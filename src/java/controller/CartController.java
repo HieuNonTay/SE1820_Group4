@@ -7,9 +7,11 @@ package controller;
 import dao.ProductDAO;
 import entity.Product;
 import entity.ProductCart;
+import java.io.PrintWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -22,6 +24,7 @@ import java.util.Vector;
  * @author ASUS
  */
 //cart
+@WebServlet(name = "Cart", urlPatterns = {"/CartURL"})
 public class CartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -62,7 +65,21 @@ public class CartController extends HttpServlet {
             response.sendRedirect("home");
         }
         if (service.equals("showCart")) {
-            request.getRequestDispatcher("/cart.jsp").forward(request, response);
+            request.getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+        }
+        if(service.equals("remove")){
+            String id = request.getParameter("id");
+            session.removeAttribute(id);
+            request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
+        }
+        if(service.equals("removeAll")){
+            Vector<String> vecKey = (Vector<String>)session.getAttribute("vecKey");
+            if(vecKey != null){
+                for(String string : vecKey){
+                    session.removeAttribute(string);
+                }
+            }
+            request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
         }
     }
 
