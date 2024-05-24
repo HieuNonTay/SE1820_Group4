@@ -14,24 +14,24 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <table class="table table-bordered">
-            <thead class="thead-dark">
-                <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Name</th>
-                    <th scope="col">BrandID</th>
-                    <th scope="col">CategoryID</th>
-                    <th scope="col">getDescription</th>
-                    <th scope="col">getPrice</th>
-                    <th scope="col">getQuantity</th>
-                    <th scope="col">getPublicationDate</th>
-                    <th scope="col">Status</th>
-                    <th>update</th>
-                    <th>delete</th>
-                    <th>add2Card</th>
+        <table border=1px>
+            <p><a href="cart?service=showCart">show cart</a></p>
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Name</th>
+                <th scope="col">BrandID</th>
+                <th scope="col">CategoryID</th>
+                <th scope="col">getDescription</th>
+                <th scope="col">getPrice</th>
+                <th scope="col">getQuantity</th>
+                <th scope="col">getPublicationDate</th>
+                <th scope="col">Status</th>
+                <th>update</th>
+                <th>delete</th>
+                <th>add2Card</th>
 
-                </tr>
-            </thead>
+            </tr>
+
             <tbody>
                 <% Vector<Product> listProduct = (Vector<Product>) request.getAttribute("listProduct");
                 for (Product product : listProduct) {
