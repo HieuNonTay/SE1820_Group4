@@ -62,20 +62,20 @@ public class CartController extends HttpServlet {
                 productCart.setQuantity(productCart.getQuantity() + 1);
                 session.setAttribute(id, productCart);
             }
-            response.sendRedirect("home");
+            response.sendRedirect("product");
         }
         if (service.equals("showCart")) {
             request.getRequestDispatcher("/ShowCart.jsp").forward(request, response);
         }
-        if(service.equals("remove")){
+        if (service.equals("remove")) {
             String id = request.getParameter("id");
             session.removeAttribute(id);
             request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
         }
-        if(service.equals("removeAll")){
-            Vector<String> vecKey = (Vector<String>)session.getAttribute("vecKey");
-            if(vecKey != null){
-                for(String string : vecKey){
+        if (service.equals("removeAll")) {
+            Vector<String> vecKey = (Vector<String>) session.getAttribute("vecKey");
+            if (vecKey != null) {
+                for (String string : vecKey) {
                     session.removeAttribute(string);
                 }
             }

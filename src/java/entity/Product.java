@@ -15,7 +15,7 @@ public class Product {
     private int productId;
     private String name;
     private int brandId;
-    private int catrgoryId;
+    private int catergoryId;
     private String description;
     private double price;
     private int quantity;
@@ -26,11 +26,11 @@ public class Product {
 
     }
 
-    public Product(int productId, String name, int brandId, int catrgoryId, String description, double price, int quantity, Timestamp publicationDate, String status) {
+    public Product(int productId, String name, int brandId, int catergoryId, String description, double price, int quantity, Timestamp publicationDate, String status) {
         this.productId = productId;
         this.name = name;
         this.brandId = brandId;
-        this.catrgoryId = catrgoryId;
+        this.catergoryId = catergoryId;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
@@ -62,12 +62,12 @@ public class Product {
         this.brandId = brandId;
     }
 
-    public int getCatrgoryId() {
-        return catrgoryId;
+    public int getCatergoryId() {
+        return catergoryId;
     }
 
-    public void setCatrgoryId(int catrgoryId) {
-        this.catrgoryId = catrgoryId;
+    public void setCatergoryId(int catergoryId) {
+        this.catergoryId = catergoryId;
     }
 
     public String getDescription() {
@@ -112,7 +112,7 @@ public class Product {
 
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", name=" + name + ", brandId=" + brandId + ", catrgoryId=" + catrgoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", publicationDate=" + publicationDate + ", status=" + status + '}';
+        return "Product{" + "productId=" + productId + ", name=" + name + ", brandId=" + brandId + ", catrgoryId=" + catergoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", publicationDate=" + publicationDate + ", status=" + status + '}';
     }
 
 }
