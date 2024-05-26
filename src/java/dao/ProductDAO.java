@@ -74,6 +74,30 @@ public class ProductDAO extends DBContext {
         }
         return vector;
     }
+    public  Product getById(int id){
+        String sql = "Select * From Product a Where a.ProductID = ?";
+        try{
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setInt(1, id);
+            ResultSet rs = pre.executeQuery();
+            if(rs.next()){
+                int productId = rs.getInt(1);
+                String name = rs.getNString(2);
+                int brandId = rs.getInt(3);
+                int catergoryId = rs.getInt(4);
+                String description = rs.getNString(5);
+                double price = rs.getDouble(6);
+                int quantity = rs.getInt(7);
+                Timestamp publicationDate = rs.getTimestamp(8);
+                String status = rs.getNString(9);
+                
+                return new Product(productId, name, brandId, catergoryId, description, price, quantity, publicationDate, status);
+            }
+        }catch(SQLException ex){
+            
+        }
+        return null;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();

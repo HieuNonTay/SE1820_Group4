@@ -39,6 +39,7 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         HttpSession session = request.getSession(true);
+        ProductDAO dao = new ProductDAO();
         String service = request.getParameter("service");
         ProductDAO productDao = new ProductDAO();
         Enumeration<String> emm = session.getAttributeNames();
@@ -80,6 +81,32 @@ public class CartController extends HttpServlet {
                 }
             }
             request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
+        }
+        if (service.equals("UPDATE")){
+            Enumeration<String> em = (Enumeration<String>)session.getAttributeNames();
+            while(em.hasMoreElements()){
+                String key = em.nextElement();
+                if(key.equals("username") || key.equals("users") || key.equals("vecKey")){
+                    continue;
+                }else{
+                    int quantity = Integer.parseInt(request.getParameter(key));
+                    ProductCart productCart = (ProductCart) session.getAttribute(key);
+                    Product product = dao.getById(productCart.getProductId());
+                    
+                    if(quantity > product.getQuantity()){
+                        request.setAttribute("mess", "Đơn hàng đã được thêm vào tối đa");
+                        productCart.setQuantity(product.getQuantity());
+                        session.setAttribute(key, productCart);
+                        request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
+                        return;
+                    }else{
+                        productCart.setQuantity(quantity);
+                        session.setAttribute(key, productCart);
+                    }
+                }
+            }
+            response.sendRedirect("CartURL");
+            return;
         }
     }
 
