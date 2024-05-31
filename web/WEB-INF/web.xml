@@ -6,7 +6,7 @@
     </servlet>
     <servlet>
         <servlet-name>ProductController</servlet-name>
-        <servlet-class>ProductController</servlet-class>
+        <servlet-class>controller.ProductController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
