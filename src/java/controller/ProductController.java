@@ -38,25 +38,25 @@ public class ProductController extends HttpServlet {
         HttpSession session = request.getSession(true);
         String service = request.getParameter("service");
         String submit = request.getParameter("submit");
-        ProductDAO producDao = new ProductDAO();
-        Vector<Product> listProduct = producDao.getAll();
-        if (submit == null) {
-            listProduct = producDao.getAll();
-        } else {
-            String title = request.getParameter("search");
-//            String typeSearch = request.getParameter("typeSearch");
-//            if (typeSearch.equals("price")) {
-//                listBook = bookDao.getBySql("select * from book where price =" + title + "");
-//            } else {
-            listProduct = producDao.getBySql("select * from book where title like '%" + title + "%'");
-//            }
-        }
+        ProductDAO productDao = new ProductDAO();
+        Vector<Product> listProduct = productDao.getAll();
+//        if (submit == null) {
+            listProduct = productDao.getAll();
+//        } else {
+//            String title = request.getParameter("search");
+////            String typeSearch = request.getParameter("typeSearch");
+////            if (typeSearch.equals("price")) {
+////                listBook = bookDao.getBySql("select * from book where price =" + title + "");
+////            } else {
+//            listProduct = producDao.getBySql("select * from product where title like '%" + title + "%'");
+////            }
+//        }
         if (service == null) {
             service = "product";
         }
         request.setAttribute("listProduct", listProduct);
         if (service.equals("product")) {
-            request.getRequestDispatcher("/product.jsp").forward(request, response);
+            request.getRequestDispatcher("/product_list.jsp").forward(request, response);
         }
     }
 

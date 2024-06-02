@@ -71,7 +71,7 @@ public class CartController extends HttpServlet {
         if (service.equals("remove")) {
             String id = request.getParameter("id");
             session.removeAttribute(id);
-            request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
+            request.getRequestDispatcher("showCart.jsp").forward(request, response);
         }
         if (service.equals("removeAll")) {
             Vector<String> vecKey = (Vector<String>) session.getAttribute("vecKey");
@@ -80,7 +80,7 @@ public class CartController extends HttpServlet {
                     session.removeAttribute(string);
                 }
             }
-            request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
+            request.getRequestDispatcher("showCart.jsp").forward(request, response);
         }
         if (service.equals("UPDATE")){
             Enumeration<String> em = (Enumeration<String>)session.getAttributeNames();
@@ -97,7 +97,7 @@ public class CartController extends HttpServlet {
                         request.setAttribute("mess", "Đơn hàng đã được thêm vào tối đa");
                         productCart.setQuantity(product.getQuantity());
                         session.setAttribute(key, productCart);
-                        request.getRequestDispatcher("ShowCart.jsp").forward(request, response);
+                        request.getRequestDispatcher("showCart.jsp").forward(request, response);
                         return;
                     }else{
                         productCart.setQuantity(quantity);
