@@ -74,17 +74,19 @@
             <div class="row my-4 my-md-5">
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="fables-store-search mb-4">
-                        <form> 
+                        <form action="product" method="get"> 
                             <div class="input-icon">
                                 <span class="fables-iconsearch-icon fables-input-icon"></span>
-                                <input type="text" class="form-control rounded-0 form-control rounded-0 font-14 fables-store-input pl-5 py-2"  placeholder="Search Product">
+                                <input name="search" type="text" class="form-control rounded-0 form-control rounded-0 font-14 fables-store-input pl-5 py-2"  placeholder="Search Product">
+                                <button type="submit" name="submit" value="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
+
                             </div>
 
                         </form>
                     </div>
                     <div class="rage-slider">
                         <h2 class="font-16 semi-font fables-forth-text-color fables-light-gary-background  p-3 mb-4">Filter by price</h2> 
-                        <form> 
+                        <form action="product?service=filterPrice" method="post"> 
                             <div class="range-slider fables-forth-text-color" id="facet-price-range-slider" data-options='{"output":{"prefix":""},"maxSymbol":"+"}'>
                                 <input name="range-1" value="0" min="0" max="10000" step="1" type="range">
                                 <input name="range-2" value="10000" min="0" max="10000" step="1" type="range">

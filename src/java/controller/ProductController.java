@@ -4,7 +4,6 @@ package controller;
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 import dao.ProductDAO;
 import entity.Product;
 import java.io.IOException;
@@ -27,7 +26,7 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+            
         }
     }
 
@@ -39,21 +38,21 @@ public class ProductController extends HttpServlet {
         String service = request.getParameter("service");
         String submit = request.getParameter("submit");
         ProductDAO productDao = new ProductDAO();
-        Vector<Product> listProduct = productDao.getAll();
-//        if (submit == null) {
-            listProduct = productDao.getAll();
-//        } else {
-//            String title = request.getParameter("search");
-////            String typeSearch = request.getParameter("typeSearch");
-////            if (typeSearch.equals("price")) {
-////                listBook = bookDao.getBySql("select * from book where price =" + title + "");
-////            } else {
-//            listProduct = producDao.getBySql("select * from product where title like '%" + title + "%'");
-////            }
-//        }
+        Vector<Product> listProduct;
+        listProduct = productDao.getAll();
         if (service == null) {
             service = "product";
         }
+
+        String sql = "select * from product";
+        if (submit == null) {
+            listProduct = productDao.getAll();
+        } else {
+            System.out.println("duoc");
+            String productName = request.getParameter("Search");
+            listProduct = productDao.searchProduct(submit);
+        }
+
         request.setAttribute("listProduct", listProduct);
         if (service.equals("product")) {
             request.getRequestDispatcher("/product_list.jsp").forward(request, response);

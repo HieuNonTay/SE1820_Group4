@@ -98,10 +98,17 @@ public class ProductDAO extends DBContext {
         }
         return null;
     }
+    public  Vector<Product> searchProduct(String name){
+        Vector<Product> vector = new Vector<>();
+        String sql = "select * from product where name like '%" + name + "%'";
+        vector = getBySql(sql);
+        return vector;
+    }
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        Vector<Product> list = dao.getAll();
+        Vector<Product> list = dao.searchProduct("product 1");
+        
         for (Product product : list) {
             System.out.println(product);
         }
