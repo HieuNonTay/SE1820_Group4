@@ -26,7 +26,7 @@ public class ProductController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            
+
         }
     }
 
@@ -43,14 +43,14 @@ public class ProductController extends HttpServlet {
         if (service == null) {
             service = "product";
         }
-
         String sql = "select * from product";
         if (submit == null) {
             listProduct = productDao.getAll();
         } else {
+
+            String productName = request.getParameter("search");
+            listProduct = productDao.searchProduct(productName);
             System.out.println("duoc");
-            String productName = request.getParameter("Search");
-            listProduct = productDao.searchProduct(submit);
         }
 
         request.setAttribute("listProduct", listProduct);
