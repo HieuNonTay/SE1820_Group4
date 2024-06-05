@@ -14,28 +14,39 @@ public class Product {
 
     private int productId;
     private String name;
+    private String model;
     private int brandId;
     private int catergoryId;
+    private int colorId;
+    private int sizeId;
     private String description;
     private double price;
     private int quantity;
+    private int sold;
+    private int view;
     private Timestamp publicationDate;
-    private String status;
+    private Timestamp createdAt;
+    private Timestamp updatedAt;
 
     public Product() {
-
     }
 
-    public Product(int productId, String name, int brandId, int catergoryId, String description, double price, int quantity, Timestamp publicationDate, String status) {
+    public Product(int productId, String name, String model, int brandId, int catergoryId, int colorId, int sizeId, String description, double price, int quantity, int sold, int view, Timestamp publicationDate, Timestamp createdAt, Timestamp updatedAt) {
         this.productId = productId;
         this.name = name;
+        this.model = model;
         this.brandId = brandId;
         this.catergoryId = catergoryId;
+        this.colorId = colorId;
+        this.sizeId = sizeId;
         this.description = description;
         this.price = price;
         this.quantity = quantity;
+        this.sold = sold;
+        this.view = view;
         this.publicationDate = publicationDate;
-        this.status = status;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
     }
 
     public int getProductId() {
@@ -54,6 +65,14 @@ public class Product {
         this.name = name;
     }
 
+    public String getModel() {
+        return model;
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
     public int getBrandId() {
         return brandId;
     }
@@ -68,6 +87,22 @@ public class Product {
 
     public void setCatergoryId(int catergoryId) {
         this.catergoryId = catergoryId;
+    }
+
+    public int getColorId() {
+        return colorId;
+    }
+
+    public void setColorId(int colorId) {
+        this.colorId = colorId;
+    }
+
+    public int getSizeId() {
+        return sizeId;
+    }
+
+    public void setSizeId(int sizeId) {
+        this.sizeId = sizeId;
     }
 
     public String getDescription() {
@@ -94,6 +129,22 @@ public class Product {
         this.quantity = quantity;
     }
 
+    public int getSold() {
+        return sold;
+    }
+
+    public void setSold(int sold) {
+        this.sold = sold;
+    }
+
+    public int getView() {
+        return view;
+    }
+
+    public void setView(int view) {
+        this.view = view;
+    }
+
     public Timestamp getPublicationDate() {
         return publicationDate;
     }
@@ -102,17 +153,26 @@ public class Product {
         this.publicationDate = publicationDate;
     }
 
-    public String getStatus() {
-        return status;
+    public Timestamp getCreatedAt() {
+        return createdAt;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Timestamp getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Timestamp updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     @Override
     public String toString() {
-        return "Product{" + "productId=" + productId + ", name=" + name + ", brandId=" + brandId + ", catrgoryId=" + catergoryId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", publicationDate=" + publicationDate + ", status=" + status + '}';
+        return "Product{" + "productId=" + productId + ", name=" + name + ", model=" + model + ", brandId=" + brandId + ", catergoryId=" + catergoryId + ", colorId=" + colorId + ", sizeId=" + sizeId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", sold=" + sold + ", view=" + view + ", publicationDate=" + publicationDate + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
-
+    
+    
 }

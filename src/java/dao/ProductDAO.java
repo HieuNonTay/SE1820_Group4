@@ -30,16 +30,22 @@ public class ProductDAO extends DBContext {
             while (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
-                int brandId = rs.getInt(3);
-                int categoryId = rs.getInt(4);
-                String description = rs.getNString(5);
-                double price = rs.getDouble(6);
-                int quantity = rs.getInt(7);
-                Timestamp publicationDate = rs.getTimestamp(8);
-                String status = rs.getString(9);
-
-                vector.add(new Product(productId, name, brandId, categoryId,
-                        description, price, quantity, publicationDate, status));
+                String model = rs.getNString(3);
+                int brandId = rs.getInt(4);
+                int categoryId = rs.getInt(5);
+                int colorId = rs.getInt(6);
+                int sizeId = rs.getInt(7);
+                String description = rs.getNString(8);
+                double price = rs.getDouble(9);
+                int quantity = rs.getInt(10);
+                int sold = rs.getInt(11);
+                int view = rs.getInt(12);
+                Timestamp publicationDate = rs.getTimestamp(13);
+                Timestamp createdAt = rs.getTimestamp(14);
+                Timestamp updatedAt = rs.getTimestamp(15);
+                
+                
+                vector.add(new Product(productId, name, model, brandId, categoryId, colorId, sizeId, description, price, quantity, sold, view, publicationDate, createdAt, updatedAt));
 
             }
 
@@ -57,16 +63,21 @@ public class ProductDAO extends DBContext {
             while (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
-                int brandId = rs.getInt(3);
-                int categoryId = rs.getInt(4);
-                String description = rs.getNString(5);
-                double price = rs.getDouble(6);
-                int quantity = rs.getInt(7);
-                Timestamp publicationDate = rs.getTimestamp(8);
-                String status = rs.getString(9);
+                String model = rs.getNString(3);
+                int brandId = rs.getInt(4);
+                int categoryId = rs.getInt(5);
+                int colorId = rs.getInt(6);
+                int sizeId = rs.getInt(7);
+                String description = rs.getNString(8);
+                double price = rs.getDouble(9);
+                int quantity = rs.getInt(10);
+                int sold = rs.getInt(11);
+                int view = rs.getInt(12);
+                Timestamp publicationDate = rs.getTimestamp(13);
+                Timestamp createdAt = rs.getTimestamp(14);
+                Timestamp updatedAt = rs.getTimestamp(15);
 
-                vector.add(new Product(productId, name, brandId, categoryId,
-                        description, price, quantity, publicationDate, status));
+                vector.add(new Product(productId, name, model, brandId, categoryId, colorId, sizeId, description, price, quantity, sold, view, publicationDate, createdAt, updatedAt));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class
@@ -84,16 +95,21 @@ public class ProductDAO extends DBContext {
             if (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
-                int brandId = rs.getInt(3);
-                int categoryId = rs.getInt(4);
-                String description = rs.getNString(5);
-                double price = rs.getDouble(6);
-                int quantity = rs.getInt(7);
-                Timestamp publicationDate = rs.getTimestamp(8);
-                String status = rs.getNString(9);
+                String model = rs.getNString(3);
+                int brandId = rs.getInt(4);
+                int categoryId = rs.getInt(5);
+                int colorId = rs.getInt(6);
+                int sizeId = rs.getInt(7);
+                String description = rs.getNString(8);
+                double price = rs.getDouble(9);
+                int quantity = rs.getInt(10);
+                int sold = rs.getInt(11);
+                int view = rs.getInt(12);
+                Timestamp publicationDate = rs.getTimestamp(13);
+                Timestamp createdAt = rs.getTimestamp(14);
+                Timestamp updatedAt = rs.getTimestamp(15);
 
-                return new Product(productId, name, brandId, categoryId, description,
-                        price, quantity, publicationDate, status);
+                return new Product(productId, name, model, brandId, categoryId, colorId, sizeId, description, price, quantity, sold, view, publicationDate, createdAt, updatedAt);
             }
         } catch (SQLException ex) {
             Logger.getLogger(ProductDAO.class.getName()).
