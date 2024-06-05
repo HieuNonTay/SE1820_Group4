@@ -70,7 +70,7 @@ public class CategoryDAO extends DBContext{
         }
         return vector;
     }
-    public Vector<Category> searchAuthor(String name) {
+    public Vector<Category> searchCategory(String name) {
         // Vector co threadsafe
         Vector<Category> vector = new Vector<>();
         String sql = "select * from Category where CategoryName like '%"+name+"%'";

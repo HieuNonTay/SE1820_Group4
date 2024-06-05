@@ -105,80 +105,6 @@
                         <li><a href="#">BLAZERS</a></li>
                         <li><a href="#">JACKETS</a></li>
                     </ul>
-
-                    <h2 class="font-16 semi-font fables-forth-text-color fables-light-gary-background  p-3 my-4">Top Rated Products</h2> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml1.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml2.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml3.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml4.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml1.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml2.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml3.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
-                    <div class="row mb-3">
-                        <div class="col-4 pr-0">
-                            <a href="#"><img src="assets/custom/images/sml4.jpg" alt="" class="w-100"></a>
-                        </div>
-                        <div class="col-8">
-                            <a href="#" class="fables-main-text-color font-14 semi-font fables-second-hover-color store-card-text">LUIS LEATHER DRIVING MOCCASINS FROM ... </a>
-                            <p class="font-weight-bold fables-second-text-color ">$ 98.00</p>
-                        </div>
-                    </div> 
                 </div>
                 <div class="col-12 col-md-8 col-lg-9"> 
                     <div class="row mb-4">
@@ -194,10 +120,6 @@
                                     </select>
                                 </div> 
                             </form>
-                        </div>
-                        <div class="col-4 col-md-6 col-lg-2 offset-lg-6 text-center pl-0 d-none d-lg-block">
-                            <span class="fables-iconlist fa-fw fables-view-btn fables-list-btn fables-third-border-color fables-third-text-color"></span>
-                            <span class="fables-icongrid active fa-fw fables-view-btn fables-grid-btn fables-third-border-color fables-third-text-color"></span>
                         </div>
                     </div>
                     <div class="row">
