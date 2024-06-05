@@ -66,7 +66,7 @@ public class CartController extends HttpServlet {
             response.sendRedirect("product");
         }
         if (service.equals("showCart")) {
-            request.getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+            request.getRequestDispatcher("/showCart.jsp").forward(request, response);
         }
         if (service.equals("remove")) {
             String id = request.getParameter("id");
@@ -82,24 +82,24 @@ public class CartController extends HttpServlet {
             }
             request.getRequestDispatcher("showCart.jsp").forward(request, response);
         }
-        if (service.equals("UPDATE")){
-            Enumeration<String> em = (Enumeration<String>)session.getAttributeNames();
-            while(em.hasMoreElements()){
+        if (service.equals("update")) {
+            Enumeration<String> em = (Enumeration<String>) session.getAttributeNames();
+            while (em.hasMoreElements()) {
                 String key = em.nextElement();
-                if(key.equals("username") || key.equals("users") || key.equals("vecKey")){
+                if (key.equals("username") || key.equals("vecKey")) {
                     continue;
-                }else{
+                } else {
                     int quantity = Integer.parseInt(request.getParameter(key));
                     ProductCart productCart = (ProductCart) session.getAttribute(key);
                     Product product = dao.getById(productCart.getProductId());
-                    
-                    if(quantity > product.getQuantity()){
+
+                    if (quantity > product.getQuantity()) {
                         request.setAttribute("mess", "Đơn hàng đã được thêm vào tối đa");
                         productCart.setQuantity(product.getQuantity());
                         session.setAttribute(key, productCart);
                         request.getRequestDispatcher("showCart.jsp").forward(request, response);
                         return;
-                    }else{
+                    } else {
                         productCart.setQuantity(quantity);
                         session.setAttribute(key, productCart);
                     }

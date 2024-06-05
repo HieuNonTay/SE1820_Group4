@@ -95,14 +95,14 @@
                                     </div>
                                 </th>
                                 <td>
-                                    <p class="mb-0 mt-4"><%=productCart.getName()%></p>
+                                    <p class="mb-0 mt-4"><%=productCart.getName()%>></p>
                                 </td>
                                 <td>
                                     <p class="mb-0 mt-4"><%=productCart.getPrice()%></p>
                                 </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <input type="number" min="0" name="<%=productCart.getProductId()%>" class="form-control form-control-sm text-center border-0" value="<%=productCart.getQuantity()%>">
+                                        <input type="number" min="0" name="<%=productCart.getProductId()%>" class="form-control form-control-sm text-center border-0" value="<%=productCart.getPrice()%>">
                                     </div>
                                 </td>
                                 <td>
@@ -133,7 +133,7 @@
 
                     <a href="CartURL?service=removeAll" class="btn btn-danger px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Remove all</a>
 
-                    <input type="submit" name="service" value="update" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"  />
+                    <input type="submit" name="service" value="UPDATE" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"  />
                     <% //if(user != null) { %>
                     <a href="CartURL?service=checkOut" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>
                     <% //} %>

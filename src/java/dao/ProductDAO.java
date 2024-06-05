@@ -31,14 +31,14 @@ public class ProductDAO extends DBContext {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
                 int brandId = rs.getInt(3);
-                int catrgoryId = rs.getInt(4);
+                int categoryId = rs.getInt(4);
                 String description = rs.getNString(5);
                 double price = rs.getDouble(6);
                 int quantity = rs.getInt(7);
                 Timestamp publicationDate = rs.getTimestamp(8);
                 String status = rs.getString(9);
 
-                vector.add(new Product(productId, name, brandId, catrgoryId,
+                vector.add(new Product(productId, name, brandId, categoryId,
                         description, price, quantity, publicationDate, status));
 
             }
@@ -58,14 +58,14 @@ public class ProductDAO extends DBContext {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
                 int brandId = rs.getInt(3);
-                int catrgoryId = rs.getInt(4);
+                int categoryId = rs.getInt(4);
                 String description = rs.getNString(5);
                 double price = rs.getDouble(6);
                 int quantity = rs.getInt(7);
                 Timestamp publicationDate = rs.getTimestamp(8);
                 String status = rs.getString(9);
 
-                vector.add(new Product(productId, name, brandId, catrgoryId,
+                vector.add(new Product(productId, name, brandId, categoryId,
                         description, price, quantity, publicationDate, status));
             }
         } catch (SQLException ex) {
@@ -74,31 +74,35 @@ public class ProductDAO extends DBContext {
         }
         return vector;
     }
-    public  Product getById(int id){
-        String sql = "Select * From Product a Where a.ProductID = ?";
-        try{
+
+    public Product getById(int id) {
+        String sql = "Select * From Product a Where a.ProductID = ?;";
+        try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
             ResultSet rs = pre.executeQuery();
-            if(rs.next()){
+            if (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
                 int brandId = rs.getInt(3);
-                int catergoryId = rs.getInt(4);
+                int categoryId = rs.getInt(4);
                 String description = rs.getNString(5);
                 double price = rs.getDouble(6);
                 int quantity = rs.getInt(7);
                 Timestamp publicationDate = rs.getTimestamp(8);
                 String status = rs.getNString(9);
-                
-                return new Product(productId, name, brandId, catergoryId, description, price, quantity, publicationDate, status);
+
+                return new Product(productId, name, brandId, categoryId, description,
+                        price, quantity, publicationDate, status);
             }
-        }catch(SQLException ex){
-            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).
+                    log(Level.SEVERE, null, ex);
         }
         return null;
     }
-    public  Vector<Product> searchProduct(String name){
+
+    public Vector<Product> searchProduct(String name) {
         Vector<Product> vector = new Vector<>();
         String sql = "select * from product where name like '%" + name + "%'";
         vector = getBySql(sql);
@@ -107,10 +111,12 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        Vector<Product> list = dao.searchProduct("product 1");
-        
-        for (Product product : list) {
-            System.out.println(product);
-        }
+//        Vector<Product> list = dao.getBySql("Select * From Product a Where a.ProductID = 1;");
+//
+//        for (Product product : list) {
+//            System.out.println(product);
+//        }
+        Product pro1 = dao.getById(1);
+        System.out.println(pro1);
     }
 }
