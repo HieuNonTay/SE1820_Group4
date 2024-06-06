@@ -30,7 +30,7 @@ public class ProductDAO extends DBContext {
             while (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
-                String model = rs.getNString(3);
+                String model = rs.getString(3);
                 int brandId = rs.getInt(4);
                 int categoryId = rs.getInt(5);
                 int colorId = rs.getInt(6);
@@ -43,8 +43,7 @@ public class ProductDAO extends DBContext {
                 Timestamp publicationDate = rs.getTimestamp(13);
                 Timestamp createdAt = rs.getTimestamp(14);
                 Timestamp updatedAt = rs.getTimestamp(15);
-                
-                
+
                 vector.add(new Product(productId, name, model, brandId, categoryId, colorId, sizeId, description, price, quantity, sold, view, publicationDate, createdAt, updatedAt));
 
             }
@@ -63,7 +62,7 @@ public class ProductDAO extends DBContext {
             while (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
-                String model = rs.getNString(3);
+                String model = rs.getString(3);
                 int brandId = rs.getInt(4);
                 int categoryId = rs.getInt(5);
                 int colorId = rs.getInt(6);
@@ -95,7 +94,7 @@ public class ProductDAO extends DBContext {
             if (rs.next()) {
                 int productId = rs.getInt(1);
                 String name = rs.getNString(2);
-                String model = rs.getNString(3);
+                String model = rs.getString(3);
                 int brandId = rs.getInt(4);
                 int categoryId = rs.getInt(5);
                 int colorId = rs.getInt(6);
