@@ -70,7 +70,6 @@
                                 <th scope="col">Giá</th>
                                 <th scope="col">Số Lượng</th>
                                 <th scope="col">Tổng</th>
-                                <th scope="col">Xoá</th>
                             </tr>
                             <%  
                                 Enumeration<String> em = session.getAttributeNames();

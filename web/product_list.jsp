@@ -75,12 +75,25 @@
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="fables-store-search mb-4">
                         <form action="product" method="get"> 
-                            <div class="input-icon">
-                                <span class="fables-iconsearch-icon fables-input-icon"></span>
-                                <input name="search" type="text" class="form-control rounded-0 form-control rounded-0 font-14 fables-store-input pl-5 py-2"  placeholder="Search Product">
-                                <button type="submit" name="submit" value="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
-
+                            <div class="input-group">
+                                <input name="search" type="text" class="form-control rounded-0 font-14 fables-store-input pl-5 py-2" placeholder="Search Product">
+                                <div class="input-group-append">
+                                    <button type="submit" name="submit" value="submit" id="search-icon-1" class="btn btn-secondary"><i class="fa fa-search"></i></button>
+                                </div>
                             </div>
+
+                            <style>
+                                .input-group {
+                                    display: flex;
+                                }
+                                .form-control {
+                                    border-radius: 0;
+                                }
+                                .input-group-append .btn {
+                                    border-radius: 0;
+                                    height: auto;
+                                }
+                            </style>
 
                         </form>
                     </div>
