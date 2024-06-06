@@ -51,7 +51,7 @@
         <jsp:include page="header.jsp"/>
         <div class="fables-header fables-after-overlay">
             <div class="container"> 
-                <h2 class="fables-page-title fables-second-border-color">Forgot Password</h2>
+                <h2 class="fables-page-title fables-second-border-color">Product Detail</h2>
             </div>
         </div>
 
