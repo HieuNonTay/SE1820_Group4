@@ -22,10 +22,44 @@ import model.DBContext;
 public class OrderDAO extends DBContext {
 
     public Vector<Order> getAll() {
-        String sql = "select * from Order";
+        String sql = "select * from [Order]";
         Vector<Order> vector = new Vector<>();
         ResultSet rs = getData(sql);
 
+        try {
+            while (rs.next()) {
+                int orderId = rs.getInt(1);
+                int accountId = rs.getInt(2);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
+                Timestamp Orderdate = rs.getTimestamp(5);
+                double total = rs.getDouble(6);
+                String line1 = rs.getString(7);
+                String line2 = rs.getString(8);
+                String city = rs.getString(9);
+                String province = rs.getString(10);
+                String countryId = rs.getString(11);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
+
+                vector.add(new Order(orderId, accountId, firstName, lastName,
+                        Orderdate, total, line1, line2, city, province,
+                        countryId, createdAt, updateAt, payment, status));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return vector;
+    }
+
+    public Vector<Order> getBySql(String sql) {
+        Vector<Order> vector = new Vector<>();
+        ResultSet rs = getData(sql);
         try {
             while (rs.next()) {
                 int orderId = rs.getInt(1);
@@ -47,9 +81,7 @@ public class OrderDAO extends DBContext {
                 vector.add(new Order(orderId, accountId, firstName, lastName,
                         Orderdate, total, line1, line2, city, province,
                         countryId, createdAt, updateAt, payment, status));
-
             }
-
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class
                     .getName()).log(Level.SEVERE, null, ex);
@@ -58,7 +90,7 @@ public class OrderDAO extends DBContext {
     }
 
     public Order getById(int id) {
-        String sql = "Select * From Order o Where o.OrderID = ?;";
+        String sql = "Select * From [Order] o Where o.OrderID = ?;";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
@@ -87,6 +119,38 @@ public class OrderDAO extends DBContext {
                     log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    public int updateOrder(
+            int orderId,
+            double total,
+            String city,
+            String status
+    ) {
+        int n = 0;
+        String sql = "UPDATE [dbo].[Order]\n"
+                + "   SET [Total] = ?\n"
+                + "      ,[City] = ?\n"
+                + "      ,[Status] = ?"
+                + " WHERE [OrderId] = ?";
+        try{
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setDouble(1, total);
+            pre.setString(2, city);
+            pre.setString(3, status);
+            pre.setInt(4, orderId);
+            n = pre.executeUpdate();
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return n;
+    }
+    public static void main(String[] args) {
+        OrderDAO orderDao = new OrderDAO();
+        Vector<Order> listOrder = orderDao.getAll();
+        for (Order order : listOrder) {
+            System.out.println(order);
+        }
     }
 
 }
