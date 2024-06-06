@@ -25,7 +25,6 @@ public class ProductDAO extends DBContext {
         String sql = "select * from Product";
         Vector<Product> vector = new Vector<>();
         ResultSet rs = getData(sql);
-
         try {
             while (rs.next()) {
                 int productId = rs.getInt(1);
@@ -126,12 +125,12 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-//        Vector<Product> list = dao.getBySql("Select * From Product a Where a.ProductID = 1;");
-//
-//        for (Product product : list) {
-//            System.out.println(product);
-//        }
-        Product pro1 = dao.getById(1);
-        System.out.println(pro1);
+        Vector<Product> list = dao.getAll();
+
+        for (Product product : list) {
+            System.out.println(product);
+        }
+//        Product pro1 = dao.getById(1);
+//        System.out.println(pro1);
     }
 }

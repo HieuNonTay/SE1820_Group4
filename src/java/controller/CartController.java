@@ -4,6 +4,7 @@
  */
 package controller;
 
+import dao.OrderDAO;
 import dao.ProductDAO;
 import entity.Product;
 import entity.ProductCart;
@@ -108,12 +109,58 @@ public class CartController extends HttpServlet {
             response.sendRedirect("CartURL");
             return;
         }
+        if (service.equals("checkOut")) {
+            String submit = request.getParameter("submit");
+            if (submit == null) {
+                request.getRequestDispatcher("/checkOut.jsp").forward(request, response);
+            } else {
+                Enumeration<String> em = session.getAttributeNames();
+                int accountId = Integer.parseInt(request.getParameter("accountId"));
+//                Account account = accountDao.getByAccountId(accountId);
+                String address = request.getParameter("address");
+
+                Vector<ProductCart> listProductCart = new Vector<>();
+                boolean enoughQuantity = true;
+
+                while (em.hasMoreElements()) {
+                    String key = em.nextElement().toString(); //get key
+                    if (key.equals("username") || key.equals("vecKey")) {
+                        continue;
+                    } else {
+                        ProductCart productCart = (ProductCart) session.getAttribute(key);
+                        Product product = productDao.getById(productCart.getProductId());
+                        if (productCart.getQuantity() > product.getQuantity()) {
+                            enoughQuantity = false;
+                            request.setAttribute("mess", "Đơn hàng trong kho không đủ để thực hiện yêu cầu");
+                        } else {
+                            listProductCart.add(productCart);
+                        }
+                    }
+                }
+                if (enoughQuantity) {
+                    int checkOut = orderDao.addOrder(account.getAccountId(), listProductCart, address);
+                    if (checkOut > 0) {
+                        response.sendRedirect("home");
+                    } else {
+                        response.sendRedirect("CartURL?service=checkOut");
+                    }
+                } else {
+                    request.getRequestDispatcher("CartURL?service=checkOut").forward(request, response);
+                }
+            }
+        }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+//        HttpSession session = request.getSession(true);
+//        String service = request.getParameter("service");
+//        ProductDAO productDao = new ProductDAO();
+//        OrderDAO orderDao = new OrderDAO();
+//        Enumeration<String> emm = session.getAttributeNames();
+
     }
 
     @Override

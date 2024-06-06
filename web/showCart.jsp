@@ -66,7 +66,7 @@
                         <table class="table">
                             <tr>
                                 <th scope="col">Sản Phẩm</th>
-                                <th scope="col">Tên Sách</th>
+                                <th scope="col">Tên</th>
                                 <th scope="col">Giá</th>
                                 <th scope="col">Số Lượng</th>
                                 <th scope="col">Tổng</th>
