@@ -76,7 +76,7 @@
                 <div class="col-md-6">
                     <form action="order" method="get" class="position-relative">
                         <div class="input-group">
-                            <input name="searchOrderId" class="form-control border-secondary py-3 rounded-start" type="text" placeholder="Nhập ID đơn hàng bạn muốn tìm">
+                            <input name="searchOrderId" class="form-control border-secondary py-3 rounded-start" type="text" placeholder="Enter the order ID you want to find">
                             <button type="submit" value="submit" class="btn btn-primary py-3 px-4 rounded-end">Tìm Kiếm</button>
                         </div>
                     </form>
@@ -128,8 +128,7 @@
                                     <a href="order?service=updateOrder&id=<%= order.getOrderId()%>" class="btn btn-sm btn-primary">Edit</a>
                                 </td>
                                 <td>
-
-                                    <a href="order?service=updateStatus&id=<%=order.getOrderId()%>&status=<%= order.getStatus() %>" class="btn btn-sm btn-primary">Update</a>
+                                    <input type="submit" name="service" value="updateStatus" class="btn btn-sm btn-primary">
                                 </td>
                                 
 

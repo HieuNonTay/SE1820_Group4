@@ -92,7 +92,7 @@
                                         </a>
 
                                     <li class="nav-item">
-                                        <a class="nav-link" href="store_grid_list.html" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
+                                        <a class="nav-link" href="#" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
                                             Store
                                         </a>                                      
                                     </li>
