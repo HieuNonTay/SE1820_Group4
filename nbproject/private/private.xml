@@ -2,6 +2,14 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/E:/Ki%205/SWP/src/java/dao/OrderDAO.java</file>
+            <file>file:/E:/Ki%205/SWP/src/java/entity/Order.java</file>
+            <file>file:/E:/Ki%205/SWP/web/product_list.jsp</file>
+            <file>file:/E:/Ki%205/SWP/web/showCart.jsp</file>
+            <file>file:/E:/Ki%205/SWP/src/java/controller/OrderController.java</file>
+            <file>file:/E:/Ki%205/SWP/web/JSP/update_order.jsp</file>
+            <file>file:/E:/Ki%205/SWP/web/header.jsp</file>
+        </group>
     </open-files>
 </project-private>

@@ -4,6 +4,7 @@
     Author     : DELL
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.sql.ResultSet, java.util.*, entity.*, dao.*" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="pageSize" value="9" />
 <!DOCTYPE html>
@@ -77,7 +78,7 @@
                         </div>
                         <div class="form-group">
                             <label for="customerId">Account ID:</label>
-                            <input type="text" class="form-control" id="customerId" name="customerId" value="<%= order.getCustomerId() %>" readonly>
+                            <input type="text" class="form-control" id="customerId" name="customerId" value="<%= order.getAccountId() %>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">First Name:</label>

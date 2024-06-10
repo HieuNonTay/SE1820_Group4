@@ -64,7 +64,7 @@ public class OrderController extends HttpServlet {
         if (searchQuery != null) {
             try {
                 int orderId = Integer.parseInt(searchQuery);
-                listOrder = orderDao.getBySql("select * from Order where OrderID =" + orderId + ";");
+                listOrder = orderDao.getBySql("select * from [Order] where [OrderID] =" + orderId + ";");
                 request.setAttribute("listOrder", listOrder);
                 request.getRequestDispatcher("orderManage.jsp").forward(request, response);
             } catch (NumberFormatException e) {
@@ -103,6 +103,8 @@ public class OrderController extends HttpServlet {
 
         if (service != null && service.equals("updateOrderAction")) {
             String orderIdStr = request.getParameter("orderId");
+            String firstName = request.getParameter("firstName");
+            String lastName = request.getParameter("lastName");
             String totalStr = request.getParameter("total");
             String city = request.getParameter("city");
             String status = request.getParameter("status");
@@ -110,7 +112,7 @@ public class OrderController extends HttpServlet {
             try {
                 int orderId = Integer.parseInt(orderIdStr);
                 double total = Double.parseDouble(totalStr);
-                int update = orderDao.updateOrder(orderId, total, city, status);
+                int update = orderDao.updateOrder(orderId, firstName, lastName, total, city, status);
                 if (update > 0) {
                     response.sendRedirect("admin?service=listOrder");
                 } else {
