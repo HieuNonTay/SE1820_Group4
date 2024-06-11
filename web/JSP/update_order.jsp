@@ -82,11 +82,11 @@
                         </div>
                         <div class="form-group">
                             <label for="address">First Name:</label>
-                            <input type="text" class="form-control" id="firstName" name="firstName" value="<%= order.getFirstName() %>">
+                            <input type="text" class="form-control" id="firstName" name="firstName" value="<%= order.getFirstName() %>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">Last Name:</label>
-                            <input type="text" class="form-control" id="lastName" name="lastName" value="<%= order.getLastName() %>">
+                            <input type="text" class="form-control" id="lastName" name="lastName" value="<%= order.getLastName() %>" readonly>
                         </div>
                         
                         <div class="form-group">
@@ -95,11 +95,11 @@
                         </div>
                         <div class="form-group">
                             <label for="total">Total:</label>
-                            <input type="text" class="form-control" id="total" name="total" value="<%= order.getTotal() %>">
+                            <input type="text" class="form-control" id="total" name="total" value="<%= order.getTotal() %>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">Address:</label>
-                            <input type="text" class="form-control" id="address" name="address" value="<%= order.getCity() %>">
+                            <input type="text" class="form-control" id="address" name="address" value="<%= order.getCity() %>" readonly>
                         </div>
                         <div class="form-group">
                             <label for="status">Status:</label>

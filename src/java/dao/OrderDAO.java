@@ -155,8 +155,11 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO orderDao = new OrderDAO();
-        int listOrder = orderDao.updateOrder(1, "acc", "add", 1000, "New York", "Delivered");
-        
+//        int listOrder = orderDao.updateOrder(1, "acc", "add", 1000, "New York", "Delivered");
+        Vector<Order> order = orderDao.getAll();
+        for (Order order1 : order) {
+            System.out.println(order1);
+        }
     }
 
 }
