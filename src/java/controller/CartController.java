@@ -111,10 +111,23 @@ public class CartController extends HttpServlet {
             return;
         }
         if (service.equals("checkOut")) {
+            request.getRequestDispatcher("checkOut.jsp").forward(request, response);
+        }
+
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+//        processRequest(request, response);
+        HttpSession session = request.getSession(true);
+        String service = request.getParameter("service");
+        ProductDAO productDao = new ProductDAO();
+        OrderDAO orderDao = new OrderDAO();
+        Enumeration<String> emm = session.getAttributeNames();
+        if (service.equals("checkOut")) {
             String submit = request.getParameter("submit");
-            System.out.println(submit);
             if (submit == null) {
-                System.out.println("khong duoc22");
                 request.getRequestDispatcher("/checkOut.jsp").forward(request, response);
             } else {
                 Enumeration<String> em = session.getAttributeNames();
@@ -127,7 +140,6 @@ public class CartController extends HttpServlet {
                 String line2 = request.getParameter("line2");
                 String city = request.getParameter("city");
                 String province = request.getParameter("province");
-                System.out.println("duoc1");
 
                 Vector<ProductCart> listProductCart = new Vector<>();
                 boolean enoughQuantity = true;
@@ -144,7 +156,6 @@ public class CartController extends HttpServlet {
                             request.setAttribute("mess", "Đơn hàng trong kho không đủ để thực hiện yêu cầu");
                         } else {
                             listProductCart.add(productCart);
-                            System.out.println("duoc2");
                         }
                     }
                 }
@@ -153,10 +164,8 @@ public class CartController extends HttpServlet {
                     String payment = "Check";
                     int checkOut = orderDao.addOrder(accountIDD, listProductCart, firstName, lastName, discountCode, line1, line2, city, province, payment);
                     if (checkOut > 0) {
-                        System.out.println("duoc3");
                         response.sendRedirect("home");
                     } else {
-                        System.out.println("khong duoc3");
                         response.sendRedirect("CartURL?service=checkOut");
                     }
                 } else {
@@ -164,17 +173,6 @@ public class CartController extends HttpServlet {
                 }
             }
         }
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        processRequest(request, response);
-//        HttpSession session = request.getSession(true);
-//        String service = request.getParameter("service");
-//        ProductDAO productDao = new ProductDAO();
-//        OrderDAO orderDao = new OrderDAO();
-//        Enumeration<String> emm = session.getAttributeNames();
 
     }
 

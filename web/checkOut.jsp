@@ -59,62 +59,58 @@
 
         <!-- Start Breadcrumbs -->
         <div class="container-fluid py-5">
-            <form action="CartURL" method="get">
-                <div class="container py-5">
-                    <div class="table-responsive">
-
-                        <table class="table">
-                            <tr>
-                                <th scope="col">Sản Phẩm</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số Lượng</th>
-                                <th scope="col">Tổng</th>
-                            </tr>
-                            <%  
-                                Enumeration<String> em = session.getAttributeNames();
-                                DecimalFormat df = new DecimalFormat("#.##");
-                                double grandTotal = 0;
-                                int itemCount = 0;
-                                Vector<String> vecKey = new Vector<>();
-                                while(em.hasMoreElements()){
-                                    String key = em.nextElement().toString();
-                                    if(key.equals("user") || key.equals("vecKey")){
-                                        continue;
-                                    }else{
-                                        vecKey.add(key);
-                                        ProductCart productCart = (ProductCart)session.getAttribute(key);
-                                        grandTotal += productCart.getPrice()*productCart.getQuantity();
-                                        itemCount++;
-                            %>
-                            <tr>                            
-                                <th scope="row">
-                                    <div class="d-flex align-items-center">
-                                        <img src="img/" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
-                                    </div>
-                                </th>
-                                <td>
-                                    <p class="mb-0 mt-4"><%=productCart.getName()%></p>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4"><%=productCart.getPrice()%></p>
-                                </td>
-                                <td>
-                                    <div class="input-group quantity mt-4" style="width: 100px;">
-                                        <input type="number" min="0" name="<%=productCart.getProductId()%>" class="form-control form-control-sm text-center border-0" value="<%=productCart.getQuantity()%>">
-                                    </div>
-                                </td>
-                                <td>
-                                    <p class="mb-0 mt-4"><%=df.format((productCart.getPrice()*productCart.getQuantity())).replace(",",".")%></p>
-                                </td>                     
-                            </tr>
-                            <% } 
+            <div class="container py-5">
+                <div class="table-responsive">
+                    <table class="table">
+                        <tr>
+                            <th scope="col">Sản Phẩm</th>
+                            <th scope="col">Tên</th>
+                            <th scope="col">Giá</th>
+                            <th scope="col">Số Lượng</th>
+                            <th scope="col">Tổng</th>
+                        </tr>
+                        <%  
+                            Enumeration<String> em = session.getAttributeNames();
+                            DecimalFormat df = new DecimalFormat("#.##");
+                            double grandTotal = 0;
+                            int itemCount = 0;
+                            Vector<String> vecKey = new Vector<>();
+                            while(em.hasMoreElements()){
+                                String key = em.nextElement().toString();
+                                if(key.equals("user") || key.equals("vecKey")){
+                                    continue;
+                                }else{
+                                    vecKey.add(key);
+                                    ProductCart productCart = (ProductCart)session.getAttribute(key);
+                                    grandTotal += productCart.getPrice()*productCart.getQuantity();
+                                    itemCount++;
+                        %>
+                        <tr>                            
+                            <th scope="row">
+                                <div class="d-flex align-items-center">
+                                    <img src="img/" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                </div>
+                            </th>
+                            <td>
+                                <p class="mb-0 mt-4"><%=productCart.getName()%></p>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4"><%=productCart.getPrice()%></p>
+                            </td>
+                            <td>
+                                <div class="input-group quantity mt-4" style="width: 100px;">
+                                    <input type="number" min="0" name="<%=productCart.getProductId()%>" class="form-control form-control-sm text-center border-0" value="<%=productCart.getQuantity()%>">
+                                </div>
+                            </td>
+                            <td>
+                                <p class="mb-0 mt-4"><%=df.format((productCart.getPrice()*productCart.getQuantity())).replace(",",".")%></p>
+                            </td>                     
+                        </tr>
+                        <% } 
                             }%>
-                        </table>
-
-                    </div>
+                    </table>
                 </div>
-            </form>
+            </div>
         </div>
         <!-- checkOut -->
         <div class="row g-4 justify-content-end">
@@ -122,7 +118,7 @@
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                 <div class="bg-light rounded">
 
-                    <form action="CartURL?service=checkOut" method="get">
+                    <form action="CartURL?service=checkOut" method="post">
                         <input type="hidden" name="accountId" value="2">
 
                         <div class="p-4">
