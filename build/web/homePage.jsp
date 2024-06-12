@@ -48,8 +48,8 @@
                 <h2 class="fables-page-title fables-second-border-color">Home Page</h2>
             </div>
         </div>
-
         <!-- Start page content -->
+        
         <!-- /End page content -->
 
         <jsp:include page="footer.jsp"/>

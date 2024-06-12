@@ -9,25 +9,38 @@ package entity;
  * @author quyen
  */
 public class Account {
+
     private String accountID;
-    private String Phone;
-    private String Email;
-    private String Password;
+    private String fname;
+    private String lname;
+    private String dob;
+    private String phone;
+    private String email;
+    private String passwordHash;
     private int roleID;
-    private String Address;
-    private String Status;
+    private String address;
+    private String status;
+    private String registerAt;
+    private String lastLogin;
+    private String lastLogout;
 
     public Account() {
     }
 
-    public Account(String accountID, String Phone, String Email, String Password, int roleID, String Address, String Status) {
+    public Account(String accountID, String fname, String lname, String dob, String phone, String email, String passwordHash, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout) {
         this.accountID = accountID;
-        this.Phone = Phone;
-        this.Email = Email;
-        this.Password = Password;
+        this.fname = fname;
+        this.lname = lname;
+        this.dob = dob;
+        this.phone = phone;
+        this.email = email;
+        this.passwordHash = passwordHash;
         this.roleID = roleID;
-        this.Address = Address;
-        this.Status = Status;
+        this.address = address;
+        this.status = status;
+        this.registerAt = registerAt;
+        this.lastLogin = lastLogin;
+        this.lastLogout = lastLogout;
     }
 
     public String getAccountID() {
@@ -38,28 +51,52 @@ public class Account {
         this.accountID = accountID;
     }
 
-    public String getPhone() {
-        return Phone;
+    public String getFname() {
+        return fname;
     }
 
-    public void setPhone(String Phone) {
-        this.Phone = Phone;
+    public void setFname(String fname) {
+        this.fname = fname;
+    }
+
+    public String getLname() {
+        return lname;
+    }
+
+    public void setLname(String lname) {
+        this.lname = lname;
+    }
+
+    public String getDob() {
+        return dob;
+    }
+
+    public void setDob(String dob) {
+        this.dob = dob;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassword() {
-        return Password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String Password) {
-        this.Password = Password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     public int getRoleID() {
@@ -71,24 +108,43 @@ public class Account {
     }
 
     public String getAddress() {
-        return Address;
+        return address;
     }
 
-    public void setAddress(String Address) {
-        this.Address = Address;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
-    public void setStatus(String Status) {
-        this.Status = Status;
+    public void setStatus(String status) {
+        this.status = status;
     }
 
-    @Override
-    public String toString() {
-        return "Account{" + "accountID=" + accountID + ", Phone=" + Phone + ", Email=" + Email + ", Password=" + Password + ", roleID=" + roleID + ", Address=" + Address + ", Status=" + Status + '}';
+    public String getRegisterAt() {
+        return registerAt;
     }
-    
+
+    public void setRegisterAt(String registerAt) {
+        this.registerAt = registerAt;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public void setLastLogin(String lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getLastLogout() {
+        return lastLogout;
+    }
+
+    public void setLastLogout(String lastLogout) {
+        this.lastLogout = lastLogout;
+    }
+
 }

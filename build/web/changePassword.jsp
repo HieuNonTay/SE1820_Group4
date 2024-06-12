@@ -56,7 +56,7 @@
             <div class="container"> 
                 <nav aria-label="breadcrumb">
                     <ol class="fables-breadcrumb breadcrumb px-0 py-3">
-                        <li class="breadcrumb-item"><a href="#" class="fables-second-text-color">Home</a></li>
+                        <li class="breadcrumb-item"><a href="home" class="fables-second-text-color">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                     </ol>
                 </nav> 
@@ -69,40 +69,44 @@
             <div class="row my-4 my-lg-5">
                 <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">                 
                     <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Change Password</p>
-                    <form action="login" method="get">
+                    <form action="changePass" method="get">
 
                         <p class="text-danger">${mess}</p>                      
 
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconemail fables-input-icon mt-2 font-13"></span>
-                                <input name="user" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email"> 
+                                <input name="user" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email"  value="${sessionScope.acc.getEmail()}" required> 
                             </div>
                         </div>
 
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="password" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password">
+                                <input id="password" name="password" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>
+                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
                             </div>
                         </div>
 
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="New Password">
+                                <input id="password" name="newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="New Password" required>
+                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
                             </div>
                         </div> 
 
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="re_newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="New Password">
+                                <input id="password" name="re_newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Re New Password" required>
+                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
                             </div>
                         </div>
 
-                        <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Sign in</button>
-                        <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-block">Forgot Password ?</a>
+                        <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Change password</button>
+                        <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">For Got Password</a>
+                        <a href="signIn.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Sign In</a>
                         <p class="fables-forth-text-color">Dont have an account ?  <a href="register.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                     </form>
                 </div>

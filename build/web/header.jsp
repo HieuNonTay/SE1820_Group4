@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!-- Loading Screen -->
 <div id="ju-loading-screen">
     <div class="sk-double-bounce">
@@ -7,21 +8,6 @@
 </div>
 
 <!-- Start Top Header -->
-<div class="search-section">
-    <a class="close-search" href="#"></a>
-    <div class="d-flex justify-content-center align-items-center h-100">
-        <form method="post" action="#" class="w-50">
-            <div class="row">
-                <div class="col-10">
-                    <input type="search" value="" class="form-control palce bg-transparent border-0 search-input" placeholder="Search Here ..." /> 
-                </div>
-                <div class="col-2 mt-3">
-                    <button type="submit" class="btn bg-transparent text-white"> <i class="fas fa-search"></i> </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- Start Fables Navigation -->
 <div class="fables-navigation fables-main-background-color py-3 py-lg-0">
@@ -65,8 +51,8 @@
                     </div>
                 </nav>
             </div>
-            <div class="col-12 col-md-2 col-lg-3 pr-md-0 icons-header-mobile">
 
+            <div class="col-12 col-md-2 col-lg-3 pr-md-0">
                 <div class="fables-header-icons">
                     <div class="dropdown"> 
                         <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -107,13 +93,42 @@
                             </div>
                         </div>
                     </div>
+                    <!--                    <a href="signIn.jsp" class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"><span class="fables-iconuser"></span></a> -->
 
-                    <a href="signIn.jsp" class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"><span class="fables-iconuser"></span></a>
+                    <c:if test="${sessionScope.acc == null}">
+                        <div class="dropdown">
+                            <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fables-iconuser">
+                            </a>
+                            <div class="nav-item dropdown">
+                                <ul class="dropdown-menu" aria-labelledby="sub-nav1">
+                                    <li><a href="signIn.jsp"  class="dropdown-item"> Sign In </a></li>
+                                    <li><a href="register.jsp"  class="dropdown-item"> Sign Up </a></li>
+                                </ul>
+                            </div>  
+                        </div>
+                    </c:if>
+
+                    <c:if test="${sessionScope.acc != null}">
+                        <div class="dropdown">
+                            <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${sessionScope. acc.getLname()} 
+                            </a>
+                            <div class="nav-item dropdown">
+                                <ul style="list-style-type: none" class="dropdown-menu" aria-labelledby="sub-nav1">
+                                    <li><a href="userDetail.jsp"  class="dropdown-item"> Profile </a></li>
+                                    <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
+                                    <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
+                                </ul>
+                            </div>  
+                        </div>
+                    </c:if>
 
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>     
 
 <!-- /End Header -->

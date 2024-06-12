@@ -12,7 +12,9 @@ import java.sql.Statement;
  * @author ASUS
  */
 public class DBContext {
+
     public Connection conn = null;
+
     public ResultSet getData(String sql) {
         ResultSet rs = null;
         try {
@@ -51,4 +53,3 @@ public class DBContext {
         DBContext db = new DBContext("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore", "sa", "123456");
     }
 }
-

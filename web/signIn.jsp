@@ -40,12 +40,11 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet"> 
-
     </head>
 
     <body>
         <jsp:include page="header.jsp"/>
-        
+
         <div class="fables-header fables-after-overlay">
             <div class="container"> 
                 <h2 class="fables-page-title fables-second-border-color">Sign In</h2>
@@ -57,7 +56,7 @@
             <div class="container"> 
                 <nav aria-label="breadcrumb">
                     <ol class="fables-breadcrumb breadcrumb px-0 py-3">
-                        <li class="breadcrumb-item"><a href="#" class="fables-second-text-color">Home</a></li>
+                        <li class="breadcrumb-item"><a href="home" class="fables-second-text-color">Home</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Sign In</li>
                     </ol>
                 </nav> 
@@ -77,17 +76,18 @@
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconemail fables-input-icon mt-2 font-13"></span>
-                                <input name="user" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email"> 
+                                <input  name="user" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email" value="${user}" required> 
                             </div>
 
                         </div>
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="password" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password">
+                                <input id="password" name="password" id="passwordInput" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>
+                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
                             </div>
-
-                        </div> 
+                        </div>
+                    
                         <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Sign in</button>
                         <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Forgot Password</a>
                         <a href="changePassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Change Password</a>
@@ -113,6 +113,7 @@
         <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
         <script src="assets/vendor/timeline/jquery.timelify.js"></script>
         <script src="assets/custom/js/custom.js"></script>  
+        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
     </body>
