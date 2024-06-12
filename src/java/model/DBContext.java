@@ -49,7 +49,7 @@ public class DBContext {
     }
 
     public DBContext() {
-        this("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore", "sa", "123456");
+        this("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore2", "sa", "123456");
 
     }
 

@@ -18,6 +18,13 @@ public class ProductCart {
     public ProductCart() {
     }
 
+    public ProductCart(int productId, String name, int quantity, double price) {
+        this.productId = productId;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
     public ProductCart(int productId, String name, int quantity, int color, int size, double price) {
         this.productId = productId;
         this.name = name;

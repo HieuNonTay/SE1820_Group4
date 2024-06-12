@@ -43,6 +43,7 @@ public class CartController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         String service = request.getParameter("service");
         ProductDAO productDao = new ProductDAO();
+        OrderDAO orderDao = new OrderDAO();
         Enumeration<String> emm = session.getAttributeNames();
         if (service == null) {
             service = "showCart";
@@ -111,13 +112,22 @@ public class CartController extends HttpServlet {
         }
         if (service.equals("checkOut")) {
             String submit = request.getParameter("submit");
+            System.out.println(submit);
             if (submit == null) {
+                System.out.println("khong duoc22");
                 request.getRequestDispatcher("/checkOut.jsp").forward(request, response);
             } else {
                 Enumeration<String> em = session.getAttributeNames();
                 int accountId = Integer.parseInt(request.getParameter("accountId"));
 //                Account account = accountDao.getByAccountId(accountId);
-                String address = request.getParameter("address");
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
+                String discountCode = request.getParameter("discountCode");
+                String line1 = request.getParameter("line1");
+                String line2 = request.getParameter("line2");
+                String city = request.getParameter("city");
+                String province = request.getParameter("province");
+                System.out.println("duoc1");
 
                 Vector<ProductCart> listProductCart = new Vector<>();
                 boolean enoughQuantity = true;
@@ -134,14 +144,19 @@ public class CartController extends HttpServlet {
                             request.setAttribute("mess", "Đơn hàng trong kho không đủ để thực hiện yêu cầu");
                         } else {
                             listProductCart.add(productCart);
+                            System.out.println("duoc2");
                         }
                     }
                 }
                 if (enoughQuantity) {
-                    int checkOut = orderDao.addOrder(account.getAccountId(), listProductCart, address);
+                    int accountIDD = 1;
+                    String payment = "Check";
+                    int checkOut = orderDao.addOrder(accountIDD, listProductCart, firstName, lastName, discountCode, line1, line2, city, province, payment);
                     if (checkOut > 0) {
+                        System.out.println("duoc3");
                         response.sendRedirect("home");
                     } else {
+                        System.out.println("khong duoc3");
                         response.sendRedirect("CartURL?service=checkOut");
                     }
                 } else {

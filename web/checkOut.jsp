@@ -53,7 +53,7 @@
         <jsp:include page="header.jsp"/>
         <div class="fables-header fables-after-overlay">
             <div class="container"> 
-                <h2 class="fables-page-title fables-second-border-color">Cart</h2>
+                <h2 class="fables-page-title fables-second-border-color">Mua Hàng</h2>
             </div>
         </div>
 
@@ -122,21 +122,38 @@
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                 <div class="bg-light rounded">
 
-                    <form action="CartURL?service=checkOut" method="post">
-                        <input type="hidden" name="accountId" value="accountId">
+                    <form action="CartURL?service=checkOut" method="get">
+                        <input type="hidden" name="accountId" value="2">
+
                         <div class="p-4">
                             <h1 class="display-6 mb-4">Giỏ <span class="fw-normal">Mua Hàng</span></h1>
-                            <div class="d-flex justify-content-between mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="mb-0 me-4">Họ </h5>
+                                <input class="mb-0" name="firstName" value="" placeholder="Họ">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Tên </h5>
-                                <p class="mb-0">tên</p>
+                                <input class="mb-0" name="lastName" value="" placeholder="Tên">
                             </div>
-                            <div class="d-flex justify-content-between mb-4">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="mb-0 me-4">Mã Giảm Giá </h5>
+                                <input class="mb-0" name="discountCode" value="" placeholder="Mã">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Số Điện Thoại </h5>
-                                <p class="mb-0">0123456789</p>
+                                <input class="mb-0" name="line1" value="" placeholder="0123456789">
                             </div>
-                            <div class="d-flex justify-content-between">
+                            <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Địa Chỉ</h5>
-                                <input class="mb-0" name="address" value="23 hoalac">
+                                <input class="mb-0" name="line2" value="" placeholder="Địa Chỉ">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="mb-0 me-4">Thành Phố</h5>
+                                <input class="mb-0" name="city" value="" placeholder="Thành Phố">
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="mb-0 me-4">Tỉnh</h5>
+                                <input class="mb-0" name="province" value="" placeholder="Tỉnh">
                             </div>
                         </div>
                         <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
@@ -144,7 +161,7 @@
                             <p class="mb-0 pe-4"><%=df.format(grandTotal).replace(",", ".")%></p>
                         </div>
 
-                        <button type="submit" name="submit" value="submit"class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Xác Nhận Mua</button>
+                        <button type="submit" name="submit" value="submit" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Xác Nhận Mua</button>
                     </form>
 
                 </div>
