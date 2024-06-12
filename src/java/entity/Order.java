@@ -17,6 +17,7 @@ public class Order {
     private String firstName;
     private String lastName;
     private Timestamp Orderdate;
+    private String discountCode;
     private double total;
     private String line1;
     private String line2;
@@ -31,12 +32,13 @@ public class Order {
     public Order() {
     }
 
-    public Order(int orderId, int accountId, String firstName, String lastName, Timestamp Orderdate, double total, String line1, String line2, String city, String province, String countryId, Timestamp createdAt, Timestamp updateAt, String payment, String status) {
+    public Order(int orderId, int accountId, String firstName, String lastName, Timestamp Orderdate, String DiscountCode, double total, String line1, String line2, String city, String province, String countryId, Timestamp createdAt, Timestamp updateAt, String payment, String status) {
         this.orderId = orderId;
         this.accountId = accountId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.Orderdate = Orderdate;
+        this.discountCode = DiscountCode;
         this.total = total;
         this.line1 = line1;
         this.line2 = line2;
@@ -47,6 +49,14 @@ public class Order {
         this.updateAt = updateAt;
         this.payment = payment;
         this.status = status;
+    }
+
+    public String getDiscountCode() {
+        return discountCode;
+    }
+
+    public void setDiscountCode(String discountCode) {
+        this.discountCode = discountCode;
     }
 
     public int getOrderId() {
@@ -171,7 +181,7 @@ public class Order {
 
     @Override
     public String toString() {
-        return "Order{" + "orderId=" + orderId + ", accountId=" + accountId + ", firstName=" + firstName + ", lastName=" + lastName + ", Orderdate=" + Orderdate + ", total=" + total + ", line1=" + line1 + ", line2=" + line2 + ", city=" + city + ", province=" + province + ", countryId=" + countryId + ", createdAt=" + createdAt + ", updateAt=" + updateAt + ", payment=" + payment + ", status=" + status + '}';
+        return "Order{" + "orderId=" + orderId + ", accountId=" + accountId + ", firstName=" + firstName + ", lastName=" + lastName + ", Orderdate=" + Orderdate + ", discountCode=" + discountCode + ", total=" + total + ", line1=" + line1 + ", line2=" + line2 + ", city=" + city + ", province=" + province + ", countryId=" + countryId + ", createdAt=" + createdAt + ", updateAt=" + updateAt + ", payment=" + payment + ", status=" + status + '}';
     }
 
 }

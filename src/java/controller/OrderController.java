@@ -21,15 +21,6 @@ import java.util.Vector;
  */
 public class OrderController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
@@ -38,15 +29,6 @@ public class OrderController extends HttpServlet {
         }
     }
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -83,14 +65,6 @@ public class OrderController extends HttpServlet {
         }
     }
 
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -122,6 +96,20 @@ public class OrderController extends HttpServlet {
                 request.setAttribute("error", "Vui lòng nhập một số hợp lệ");
                 request.getRequestDispatcher("errorPage.jsp").forward(request, response);
             }
+        }
+        if (service.equals("updateStatus")) {
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            String status = request.getParameter("status");
+
+            int update = orderDao.updateStatus(orderId, status);
+            if (update > 0) {
+                System.out.println("duoc");
+                response.sendRedirect("order");
+            } else {
+                System.out.println("chua duoc");
+                response.sendRedirect("order");
+            }
+
         }
     }
 

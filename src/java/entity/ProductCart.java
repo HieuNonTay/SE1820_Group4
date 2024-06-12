@@ -13,6 +13,8 @@ public class ProductCart {
     private int productId;
     private String name;
     private int quantity;
+    private int color;
+    private int size;
     private double price;
 
     public ProductCart() {
@@ -29,6 +31,8 @@ public class ProductCart {
         this.productId = productId;
         this.name = name;
         this.quantity = quantity;
+        this.color = color;
+        this.size = size;
         this.price = price;
     }
 

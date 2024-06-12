@@ -35,19 +35,20 @@ public class OrderDAO extends DBContext {
                 String firstName = rs.getString(3);
                 String lastName = rs.getString(4);
                 Timestamp Orderdate = rs.getTimestamp(5);
-                double total = rs.getDouble(6);
-                String line1 = rs.getString(7);
-                String line2 = rs.getString(8);
-                String city = rs.getString(9);
-                String province = rs.getString(10);
-                String countryId = rs.getString(11);
-                Timestamp createdAt = rs.getTimestamp(12);
-                Timestamp updateAt = rs.getTimestamp(13);
-                String payment = rs.getString(14);
-                String status = rs.getString(15);
+                String discountCode = rs.getString(6);
+                double total = rs.getDouble(7);
+                String line1 = rs.getString(8);
+                String line2 = rs.getString(9);
+                String city = rs.getString(10);
+                String province = rs.getString(11);
+                String countryId = rs.getString(12);
+                Timestamp createdAt = rs.getTimestamp(13);
+                Timestamp updateAt = rs.getTimestamp(14);
+                String payment = rs.getString(15);
+                String status = rs.getString(16);
 
                 vector.add(new Order(orderId, accountId, firstName, lastName,
-                        Orderdate, total, line1, line2, city, province,
+                        Orderdate, discountCode, total, line1, line2, city, province,
                         countryId, createdAt, updateAt, payment, status));
 
             }
@@ -70,19 +71,20 @@ public class OrderDAO extends DBContext {
                 String firstName = rs.getString(3);
                 String lastName = rs.getString(4);
                 Timestamp Orderdate = rs.getTimestamp(5);
-                double total = rs.getDouble(6);
-                String line1 = rs.getString(7);
-                String line2 = rs.getString(8);
-                String city = rs.getString(9);
-                String province = rs.getString(10);
-                String countryId = rs.getString(11);
-                Timestamp createdAt = rs.getTimestamp(12);
-                Timestamp updateAt = rs.getTimestamp(13);
-                String payment = rs.getString(14);
-                String status = rs.getString(15);
+                String discountCode = rs.getString(6);
+                double total = rs.getDouble(7);
+                String line1 = rs.getString(8);
+                String line2 = rs.getString(9);
+                String city = rs.getString(10);
+                String province = rs.getString(11);
+                String countryId = rs.getString(12);
+                Timestamp createdAt = rs.getTimestamp(13);
+                Timestamp updateAt = rs.getTimestamp(14);
+                String payment = rs.getString(15);
+                String status = rs.getString(16);
 
                 vector.add(new Order(orderId, accountId, firstName, lastName,
-                        Orderdate, total, line1, line2, city, province,
+                        Orderdate, discountCode, total, line1, line2, city, province,
                         countryId, createdAt, updateAt, payment, status));
             }
         } catch (SQLException ex) {
@@ -104,18 +106,19 @@ public class OrderDAO extends DBContext {
                 String firstName = rs.getString(3);
                 String lastName = rs.getString(4);
                 Timestamp Orderdate = rs.getTimestamp(5);
-                double total = rs.getDouble(6);
-                String line1 = rs.getString(7);
-                String line2 = rs.getString(8);
-                String city = rs.getString(9);
-                String province = rs.getString(10);
-                String countryId = rs.getString(11);
-                Timestamp createdAt = rs.getTimestamp(12);
-                Timestamp updateAt = rs.getTimestamp(13);
-                String payment = rs.getString(14);
-                String status = rs.getString(15);
+                String discountCode = rs.getString(6);
+                double total = rs.getDouble(7);
+                String line1 = rs.getString(8);
+                String line2 = rs.getString(9);
+                String city = rs.getString(10);
+                String province = rs.getString(11);
+                String countryId = rs.getString(12);
+                Timestamp createdAt = rs.getTimestamp(13);
+                Timestamp updateAt = rs.getTimestamp(14);
+                String payment = rs.getString(15);
+                String status = rs.getString(16);
 
-                return new Order(orderId, accountId, firstName, lastName, Orderdate, total, line1, line2, city, province, countryId, createdAt, updateAt, payment, status);
+                return new Order(orderId, accountId, firstName, lastName, Orderdate, discountCode, total, line1, line2, city, province, countryId, createdAt, updateAt, payment, status);
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).
@@ -186,30 +189,18 @@ public class OrderDAO extends DBContext {
         return orderId; // Trả về ID của đơn hàng mới được thêm vào
     }
 
-    public int updateOrder(
+    public int updateStatus(
             int orderId,
-            String firstName,
-            String lastName,
-            double total,
-            String city,
             String status
     ) {
         int n = 0;
         String sql = "UPDATE [dbo].[Order]\n"
-                + "   SET [firstName] = ?\n"
-                + "      ,[lastName] = ?\n"
-                + "      ,[Total] = ?\n"
-                + "      ,[city] = ?\n"
-                + "      ,[Status] = ?"
+                + "   SET [Status] = ?"
                 + " WHERE [OrderId] = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, firstName);
-            pre.setString(2, lastName);
-            pre.setDouble(3, total);
-            pre.setString(4, city);
-            pre.setString(5, status);
-            pre.setInt(6, orderId);
+            pre.setString(1, status);
+            pre.setInt(2, orderId);
             n = pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -224,18 +215,19 @@ public class OrderDAO extends DBContext {
 //        for (Order order1 : order) {
 //            System.out.println(order1);
 //        }
-        Vector<ProductCart> listCart = new Vector<>();
-        listCart.add(new ProductCart(2, "Nike", 2, 50000));
-        listCart.add(new ProductCart(2, "Nike", 1, 50000));
-        listCart.add(new ProductCart(2, "Nike", 1, 50000));
-        listCart.add(new ProductCart(5, "Nike", 1, 50000));
+//        Vector<ProductCart> listCart = new Vector<>();
+//        listCart.add(new ProductCart(2, "Nike", 2, 50000));
+//        listCart.add(new ProductCart(2, "Nike", 1, 50000));
+//        listCart.add(new ProductCart(2, "Nike", 1, 50000));
+//        listCart.add(new ProductCart(5, "Nike", 1, 50000));
+//
+//        int n = orderDao.addOrder(2, listCart, "bui", "hieu", "A2", "hoa lac 1", "hoa lac 2", "Thach that", "Ha noi", "payment");
+//        if (n > 0) {
+//            System.out.println("duoc");
+//        } else {
+//            System.out.println("khong duoc");
+//        }
 
-        int n = orderDao.addOrder(2, listCart, "bui", "hieu", "A2", "hoa lac 1", "hoa lac 2", "Thach that", "Ha noi", "payment");
-        if (n > 0) {
-            System.out.println("duoc");
-        } else {
-            System.out.println("khong duoc");
-        }
     }
 
 }

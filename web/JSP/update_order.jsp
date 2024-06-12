@@ -88,7 +88,7 @@
                             <label for="address">Last Name:</label>
                             <input type="text" class="form-control" id="lastName" name="lastName" value="<%= order.getLastName() %>" readonly>
                         </div>
-                        
+
                         <div class="form-group">
                             <label for="orderDate">Order Date:</label>
                             <input type="text" class="form-control" id="orderDate" name="orderDate" value="<%= order.getOrderdate() %>" readonly>
@@ -103,16 +103,12 @@
                         </div>
                         <div class="form-group">
                             <label for="status">Status:</label>
-                            <select class="form-control" id="status" name="status">
-                                <option value="Pending" <%= order.getStatus().equals("Pending") ? "selected" : "" %>>Pending</option>
-                                <option value="Delivering" <%= order.getStatus().equals("Delivering") ? "selected" : "" %>>Delivering</option>
-                                <option value="Delivered" <%= order.getStatus().equals("Delivered") ? "selected" : "" %>>Delivered</option>
-                                <option value="Cancelled" <%= order.getStatus().equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
-                            </select>
+                            <input type="text" class="form-control" id="status" name="status" value="<%= order.getStatus() %>" readonly>
+
                         </div>
-                        <div style="margin-top: 10px">
-                            <button type="submit" class="btn btn-primary">Cập Nhật</button>
-                        </div>
+                        <!--                        <div style="margin-top: 10px">
+                                                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
+                                                </div>-->
                     </form>
                 </div>
             </div>

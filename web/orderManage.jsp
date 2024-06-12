@@ -96,7 +96,7 @@
                                 <th scope="col">Total</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Status</th>
-                                <th scope="col">Edit</th>
+                                <th scope="col">View</th>
                                 <th scope="col">Update</th>
                             </tr>
                         </thead>
@@ -125,14 +125,11 @@
                                         <option value="Cancelled" <%= order.getStatus().equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
                                     </select></td>
                                 <td>
-                                    <a href="order?service=updateOrder&id=<%= order.getOrderId()%>" class="btn btn-sm btn-primary">Edit</a>
+                                    <a href="order?service=updateOrder&id=<%= order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
                                 </td>
                                 <td>
-                                    <input type="submit" name="service" value="updateStatus" class="btn btn-sm btn-primary">
+                                    <input type="submit"  class="btn btn-sm btn-primary">
                                 </td>
-                                
-
-
                             </tr>
                         </form>
                         <% } %>
