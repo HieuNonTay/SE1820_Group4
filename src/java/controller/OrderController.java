@@ -56,7 +56,9 @@ public class OrderController extends HttpServlet {
         } else if (service.equals("updateOrder")) {
             int orderId = Integer.parseInt(request.getParameter("id"));
             Order order = orderDao.getById(orderId);
+            listOrderDetail = orderDetailDao.getBySql("select * from OrderDetail Where OrderID = " + orderId + ";");
             request.setAttribute("order", order);
+            request.setAttribute("listOrderDetail", listOrderDetail);
             request.getRequestDispatcher("/JSP/update_order.jsp").forward(request, response);
         } else {
             listOrder = orderDao.getAll();

@@ -114,20 +114,72 @@
             </div>
         </div>
 
+    <head>
+        <style>
+            table {
+                font-family: Arial, sans-serif;
+                border-collapse: collapse;
+                width: 100%;
+            }
 
-        <jsp:include page="footer.jsp"/>
+            th, td {
+                border: 1px solid #dddddd;
+                text-align: left;
+                padding: 8px;
+            }
 
+            th {
+                background-color: #f2f2f2;
+            }
+        </style>
+    </head>
+    <body>
 
-        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <script src="assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
-        <script src="assets/vendor/popper/popper.min.js"></script>
-        <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
-        <script src="assets/vendor/loadscreen/js/ju-loading-screen.js"></script>
-        <script src="assets/vendor/range-slider/range-slider.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap-4-navbar.js"></script>
-        <script src="assets/vendor/timeline/jquery.timelify.js"></script>
-        <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
-        <script src="assets/custom/js/custom.js"></script>  
+        <h2>Order Detail List</h2>
+
+        <table>
+            <tr>
+                <th>OrderDetailID</th>
+                <th>OrderID</th>
+                <th>ProductID</th>
+                <th>Quantity</th>
+                <th>Price</th>
+            </tr>
+            <% Vector<OrderDetail> listOrderDetail = (Vector<OrderDetail>)request.getAttribute("listOrderDetail"); 
+                for (OrderDetail orderDetail : listOrderDetail) { 
+            %>
+            <tr>
+                <td><%= orderDetail.getOrderDetailID()%></td> <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
+                <td><%= orderDetail.getOrderID()%></td>
+                <td><%= orderDetail.getProductID()%></td>
+                <td><%= orderDetail.getQuantity()%></td>
+                <td><%= orderDetail.getPrice()%></td>
+            </tr>
+            <%}%>
+            <tr>
+                <td>2</td>
+                <td>102</td>
+                <td>202</td>
+                <td>2</td>
+                <td>15.50</td>
+            </tr>
+
+        </table>
+
     </body>
+    <jsp:include page="footer.jsp"/>
+
+
+    <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+    <script src="assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
+    <script src="assets/vendor/popper/popper.min.js"></script>
+    <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
+    <script src="assets/vendor/loadscreen/js/ju-loading-screen.js"></script>
+    <script src="assets/vendor/range-slider/range-slider.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="assets/vendor/bootstrap/js/bootstrap-4-navbar.js"></script>
+    <script src="assets/vendor/timeline/jquery.timelify.js"></script>
+    <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
+    <script src="assets/custom/js/custom.js"></script>  
+</body>
 </html>
