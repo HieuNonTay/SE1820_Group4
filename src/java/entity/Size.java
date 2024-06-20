@@ -9,32 +9,38 @@ package entity;
  * @author DELL
  */
 public class Size {
-    private String SizeID, ColorID;
+
+    private int SizeID, ColorID;
     private int Quantity, SizeNumber;
 
     public Size() {
     }
 
-    public Size(String SizeID, String ColorID, int Quantity, int SizeNumber) {
+    public Size(int sizeID, int size) {
+        this.SizeID = sizeID;
+        this.ColorID = size;
+    }
+
+    public Size(int SizeID, int ColorID, int Quantity, int SizeNumber) {
         this.SizeID = SizeID;
         this.ColorID = ColorID;
         this.Quantity = Quantity;
         this.SizeNumber = SizeNumber;
     }
 
-    public String getSizeID() {
+    public int getSizeID() {
         return SizeID;
     }
 
-    public void setSizeID(String SizeID) {
+    public void setSizeID(int SizeID) {
         this.SizeID = SizeID;
     }
 
-    public String getColorID() {
+    public int getColorID() {
         return ColorID;
     }
 
-    public void setColorID(String ColorID) {
+    public void setColorID(int ColorID) {
         this.ColorID = ColorID;
     }
 
@@ -53,5 +59,5 @@ public class Size {
     public void setSizeNumber(int SizeNumber) {
         this.SizeNumber = SizeNumber;
     }
-    
+
 }

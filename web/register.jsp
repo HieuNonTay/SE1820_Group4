@@ -40,7 +40,6 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet"> 
-
     </head>
 
     <body>
@@ -78,13 +77,13 @@
                             <div class="col-12 col-md-6 mb-4 mb-md-0">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="fname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="First name" value="${fname}">
+                                    <input name="fname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="First name" value="${fname}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="lname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Last name" value="${lname}">
+                                    <input name="lname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Last name" value="${lname}" required>
                                 </div>
                             </div>
                         </div>
@@ -93,36 +92,45 @@
                             <div class="col-12 col-md-6">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="phone" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Phone Number" value="${phone}">
+                                    <input name="phone" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Phone Number" value="${phone}" maxlength="10" pattern="0\d{9}" required>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="address" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Address" value="${address}">
+                                    <input name="address" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Address" value="${address}" required>
                                 </div>
                             </div>
                         </div>  
 
                         <div class="form-group"> 
                             <div class="input-icon">
+                                <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
+                                <input name="dob" type="date" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" value="${dob}" required> 
+                            </div>
+                        </div>
+
+                        <div class="form-group"> 
+                            <div class="input-icon">
                                 <span class="fables-iconemail fables-input-icon mt-2 font-13"></span>
-                                <input name="email" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email" value="${email}" > 
+                                <input name="email" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email" value="${email}" required> 
                             </div>
 
                         </div>
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="pass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" value="${pass}">
+                                <input  name="pass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" value="" required>
+
                             </div>
 
                         </div> 
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="repass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Repeat Password" value="${repass}">
+                                <input name="repass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Repeat Password" value="" required>
+
                             </div>
 
                         </div> 

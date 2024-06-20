@@ -9,21 +9,23 @@ package entity;
  * @author DELL
  */
 public class Category {
-    private String CategoryID, CategoryName;
+
+    private int CategoryID;
+    private String CategoryName;
 
     public Category() {
     }
 
-    public Category(String CategoryID, String CategoryName) {
+    public Category(int CategoryID, String CategoryName) {
         this.CategoryID = CategoryID;
         this.CategoryName = CategoryName;
     }
 
-    public String getCategoryID() {
+    public int getCategoryID() {
         return CategoryID;
     }
 
-    public void setCategoryID(String CategoryID) {
+    public void setCategoryID(int CategoryID) {
         this.CategoryID = CategoryID;
     }
 
@@ -34,6 +36,5 @@ public class Category {
     public void setCategoryName(String CategoryName) {
         this.CategoryName = CategoryName;
     }
-    
-    
+
 }

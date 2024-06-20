@@ -34,7 +34,7 @@ public class loginDAO extends DBContext {
             while (rs.next()) {
                 if (checkAccountRole(rs.getInt(8)) && checkBan(rs.getString(9))) {
                     return new Account(
-                            rs.getString(1),
+                            rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),

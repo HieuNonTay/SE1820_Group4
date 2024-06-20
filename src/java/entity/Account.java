@@ -10,7 +10,7 @@ package entity;
  */
 public class Account {
 
-    private String accountID;
+    private int accountID;
     private String fname;
     private String lname;
     private String dob;
@@ -28,7 +28,7 @@ public class Account {
 
     }
 
-    public Account(String accountID, String fname, String lname, String dob, String phone, String email, String password, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout) {
+    public Account(int accountID, String fname, String lname, String dob, String phone, String email, String password, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout) {
         this.accountID = accountID;
         this.fname = fname;
         this.lname = lname;
@@ -44,11 +44,11 @@ public class Account {
         this.lastLogout = lastLogout;
     }
 
-    public String getAccountID() {
+    public int getAccountID() {
         return accountID;
     }
 
-    public void setAccountID(String accountID) {
+    public void setAccountID(int accountID) {
         this.accountID = accountID;
     }
 
