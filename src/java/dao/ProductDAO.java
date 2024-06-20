@@ -27,7 +27,8 @@ import model.DBContext;
 public class ProductDAO extends DBContext {
 
     public Vector<Product> getAll() {
-        String sql = "select * from Product";
+        String sql = "select [ProductID], [Name], [Categoryid], [BrandID], [Description], [model], "
+                + "[SizeID], [ColorID], [Quantity], [sold], [view], [PublicationDate],[createdAt],[updatedAt],Price from Product";
         Vector<Product> vector = new Vector<>();
         ResultSet rs = getData(sql);
 
