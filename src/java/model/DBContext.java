@@ -54,6 +54,6 @@ public class DBContext {
     }
 
     public static void main(String[] args) {
-        DBContext db = new DBContext("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore", "sa", "123456");
+        DBContext db = new DBContext("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore2", "sa", "123456");
     }
 }

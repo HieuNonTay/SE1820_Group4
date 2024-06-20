@@ -16,6 +16,7 @@ public class OrderDetail {
     private int Quantity;
     private double Price;
 
+
     public OrderDetail() {
     }
 
@@ -71,5 +72,9 @@ public class OrderDetail {
     public String toString() {
         return "OrderDetail{" + "OrderDetailID=" + OrderDetailID + ", OrderID=" + OrderID + ", ProductID=" + ProductID + ", Quantity=" + Quantity + ", Price=" + Price + '}';
     }
+
+    
+
+    
 
 }

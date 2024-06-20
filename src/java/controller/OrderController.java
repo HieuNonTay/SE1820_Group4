@@ -38,22 +38,19 @@ public class OrderController extends HttpServlet {
         Vector<Order> listOrder = orderDao.getAll();
         Vector<OrderDetail> listOrderDetail = orderDetailDao.getAll();
         String service = request.getParameter("service");
+        String submit = request.getParameter("submit");
         if (service == null) {
             service = "nothing";
         }
 
         String searchQuery = request.getParameter("searchOrderId");
         if (searchQuery != null) {
-            try {
-                int orderId = Integer.parseInt(searchQuery);
-                listOrder = orderDao.getBySql("select * from [Order] where [OrderID] =" + orderId + ";");
-                request.setAttribute("listOrder", listOrder);
-                request.getRequestDispatcher("orderManage.jsp").forward(request, response);
-            } catch (NumberFormatException e) {
-                request.setAttribute("error", "Vui lòng nhập số hợp lệ");
-                request.getRequestDispatcher("errorPage.jsp").forward(request, response);
-            }
-        } else if (service.equals("updateOrder")) {
+            listOrder = orderDao.searchOrder(searchQuery);
+            request.setAttribute("searchQuery", searchQuery);
+            request.setAttribute("listOrder", listOrder);
+            request.getRequestDispatcher("orderManage.jsp").forward(request, response);
+
+        } else if (service.equals("View")) {
             int orderId = Integer.parseInt(request.getParameter("id"));
             Order order = orderDao.getById(orderId);
             listOrderDetail = orderDetailDao.getBySql("select * from OrderDetail Where OrderID = " + orderId + ";");
@@ -76,6 +73,9 @@ public class OrderController extends HttpServlet {
         Vector<Order> listOrder = orderDao.getAll();
         Vector<OrderDetail> listOrderDetail = orderDetailDao.getAll();
         String service = request.getParameter("service");
+        if (service == null) {
+            service = "nothing";
+        }
 
         if (service != null && service.equals("updateOrderAction")) {
             String orderIdStr = request.getParameter("orderId");
@@ -88,7 +88,7 @@ public class OrderController extends HttpServlet {
             try {
                 int orderId = Integer.parseInt(orderIdStr);
                 double total = Double.parseDouble(totalStr);
-                int update = orderDao.updateOrder(orderId, firstName, lastName, total, city, status);
+                int update = orderDao.updateStatus(orderId, status);
                 if (update > 0) {
                     response.sendRedirect("admin?service=listOrder");
                 } else {
@@ -113,6 +113,7 @@ public class OrderController extends HttpServlet {
             }
 
         }
+
     }
 
     /**

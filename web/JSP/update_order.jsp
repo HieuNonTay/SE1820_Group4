@@ -106,9 +106,6 @@
                             <input type="text" class="form-control" id="status" name="status" value="<%= order.getStatus() %>" readonly>
 
                         </div>
-                        <!--                        <div style="margin-top: 10px">
-                                                    <button type="submit" class="btn btn-primary">Cập Nhật</button>
-                                                </div>-->
                     </form>
                 </div>
             </div>
@@ -139,30 +136,27 @@
 
         <table>
             <tr>
-                <th>OrderDetailID</th>
+                
                 <th>OrderID</th>
-                <th>ProductID</th>
+                <th>Product Name</th>
                 <th>Quantity</th>
                 <th>Price</th>
             </tr>
             <% Vector<OrderDetail> listOrderDetail = (Vector<OrderDetail>)request.getAttribute("listOrderDetail"); 
                 for (OrderDetail orderDetail : listOrderDetail) { 
+                ProductDAO productDAO = new ProductDAO();
+                Product product = productDAO.getById(orderDetail.getProductID());
+                
             %>
             <tr>
-                <td><%= orderDetail.getOrderDetailID()%></td> <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
+                 <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
                 <td><%= orderDetail.getOrderID()%></td>
-                <td><%= orderDetail.getProductID()%></td>
+                <td><%= product.getName()%></td>
                 <td><%= orderDetail.getQuantity()%></td>
                 <td><%= orderDetail.getPrice()%></td>
             </tr>
             <%}%>
-            <tr>
-                <td>2</td>
-                <td>102</td>
-                <td>202</td>
-                <td>2</td>
-                <td>15.50</td>
-            </tr>
+            
 
         </table>
 

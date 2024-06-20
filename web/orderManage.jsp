@@ -76,25 +76,41 @@
                 <div class="col-md-6">
                     <form action="order" method="get" class="position-relative">
                         <div class="input-group">
-                            <input name="searchOrderId" class="form-control border-secondary py-3 rounded-start" type="text" placeholder="Enter the order ID you want to find">
-                            <button type="submit" value="submit" class="btn btn-primary py-3 px-4 rounded-end">Tìm Kiếm</button>
+                            <input name="searchOrderId" value="${searchQuery}" class="form-control border-secondary py-3 rounded-start" type="text" placeholder="Enter what you want to find">
+                            <button type="submit" value="submit" class="btn btn-primary py-3 px-4 rounded-end">Search</button>
                         </div>
                     </form>
                 </div>
             </div>
+<!--            <form action="order" method="post" class="position-relative">
+            <div class="input-group w-100 mx-auto d-flex">
+                
+                    <select name="type-search" class="form-select form-select-sm" aria-label="Default select example">
+                        <option value="orderID" >Order ID</option>                                            
+                        <option value="firstName">First Name</option>
+                        <option value="lastName">Last Name</option>
+                        <option value="addRess">Address</option>
+                        <option value="status">Status</option>
+                    </select>
+                    <input name="search"class="form-control p-3" placeholder="Enter what you want to find" aria-describedby="search-icon-1">
+                    <button type="submit"  name="submit "value="submit" id="search-icon-1" class="btn btn-primary py-3 px-4 rounded-end">Search</button>
+                
+            </div>
+                </form>-->
 
             <div class="row">
                 <div class="col-md-12">
                     <table class="table table-bordered table-striped">
                         <thead class="thead-dark">
                             <tr>
-                                <th scope="col">Order ID</th>
                                 <th scope="col">Account ID</th>
                                 <th scope="col">First Name</th>
                                 <th scope="col">Last Name</th>
                                 <th scope="col">Order Date</th>
-                                <th scope="col">Total</th>
+                                <th scope="col">Phone Number</th>
                                 <th scope="col">Address</th>
+                                <th scope="col">City</th>
+                                <th scope="col">Total</th>
                                 <th scope="col">Status</th>
                                 <th scope="col">View</th>
                                 <th scope="col">Update</th>
@@ -108,14 +124,15 @@
                         <form action="order?service=updateStatus" method="post">
                             <input type="hidden" name="orderId" value="<%= order.getOrderId()%>">
                             <tr>
-                                <td><%= order.getOrderId()%></td>
                                 <td><%= order.getAccountId()%></td>
                                 <td><%= order.getFirstName()%></td>
                                 <td><%= order.getLastName()%></td>
                                 <td><%= order.getOrderdate()%></td>
-                                <td><%= order.getTotal()%></td>
+                                <td><%= order.getLine1()%></td>
+                                <td><%= order.getLine2()%></td>
                                 <td><%= order.getCity()%></td>
-
+                                <td><%= order.getTotal()%></td>
+                                
                                 <td>
                                     <label for="status"></label>
                                     <select class="form-control" id="status" name="status">
@@ -125,7 +142,7 @@
                                         <option value="Cancelled" <%= order.getStatus().equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
                                     </select></td>
                                 <td>
-                                    <a href="order?service=updateOrder&id=<%= order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
+                                    <a href="order?service=View&id=<%= order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
                                 </td>
                                 <td>
                                     <input type="submit"  class="btn btn-sm btn-primary">

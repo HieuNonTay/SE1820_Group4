@@ -127,6 +127,45 @@ public class OrderDAO extends DBContext {
         return null;
     }
 
+    public Vector<Order> searchOrder(String search) {
+        String sql = "SELECT * FROM [Order]\n"
+                + "WHERE firstName like '%" + search + "%' or lastName like '%" + search + "%' \n"
+                + "or line1 like '%" + search + "%' or line2 like '%" + search + "%' \n"
+                + "or city like '%" + search + "%' or [Status] like '%" + search + "%';";
+        Vector<Order> vector = new Vector<>();
+        ResultSet rs = getData(sql);
+        try {
+            while (rs.next()) {
+                int orderId = rs.getInt(1);
+                int accountId = rs.getInt(2);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
+                Timestamp Orderdate = rs.getTimestamp(5);
+                String discountCode = rs.getString(6);
+                double total = rs.getDouble(7);
+                String line1 = rs.getString(8);
+                String line2 = rs.getString(9);
+                String city = rs.getString(10);
+                String province = rs.getString(11);
+                String countryId = rs.getString(12);
+                Timestamp createdAt = rs.getTimestamp(13);
+                Timestamp updateAt = rs.getTimestamp(14);
+                String payment = rs.getString(15);
+                String status = rs.getString(16);
+
+                vector.add(new Order(orderId, accountId, firstName, lastName,
+                        Orderdate, discountCode, total, line1, line2, city, province,
+                        countryId, createdAt, updateAt, payment, status));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return vector;
+    }
+
     public int addOrder(int accountId, Vector<ProductCart> listProdcut, String firstName, String lastName,
             String DiscountCode, String line1, String line2, String city, String province, String payment) {
         int orderId = 0; // Lưu trữ ID của đơn hàng được thêm vào
@@ -210,23 +249,11 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO orderDao = new OrderDAO();
-//        int listOrder = orderDao.updateOrder(1, "acc", "add", 1000, "New York", "Delivered");
-//        Vector<Order> order = orderDao.getAll();
-//        for (Order order1 : order) {
-//            System.out.println(order1);
-//        }
-//        Vector<ProductCart> listCart = new Vector<>();
-//        listCart.add(new ProductCart(2, "Nike", 2, 50000));
-//        listCart.add(new ProductCart(2, "Nike", 1, 50000));
-//        listCart.add(new ProductCart(2, "Nike", 1, 50000));
-//        listCart.add(new ProductCart(5, "Nike", 1, 50000));
-//
-//        int n = orderDao.addOrder(2, listCart, "bui", "hieu", "A2", "hoa lac 1", "hoa lac 2", "Thach that", "Ha noi", "payment");
-//        if (n > 0) {
-//            System.out.println("duoc");
-//        } else {
-//            System.out.println("khong duoc");
-//        }
+        String search = "0904216197";
+        Vector<Order> list = orderDao.searchOrder(search);
+        for (Order order : list) {
+            System.out.println(order);
+        }
 
     }
 
