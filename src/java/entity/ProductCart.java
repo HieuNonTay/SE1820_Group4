@@ -13,15 +13,35 @@ public class ProductCart {
     private int productId;
     private String name;
     private int quantity;
+<<<<<<< Updated upstream
+=======
+    private int color;
+    private int size;
+>>>>>>> Stashed changes
     private double price;
 
     public ProductCart() {
     }
 
+<<<<<<< Updated upstream
+=======
+    public ProductCart(int productId, String name, int quantity, double price) {
+        this.productId = productId;
+        this.name = name;
+        this.quantity = quantity;
+        this.price = price;
+    }
+
+>>>>>>> Stashed changes
     public ProductCart(int productId, String name, int quantity, int color, int size, double price) {
         this.productId = productId;
         this.name = name;
         this.quantity = quantity;
+<<<<<<< Updated upstream
+=======
+        this.color = color;
+        this.size = size;
+>>>>>>> Stashed changes
         this.price = price;
     }
 

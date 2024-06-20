@@ -4,6 +4,10 @@
  */
 package controller;
 
+<<<<<<< Updated upstream
+=======
+import dao.OrderDAO;
+>>>>>>> Stashed changes
 import dao.ProductDAO;
 import entity.Product;
 import entity.ProductCart;
@@ -42,6 +46,10 @@ public class CartController extends HttpServlet {
         ProductDAO dao = new ProductDAO();
         String service = request.getParameter("service");
         ProductDAO productDao = new ProductDAO();
+<<<<<<< Updated upstream
+=======
+        OrderDAO orderDao = new OrderDAO();
+>>>>>>> Stashed changes
         Enumeration<String> emm = session.getAttributeNames();
         if (service == null) {
             service = "showCart";
@@ -66,7 +74,11 @@ public class CartController extends HttpServlet {
             response.sendRedirect("product");
         }
         if (service.equals("showCart")) {
+<<<<<<< Updated upstream
             request.getRequestDispatcher("/ShowCart.jsp").forward(request, response);
+=======
+            request.getRequestDispatcher("/showCart.jsp").forward(request, response);
+>>>>>>> Stashed changes
         }
         if (service.equals("remove")) {
             String id = request.getParameter("id");
@@ -82,6 +94,7 @@ public class CartController extends HttpServlet {
             }
             request.getRequestDispatcher("showCart.jsp").forward(request, response);
         }
+<<<<<<< Updated upstream
         if (service.equals("UPDATE")){
             Enumeration<String> em = (Enumeration<String>)session.getAttributeNames();
             while(em.hasMoreElements()){
@@ -94,12 +107,30 @@ public class CartController extends HttpServlet {
                     Product product = dao.getById(productCart.getProductId());
                     
                     if(quantity > product.getQuantity()){
+=======
+        if (service.equals("update")) {
+            Enumeration<String> em = (Enumeration<String>) session.getAttributeNames();
+            while (em.hasMoreElements()) {
+                String key = em.nextElement();
+                if (key.equals("username") || key.equals("vecKey")) {
+                    continue;
+                } else {
+                    int quantity = Integer.parseInt(request.getParameter(key));
+                    ProductCart productCart = (ProductCart) session.getAttribute(key);
+                    Product product = dao.getById(productCart.getProductId());
+
+                    if (quantity > product.getQuantity()) {
+>>>>>>> Stashed changes
                         request.setAttribute("mess", "Đơn hàng đã được thêm vào tối đa");
                         productCart.setQuantity(product.getQuantity());
                         session.setAttribute(key, productCart);
                         request.getRequestDispatcher("showCart.jsp").forward(request, response);
                         return;
+<<<<<<< Updated upstream
                     }else{
+=======
+                    } else {
+>>>>>>> Stashed changes
                         productCart.setQuantity(quantity);
                         session.setAttribute(key, productCart);
                     }
@@ -108,12 +139,73 @@ public class CartController extends HttpServlet {
             response.sendRedirect("CartURL");
             return;
         }
+<<<<<<< Updated upstream
+=======
+        if (service.equals("checkOut")) {
+            request.getRequestDispatcher("checkOut.jsp").forward(request, response);
+        }
+
+>>>>>>> Stashed changes
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        HttpSession session = request.getSession(true);
+        String service = request.getParameter("service");
+        ProductDAO productDao = new ProductDAO();
+        OrderDAO orderDao = new OrderDAO();
+        Enumeration<String> emm = session.getAttributeNames();
+        if (service.equals("checkOut")) {
+            String submit = request.getParameter("submit");
+            if (submit == null) {
+                request.getRequestDispatcher("/checkOut.jsp").forward(request, response);
+            } else {
+                Enumeration<String> em = session.getAttributeNames();
+                int accountId = Integer.parseInt(request.getParameter("accountId"));
+//                Account account = accountDao.getByAccountId(accountId);
+                String firstName = request.getParameter("firstName");
+                String lastName = request.getParameter("lastName");
+                String discountCode = request.getParameter("discountCode");
+                String line1 = request.getParameter("line1");
+                String line2 = request.getParameter("line2");
+                String city = request.getParameter("city");
+                String province = request.getParameter("province");
+
+                Vector<ProductCart> listProductCart = new Vector<>();
+                boolean enoughQuantity = true;
+
+                while (em.hasMoreElements()) {
+                    String key = em.nextElement().toString(); //get key
+                    if (key.equals("username") || key.equals("vecKey")) {
+                        continue;
+                    } else {
+                        ProductCart productCart = (ProductCart) session.getAttribute(key);
+                        Product product = productDao.getById(productCart.getProductId());
+                        if (productCart.getQuantity() > product.getQuantity()) {
+                            enoughQuantity = false;
+                            request.setAttribute("mess", "Đơn hàng trong kho không đủ để thực hiện yêu cầu");
+                        } else {
+                            listProductCart.add(productCart);
+                        }
+                    }
+                }
+                if (enoughQuantity) {
+                    int accountIDD = 1;
+                    String payment = "Check";
+                    int checkOut = orderDao.addOrder(accountIDD, listProductCart, firstName, lastName, discountCode, line1, line2, city, province, payment);
+                    if (checkOut > 0) {
+                        response.sendRedirect("home");
+                    } else {
+                        response.sendRedirect("CartURL?service=checkOut");
+                    }
+                } else {
+                    request.getRequestDispatcher("CartURL?service=checkOut").forward(request, response);
+                }
+            }
+        }
+
     }
 
     @Override

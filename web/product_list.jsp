@@ -52,7 +52,11 @@
         <jsp:include page="header.jsp"/>
         <div class="fables-header fables-after-overlay">
             <div class="container"> 
+<<<<<<< Updated upstream
                 <h2 class="fables-page-title fables-second-border-color">Forgot Password</h2>
+=======
+                <h2 class="fables-page-title fables-second-border-color">Product List</h2>
+>>>>>>> Stashed changes
             </div>
         </div>
 
@@ -84,6 +88,7 @@
 
                         </form>
                     </div>
+<<<<<<< Updated upstream
                     <div class="rage-slider">
                         <h2 class="font-16 semi-font fables-forth-text-color fables-light-gary-background  p-3 mb-4">Filter by price</h2> 
                         <form action="product?service=filterPrice" method="post"> 
@@ -195,6 +200,50 @@
                                 </div> 
                             </form>
                         </div>
+=======
+                    <div class="range-slider">
+                        <h2 class="font-16 semi-font fables-forth-text-color fables-light-gary-background p-3 mb-4">Filter by price</h2>
+                        <form action="product" method="get">
+                            <div class="range-slider fables-forth-text-color" id="facet-price-range-slider" data-options='{"output":{"prefix":""},"maxSymbol":"+"}'>
+                                <input name="passPrice" value="0" min="0" max="200" step="1" type="range" id="priceRange" oninput="updatePriceValue(this.value)">
+                                <input name ="service" value="filterPrice" hidden=>
+                                <span id="priceValue">0</span>
+                            </div>
+                            <div class="form-group mb-4 mt-3">
+                                <select class="form-control rounded-0" name="sortOrder">
+                                    <option value="default" selected>Default sorting</option>
+                                    <option value="ascending">Ascending price</option>
+                                    <option value="decreasing">Decreasing price</option>
+                                </select>
+                            </div>
+                            <button type="submit" class="btn btn-block fables-second-background-color rounded-0 white-color white-color-hover p-2 font-15 mb-4">Filter</button>
+                        </form>
+                    </div>
+
+                    <h2 class="font-16 semi-font fables-forth-text-color fables-light-gary-background  p-3 mb-4">Product Categories</h2>
+                    <ul class="nav fables-forth-text-color fables-forth-before fables-store-left-list">
+                        <c:forEach items="${categorys}" var="category">
+                            <li><a href="product?name=${category.categoryName}&service=categoryFilter"">${category.categoryName}</a></li>
+                            </c:forEach>
+                    </ul>
+
+                </div>
+                <div class="col-12 col-md-8 col-lg-9"> 
+                    <div class="row mb-4">
+                        <!--                        <div class="col-12 col-lg-4">
+                                                    <form> 
+                                                        <div class="form-group mb-0"> 
+                                                            <select class="form-control rounded-0">
+                                                                <option value="" selected>default sorting</option>
+                                                                <option>2</option>
+                                                                <option>3</option>
+                                                                <option>4</option>
+                                                                <option>5</option>
+                                                            </select>
+                                                        </div> 
+                                                    </form>
+                                                </div>-->
+>>>>>>> Stashed changes
                         <div class="col-4 col-md-6 col-lg-2 offset-lg-6 text-center pl-0 d-none d-lg-block">
                             <span class="fables-iconlist fa-fw fables-view-btn fables-list-btn fables-third-border-color fables-third-text-color"></span>
                             <span class="fables-icongrid active fa-fw fables-view-btn fables-grid-btn fables-third-border-color fables-third-text-color"></span>
@@ -219,7 +268,11 @@
                                         </div>
                                         <div class="card-body col-12">
                                             <h5 class="card-title mx-xl-3">
+<<<<<<< Updated upstream
                                                 <a href="#" class="fables-main-text-color fables-store-product-title fables-second-hover-color">${product.name}</a>
+=======
+                                                <a href="detail?action=productdetail&product_id=${product.productId}" class="fables-main-text-color fables-store-product-title fables-second-hover-color">${product.name}</a>
+>>>>>>> Stashed changes
                                             </h5>
                                             <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3">DOUBLE</p>
                                             <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3">${product.price} $</p>
@@ -263,5 +316,20 @@
         <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
         <script src="assets/custom/js/custom.js"></script>  
 
+<<<<<<< Updated upstream
+=======
+        <script>
+            function updatePriceValue(value) {
+                document.getElementById('priceValue').textContent = value;
+            }
+
+            // Initial display of the price value
+            document.addEventListener('DOMContentLoaded', (event) => {
+                const rangeInput = document.getElementById('priceRange');
+                const priceValue = document.getElementById('priceValue');
+                priceValue.textContent = rangeInput.value;
+            });
+        </script>
+>>>>>>> Stashed changes
     </body>
 </html>

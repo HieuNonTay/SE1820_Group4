@@ -42,6 +42,7 @@
 
     <body>
 
+<<<<<<< Updated upstream
         <!-- Start Top Header -->
         <div class="search-section">
             <a class="close-search" href="#"></a>
@@ -315,4 +316,33 @@
     <script>
     </script>
 </body>
+=======
+        <jsp:include page="header.jsp"/>
+        <div class="fables-header fables-after-overlay">
+            <div class="container"> 
+                <h2 class="fables-page-title fables-second-border-color">Home Page</h2>
+            </div>
+        </div>
+        <!-- Start page content -->
+
+        <!-- /End page content -->
+
+        <jsp:include page="footer.jsp"/>
+
+        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+        <script src="assets/vendor/timeline/jquery.timelify.js"></script>
+        <script src="assets/vendor/loadscreen/js/ju-loading-screen.js"></script>
+        <script src="assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
+        <script src="assets/vendor/popper/popper.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+        <script src="assets/vendor/bootstrap/js/bootstrap-4-navbar.js"></script>
+        <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
+        <script src="assets/vendor/fancybox-master/jquery.fancybox.min.js"></script>
+        <script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
+        <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
+        <script src="assets/custom/js/custom.js"></script>  
+        <script>
+        </script>
+    </body>
+>>>>>>> Stashed changes
 </html>

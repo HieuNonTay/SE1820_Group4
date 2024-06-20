@@ -9,19 +9,34 @@ package entity;
  * @author DELL
  */
 public class Size {
+<<<<<<< Updated upstream
     private String SizeID, ColorID;
+=======
+
+    private int SizeID, ColorID;
+>>>>>>> Stashed changes
     private int Quantity, SizeNumber;
 
     public Size() {
     }
 
+<<<<<<< Updated upstream
     public Size(String SizeID, String ColorID, int Quantity, int SizeNumber) {
+=======
+    public Size(int sizeID, int size) {
+        this.SizeID = sizeID;
+        this.ColorID = size;
+    }
+
+    public Size(int SizeID, int ColorID, int Quantity, int SizeNumber) {
+>>>>>>> Stashed changes
         this.SizeID = SizeID;
         this.ColorID = ColorID;
         this.Quantity = Quantity;
         this.SizeNumber = SizeNumber;
     }
 
+<<<<<<< Updated upstream
     public String getSizeID() {
         return SizeID;
     }
@@ -35,6 +50,21 @@ public class Size {
     }
 
     public void setColorID(String ColorID) {
+=======
+    public int getSizeID() {
+        return SizeID;
+    }
+
+    public void setSizeID(int SizeID) {
+        this.SizeID = SizeID;
+    }
+
+    public int getColorID() {
+        return ColorID;
+    }
+
+    public void setColorID(int ColorID) {
+>>>>>>> Stashed changes
         this.ColorID = ColorID;
     }
 
@@ -53,5 +83,9 @@ public class Size {
     public void setSizeNumber(int SizeNumber) {
         this.SizeNumber = SizeNumber;
     }
+<<<<<<< Updated upstream
     
+=======
+
+>>>>>>> Stashed changes
 }

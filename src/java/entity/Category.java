@@ -9,21 +9,39 @@ package entity;
  * @author DELL
  */
 public class Category {
+<<<<<<< Updated upstream
     private String CategoryID, CategoryName;
+=======
+
+    private int CategoryID;
+    private String CategoryName;
+>>>>>>> Stashed changes
 
     public Category() {
     }
 
+<<<<<<< Updated upstream
     public Category(String CategoryID, String CategoryName) {
+=======
+    public Category(int CategoryID, String CategoryName) {
+>>>>>>> Stashed changes
         this.CategoryID = CategoryID;
         this.CategoryName = CategoryName;
     }
 
+<<<<<<< Updated upstream
     public String getCategoryID() {
         return CategoryID;
     }
 
     public void setCategoryID(String CategoryID) {
+=======
+    public int getCategoryID() {
+        return CategoryID;
+    }
+
+    public void setCategoryID(int CategoryID) {
+>>>>>>> Stashed changes
         this.CategoryID = CategoryID;
     }
 
@@ -34,6 +52,10 @@ public class Category {
     public void setCategoryName(String CategoryName) {
         this.CategoryName = CategoryName;
     }
+<<<<<<< Updated upstream
     
     
+=======
+
+>>>>>>> Stashed changes
 }

@@ -102,6 +102,7 @@
                     </div>
                 </div> 
                 <div class="col-12 col-lg-6 col-12 col-lg-6 mt-3 mt-lg-0">
+<<<<<<< Updated upstream
                     <h2 class="fables-main-text-color font-20 semi-font">LUIS LEATHER DRIVING MOCCASINS FROM  DOUBLE OAK MILLS</h2>
 
                     <div class="fables-forth-text-color fables-single-tags mt-3">
@@ -112,6 +113,17 @@
 
                     <p class="fables-forth-text-color font-15 my-3">
                         Fashion was originally established as a source of exclusive designer clothing at affordable prices.
+=======
+                    <h2 class="fables-main-text-color font-20 semi-font">${ProductData.name}</h2>
+
+                    <div class="fables-forth-text-color fables-single-tags mt-3">
+                        <span class="fables-fifth-text-color fables-icontags"></span> 
+                        <a href="product?product_id=${ProductData.productId}&service=category">${ProductByCategory}</a>
+                    </div>
+
+                    <p class="fables-forth-text-color font-15 my-3">
+                        ${ProductData.description}
+>>>>>>> Stashed changes
                     </p>
 
                     <div class="row mb-5">
@@ -151,7 +163,11 @@
                     <div class="row mb-5">
                         <div class="col-12 col-sm-7 text-center text-md-left"> 
                             <span class="fables-fifth-text-color"><span class="fables-iconprice"></span> Price :</span> 
+<<<<<<< Updated upstream
                             <span class="fables-second-text-color font-20 font-weight-bold">$98.00</span> 
+=======
+                            <span class="fables-second-text-color font-20 font-weight-bold">${ProductData.price}</span> 
+>>>>>>> Stashed changes
                         </div>
                         <div class="col-9 col-md-4 col-lg-5 mt-3 mt-sm-0 mr-auto ml-auto mr-md-0 ml-md-auto">
                             <div class="fables-calc fables-light-background-color fables-btn-rouned">
@@ -335,6 +351,7 @@
         </div> 
         <!-- /End page content -->
 
+<<<<<<< Updated upstream
         <!-- Start Footer 2 Background Image  -->
         <div class="fables-footer-image fables-after-overlay white-color py-4 py-lg-5 bg-rules">
             <div class="container">
@@ -404,6 +421,9 @@
         </div>
 
         <!-- /End Footer 2 Background Image -->
+=======
+        <jsp:include page="footer.jsp"/>
+>>>>>>> Stashed changes
 
 
         <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>

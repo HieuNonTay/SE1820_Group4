@@ -1,3 +1,7 @@
+<<<<<<< Updated upstream
+=======
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+>>>>>>> Stashed changes
 <!-- Loading Screen -->
 <div id="ju-loading-screen">
     <div class="sk-double-bounce">
@@ -7,6 +11,7 @@
 </div>
 
 <!-- Start Top Header -->
+<<<<<<< Updated upstream
 <div class="search-section">
     <a class="close-search" href="#"></a>
     <div class="d-flex justify-content-center align-items-center h-100">
@@ -22,6 +27,8 @@
         </form>
     </div>
 </div>
+=======
+>>>>>>> Stashed changes
 
 <!-- Start Fables Navigation -->
 <div class="fables-navigation fables-main-background-color py-3 py-lg-0">
@@ -65,11 +72,19 @@
                     </div>
                 </nav>
             </div>
+<<<<<<< Updated upstream
             <div class="col-12 col-md-2 col-lg-3 pr-md-0 icons-header-mobile">
 
                 <div class="fables-header-icons">
                     <div class="dropdown"> 
                         <a href="#" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+=======
+
+            <div class="col-12 col-md-2 col-lg-3 pr-md-0">
+                <div class="fables-header-icons">
+                    <div class="dropdown"> 
+                        <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+>>>>>>> Stashed changes
                             <span class="fables-iconcart-icon font-20"></span>
                             <span class="fables-cart-number fables-second-background-color text-center">3</span>
                         </a>
@@ -101,19 +116,60 @@
                                 <span class="font-14 semi-font fables-second-text-color float-right">$200.00</span>
                                 <hr>
                                 <div class="text-center">
+<<<<<<< Updated upstream
                                     <a href="cart?service=showCart" class="fables-second-background-color fables-btn-rounded  text-center white-color py-2 px-3 font-14 bg-hover-transparent border fables-second-border-color fables-second-hover-color">View my cart</a> 
+=======
+                                    <a href="#" class="fables-second-background-color fables-btn-rounded  text-center white-color py-2 px-3 font-14 bg-hover-transparent border fables-second-border-color fables-second-hover-color">View my cart</a> 
+>>>>>>> Stashed changes
                                     <a href="#" class="fables-second-text-color border fables-second-border-color fables-btn-rounded text-center white-color p-2 px-4 font-14 fables-second-hover-background-color">Checkout</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+<<<<<<< Updated upstream
 
                     <a href="signIn.jsp" class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"><span class="fables-iconuser"></span></a>
+=======
+                    <!--                    <a href="signIn.jsp" class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"><span class="fables-iconuser"></span></a> -->
+
+                    <c:if test="${sessionScope.acc == null}">
+                        <div class="dropdown">
+                            <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fables-iconuser">
+                            </a>
+                            <div class="nav-item dropdown">
+                                <ul class="dropdown-menu" aria-labelledby="sub-nav1">
+                                    <li><a href="signIn.jsp"  class="dropdown-item"> Sign In </a></li>
+                                    <li><a href="register.jsp"  class="dropdown-item"> Sign Up </a></li>
+                                </ul>
+                            </div>  
+                        </div>
+                    </c:if>
+
+                    <c:if test="${sessionScope.acc != null}">
+                        <div class="dropdown">
+                            <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${sessionScope. acc.getLname()} 
+                            </a>
+                            <div class="nav-item dropdown">
+                                <ul style="list-style-type: none" class="dropdown-menu" aria-labelledby="sub-nav1">
+                                    <li><a href="userDetail.jsp"  class="dropdown-item"> Profile </a></li>
+                                    <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
+                                    <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
+                                </ul>
+                            </div>  
+                        </div>
+                    </c:if>
+>>>>>>> Stashed changes
 
                 </div>
             </div>
         </div>
     </div>
+<<<<<<< Updated upstream
+=======
+</div>
+>>>>>>> Stashed changes
 </div>     
 
 <!-- /End Header -->
