@@ -6,6 +6,7 @@ package controller;
 
 import dao.OrderDAO;
 import dao.ProductDAO;
+import entity.Account;
 import entity.Product;
 import entity.ProductCart;
 import java.io.PrintWriter;
@@ -40,6 +41,14 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         HttpSession session = request.getSession(true);
+        HttpSession s = request.getSession();
+//        if (s.getAttribute("acc") == null) {
+//            request.getRequestDispatcher("403.jsp").forward(request, response);
+//        }
+//        Account ch = (Account) s.getAttribute("acc");
+//        if (!(ch.getRoleID() == 1 || ch.getRoleID() == 3)) {
+//            request.getRequestDispatcher("403.jsp").forward(request, response);
+//        }
         ProductDAO dao = new ProductDAO();
         String service = request.getParameter("service");
         ProductDAO productDao = new ProductDAO();
@@ -88,7 +97,7 @@ public class CartController extends HttpServlet {
             Enumeration<String> em = (Enumeration<String>) session.getAttributeNames();
             while (em.hasMoreElements()) {
                 String key = em.nextElement();
-                if (key.equals("username") || key.equals("vecKey")) {
+                if (key.equals("acc") || key.equals("vecKey")) {
                     continue;
                 } else {
                     int quantity = Integer.parseInt(request.getParameter(key));
@@ -132,7 +141,7 @@ public class CartController extends HttpServlet {
             } else {
                 Enumeration<String> em = session.getAttributeNames();
                 int accountId = Integer.parseInt(request.getParameter("accountId"));
-//                Account account = accountDao.getByAccountId(accountId);
+                System.out.println(accountId);
                 String firstName = request.getParameter("firstName");
                 String lastName = request.getParameter("lastName");
                 String discountCode = request.getParameter("discountCode");
@@ -146,7 +155,7 @@ public class CartController extends HttpServlet {
 
                 while (em.hasMoreElements()) {
                     String key = em.nextElement().toString(); //get key
-                    if (key.equals("username") || key.equals("vecKey")) {
+                    if (key.equals("acc") || key.equals("vecKey")) {
                         continue;
                     } else {
                         ProductCart productCart = (ProductCart) session.getAttribute(key);
@@ -160,9 +169,8 @@ public class CartController extends HttpServlet {
                     }
                 }
                 if (enoughQuantity) {
-                    int accountIDD = 1;
                     String payment = "Check";
-                    int checkOut = orderDao.addOrder(accountIDD, listProductCart, firstName, lastName, discountCode, line1, line2, city, province, payment);
+                    int checkOut = orderDao.addOrder(accountId, listProductCart, firstName, lastName, discountCode, line1, line2, city, province, payment);
                     if (checkOut > 0) {
                         response.sendRedirect("home");
                     } else {

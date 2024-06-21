@@ -27,8 +27,8 @@ import model.DBContext;
 public class ProductDAO extends DBContext {
 
     public Vector<Product> getAll() {
-        String sql = "select [ProductID], [Name], [Categoryid], [BrandID], [Description], [model], "
-                + "[SizeID], [ColorID], [Quantity], [sold], [view], [PublicationDate],[createdAt],[updatedAt],Price from Product";
+        String sql = "select [ProductID], [Name], [model], [BrandID], [Categoryid], "
+                + "[ColorID], [SizeID], [Description],Price, [Quantity], [sold], [view], [PublicationDate],[createdAt],[updatedAt] from Product";
         Vector<Product> vector = new Vector<>();
         ResultSet rs = getData(sql);
 
@@ -277,13 +277,13 @@ public class ProductDAO extends DBContext {
 
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-//        Vector<Product> list = dao.getBySql("Select * From Product a Where a.ProductID = 1;");
-//
-//        for (Product product : list) {
-//            System.out.println(product);
-//        }
-        List<Product> categorys = dao.filterProductsByPrice(30, "ascending");
-        categorys.stream().forEach(y -> System.err.println(y.getPrice()));
+        Vector<Product> list = dao.getAll();
+
+        for (Product product : list) {
+            System.out.println(product);
+        }
+//        List<Product> categorys = dao.filterProductsByPrice(30, "ascending");
+//        categorys.stream().forEach(y -> System.err.println(y.getPrice()));
 
     }
 }

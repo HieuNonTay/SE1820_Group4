@@ -44,6 +44,10 @@
         <servlet-name>ManagerController</servlet-name>
         <servlet-class>controller.ManagerController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>HistoryOrderController</servlet-name>
+        <servlet-class>controller.HistoryOrderController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart</url-pattern>
@@ -143,5 +147,9 @@
     <servlet-mapping>
         <servlet-name>discountUpdateController</servlet-name>
         <url-pattern>/discountUpdate</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>HistoryOrderController</servlet-name>
+        <url-pattern>/historyOrder</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -47,7 +47,7 @@
 
 
     </head>
-    
+
 
 
     <body>
@@ -82,7 +82,7 @@
                                 Vector<String> vecKey = new Vector<>();
                                 while(em.hasMoreElements()){
                                     String key = em.nextElement().toString();
-                                    if(key.equals("user") || key.equals("vecKey")){
+                                    if(key.equals("user") || key.equals("vecKey") ||key.equals("acc") ){
                                         continue;
                                     }else{
                                         vecKey.add(key);
@@ -136,9 +136,12 @@
                     <a href="CartURL?service=removeAll" class="btn btn-danger px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Remove all</a>
 
                     <input type="submit" name="service" value="update" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"  />
-                    <% //if(user != null) { %>
-                    <a href="CartURL?service=checkOut" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>
-                    <% //} %>
+                    <c:if test="${sessionScope.acc == null}">
+                        <a href="signIn.jsp" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>                        
+                    </c:if>
+                    <c:if test="${sessionScope.acc != null}">
+                        <a href="CartURL?service=checkOut" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>
+                    </c:if>
                     <% } %>
 
                 </div>

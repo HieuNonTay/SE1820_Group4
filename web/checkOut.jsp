@@ -77,7 +77,7 @@
                             Vector<String> vecKey = new Vector<>();
                             while(em.hasMoreElements()){
                                 String key = em.nextElement().toString();
-                                if(key.equals("user") || key.equals("vecKey")){
+                                if(key.equals("user") || key.equals("vecKey")||key.equals("acc")){
                                     continue;
                                 }else{
                                     vecKey.add(key);
@@ -119,7 +119,7 @@
                 <div class="bg-light rounded">
 
                     <form action="CartURL?service=checkOut" method="post">
-                        <input type="hidden" name="accountId" value="2">
+                        <input type="hidden" name="accountId" value="${sessionScope. acc.getAccountID()}">
 
                         <div class="p-4">
                             <h1 class="display-6 mb-4">Giỏ <span class="fw-normal">Mua Hàng</span></h1>

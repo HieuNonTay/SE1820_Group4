@@ -13,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.Vector;
 
 /**
@@ -34,7 +35,6 @@ public class OrderController extends HttpServlet {
             throws ServletException, IOException {
         OrderDAO orderDao = new OrderDAO();
         OrderDetailDAO orderDetailDao = new OrderDetailDAO();
-
         Vector<Order> listOrder = orderDao.getAll();
         Vector<OrderDetail> listOrderDetail = orderDetailDao.getAll();
         String service = request.getParameter("service");

@@ -127,6 +127,41 @@ public class OrderDAO extends DBContext {
         return null;
     }
 
+    public Vector<Order> getByAccountId(int accountID) {
+        String sql = "Select * From [Order] o Where o.AccountID = " + accountID + ";";
+        Vector<Order> vector = new Vector<>();
+        ResultSet rs = getData(sql);
+        try {
+            while (rs.next()) {
+
+                int orderId = rs.getInt(1);
+                int accountId = rs.getInt(2);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
+                Timestamp Orderdate = rs.getTimestamp(5);
+                String discountCode = rs.getString(6);
+                double total = rs.getDouble(7);
+                String line1 = rs.getString(8);
+                String line2 = rs.getString(9);
+                String city = rs.getString(10);
+                String province = rs.getString(11);
+                String countryId = rs.getString(12);
+                Timestamp createdAt = rs.getTimestamp(13);
+                Timestamp updateAt = rs.getTimestamp(14);
+                String payment = rs.getString(15);
+                String status = rs.getString(16);
+
+                vector.add(new Order(orderId, accountId, firstName, lastName,
+                        Orderdate, discountCode, total, line1, line2, city, province,
+                        countryId, createdAt, updateAt, payment, status));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return vector;
+    }
+
     public Vector<Order> searchOrder(String search) {
         String sql = "SELECT * FROM [Order]\n"
                 + "WHERE firstName like '%" + search + "%' or lastName like '%" + search + "%' \n"
@@ -250,7 +285,7 @@ public class OrderDAO extends DBContext {
     public static void main(String[] args) {
         OrderDAO orderDao = new OrderDAO();
         String search = "0904216197";
-        Vector<Order> list = orderDao.searchOrder(search);
+        Vector<Order> list = orderDao.getByAccountId(2);
         for (Order order : list) {
             System.out.println(order);
         }

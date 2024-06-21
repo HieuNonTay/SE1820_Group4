@@ -68,7 +68,7 @@
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
                 <a class="nav-link active ms-0" href="userDetail.jsp" target="__blank">Profile</a>
-                <a class="nav-link" href="#" target="__blank">History</a>
+                <a class="nav-link" href="historyOrder" target="__blank">History</a>
                 <a class="nav-link" href="changePassword.jsp" target="__blank">Change password</a>
             </nav>
             <hr class="mt-0 mb-4">
@@ -164,9 +164,9 @@
         <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
         <script src="assets/custom/js/custom.js"></script>
         <script>
-            function setFormAction(actionUrl) {
-                document.getElementById('myForm').action = actionUrl;
-            }
+                                    function setFormAction(actionUrl) {
+                                        document.getElementById('myForm').action = actionUrl;
+                                    }
         </script>
     </body>
 </html>
