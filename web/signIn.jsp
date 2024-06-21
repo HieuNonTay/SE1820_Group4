@@ -40,6 +40,8 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet"> 
+        <!--        add new icon-->
+        <script src="https://kit.fontawesome.com/d9088230f9.js" crossorigin="anonymous"></script>
     </head>
 
     <body>
@@ -83,16 +85,22 @@
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input id="password" name="password" id="passwordInput" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>
-                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
+                                <input name="password" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>          
                             </div>
                         </div>
-                    
                         <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Sign in</button>
-                        <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Forgot Password</a>
-                        <a href="changePassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Change Password</a>
-                        <p class="fables-forth-text-color">Dont have an account ?  <a href="register.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                     </form>
+                            <br>
+                    <div class="form-group">
+                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:8080/SE1820_Group4/loginGG&response_type=code&client_id=82568343053-8aatbq2dj2gst27tk6mb2gb544bmgf7l.apps.googleusercontent.com&approval_prompt=force">
+                            <i class="fa-brands fa-google fa-3x" style="color: #d31212;"></i>
+                        </a>
+                    </div>
+
+
+                    <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Forgot Password</a>
+                    <a href="changePassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Change Password</a>
+                    <p class="fables-forth-text-color">Dont have an account ?  <a href="register.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                 </div>
             </div>
 

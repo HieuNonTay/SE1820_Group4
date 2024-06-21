@@ -14,7 +14,7 @@
         <meta name="author" content="Enterprise Development">
         <link rel="shortcut icon" href="assets/custom/images/shortcut.png">
 
-        <title> Signin</title>
+        <title> Forgot Password</title>
 
         <!-- animate.css-->  
         <link href="assets/vendor/animate.css-master/animate.min.css" rel="stylesheet">
@@ -70,18 +70,14 @@
             <div class="row my-4 my-lg-5">
                 <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">
                     <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Forgot Password</p>
-                    <form>
+                    
+                    <form action="sendEmail" method="post">
+                        <p class="text-danger">${mess}</p>
+
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconemail fables-input-icon mt-2 font-13"></span>
-                                <input type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Gmail"> 
-                            </div>
-
-                        </div>
-                        <div class="form-group"> 
-                            <div class="input-icon">
-                                <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password">
+                                <input type="email" name="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Gmail" required> 
                             </div>
 
                         </div> 

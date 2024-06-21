@@ -83,8 +83,7 @@
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input id="password" name="password" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>
-                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
+                                <input name="password" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>
                             </div>
                         </div>
 
@@ -92,7 +91,6 @@
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
                                 <input id="password" name="newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="New Password" required>
-                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
                             </div>
                         </div> 
 
@@ -100,7 +98,6 @@
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
                                 <input id="password" name="re_newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Re New Password" required>
-                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
                             </div>
                         </div>
 

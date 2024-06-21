@@ -24,6 +24,18 @@
         <servlet-name>updateInfo</servlet-name>
         <servlet-class>controller.updateInfoController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>loginGG</servlet-name>
+        <servlet-class>controller.loginGGController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>sendEmail</servlet-name>
+        <servlet-class>controller.sendEmailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>resetPassword</servlet-name>
+        <servlet-class>controller.resetPasswordController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -48,4 +60,20 @@
         <servlet-name>updateInfo</servlet-name>
         <url-pattern>/updateInfo</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>loginGG</servlet-name>
+        <url-pattern>/loginGG</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>sendEmail</servlet-name>
+        <url-pattern>/sendEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>resetPassword</servlet-name>
+        <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/404.jsp</location>
+    </error-page>
 </web-app>

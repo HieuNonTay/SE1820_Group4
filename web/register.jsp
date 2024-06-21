@@ -77,13 +77,13 @@
                             <div class="col-12 col-md-6 mb-4 mb-md-0">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="fname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="First name" value="${fname}" required oninvalid="this.setCustomValidity('Please enter a valid first name')">
+                                    <input name="fname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="First name" value="${fname}" required>
                                 </div>
                             </div>
                             <div class="col-12 col-md-6">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="lname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Last name" value="${lname}" required oninvalid="this.setCustomValidity('Please enter a valid last name')" >
+                                    <input name="lname" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Last name" value="${lname}" required>
                                 </div>
                             </div>
                         </div>
@@ -92,14 +92,14 @@
                             <div class="col-12 col-md-6">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="phone" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Phone Number" value="${phone}" maxlength="10" pattern="0\d{9}" required">
+                                    <input name="phone" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Phone Number" value="${phone}" maxlength="10" pattern="0\d{9}" required>
                                 </div>
                             </div>
 
                             <div class="col-12 col-md-6">
                                 <div class="input-icon">
                                     <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                    <input name="address" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Address" value="${address}" required oninvalid="this.setCustomValidity('Please enter a valid address')">
+                                    <input name="address" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Address" value="${address}" required>
                                 </div>
                             </div>
                         </div>  
@@ -107,7 +107,7 @@
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconuser-register fables-input-icon mt-2 font-13"></span>
-                                <input name="dob" type="text" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="YYYY-MM-DD" value="${dob}" pattern="^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" required> 
+                                <input name="dob" type="date" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" value="${dob}" required> 
                             </div>
                         </div>
 
@@ -121,8 +121,8 @@
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input id="password" name="pass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" value="" required>
-                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
+                                <input  name="pass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" value="" required>
+
                             </div>
 
                         </div> 
@@ -130,7 +130,7 @@
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
                                 <input name="repass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Repeat Password" value="" required>
-                                <span id="togglePassword"><img style="width: 35%;" src="assets/custom/images/eye-close.png" alt="eye" id="eyeID"></span>
+
                             </div>
 
                         </div> 

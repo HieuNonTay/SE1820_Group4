@@ -1,20 +1,5 @@
 $(document).ready(function () {
-
-    let eyeicon = document.getElementById("eyeID");
-    let password = document.getElementById("password");
-    
-    
-    eyeicon.onclick = function () {
-        if (password.type == "password") {
-            password.type = "text";
-            eyeicon.src = "assets/custom/images/eye-open.png";
-        } else {
-            password.type = "password";
-            eyeicon.src = "assets/custom/images/eye-close.png";
-        }
-    }
   
-
     "use strict";
 // wow 
     new WOW({

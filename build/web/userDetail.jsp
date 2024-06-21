@@ -94,10 +94,10 @@
                     <div class="card mb-4">
                         <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            <form action="updateInfo" method="Get">
+                            <form id="myForm" method="Get">
 
                                 <p class="text-danger">${mess}</p> 
-                                
+
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group (first name)-->
@@ -116,13 +116,13 @@
                                     <!-- Form Group (birthday)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1">Birthday</label>
-                                        <input name="dob" class="form-control" type="text" placeholder="YYYY-MM-DD" pattern="^([0-9]{4})-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$" required value="${sessionScope.acc.getDob()}"">
+                                        <input name="dob" class="form-control" type="date" placeholder="Date of birth" required value="${sessionScope.acc.getDob()}"">
                                     </div>
 
                                     <!-- Form Group (location)-->
                                     <div class="col-md-6">
                                         <label class="small mb-1">Address</label>
-                                        <input name="address" class="form-control" placeholder="Enter your address" type="text" placeholder="Enter your address"  required value="${sessionScope.acc.getAddress()}">
+                                        <input name="address" class="form-control" type="text" placeholder="Enter your address"  required value="${sessionScope.acc.getAddress()}">
                                     </div>
                                 </div>
                                 <!-- Form Row-->
@@ -130,7 +130,7 @@
                                     <!-- Form Phone-->
                                     <div class="col-md-6">
                                         <label class="small mb-1">Phone number</label>
-                                        <input name="phone" class="form-control" type="text" placeholder="Enter your phone number (10 number and start with 0)" value="${sessionScope.acc.getPhone()}" maxlength="10" pattern="0\d{9}" required>
+                                        <input name="phone" class="form-control" type="text" value="${sessionScope.acc.getPhone()}" maxlength="10" pattern="0\d{9}" required>
                                     </div>
                                     <!-- Form Group (email address)-->
                                     <div class="col-md-6">
@@ -139,9 +139,9 @@
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary" onclick="setFormAction('updateInfo');">Save changes</button>
                                 <!-- Log Out button-->
-                                <button type="submit" class="btn btn-danger">Log Out</button>
+                                <button type="submit" class="btn btn-danger"  onclick="setFormAction('logout');">Log Out</button>
 
                             </form>
                         </div>
@@ -162,6 +162,11 @@
         <script src="assets/vendor/fancybox-master/jquery.fancybox.min.js"></script>
         <script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
         <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
-        <script src="assets/custom/js/custom.js"></script> 
+        <script src="assets/custom/js/custom.js"></script>
+        <script>
+            function setFormAction(actionUrl) {
+                document.getElementById('myForm').action = actionUrl;
+            }
+        </script>
     </body>
 </html>

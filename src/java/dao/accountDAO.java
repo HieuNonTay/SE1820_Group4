@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package dao;
 
 import entity.Account;
@@ -15,7 +12,7 @@ import model.DBContext;
  *
  * @author quyen
  */
-public class accountDAO {
+public class AccountDAO {
 
     Connection conn;  //ket noi
     Statement stm;   //thuc hien cau lenh sql
@@ -39,8 +36,8 @@ public class accountDAO {
             System.out.println("Update: " + e.getMessage());
         }
     }
-    
-       public Account getUser(String user) {
+
+    public Account getUser(String user) {
         String query = "  SELECT * FROM Account\n"
                 + "  where Email =?";
         try {
@@ -49,20 +46,20 @@ public class accountDAO {
             pstm.setString(1, user);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                    return new Account(
-                            rs.getString(1),
-                            rs.getString(2),
-                            rs.getString(3),
-                            rs.getString(4),
-                            rs.getString(5),
-                            rs.getString(6),
-                            rs.getString(7),
-                            rs.getInt(8),
-                            rs.getString(9),
-                            rs.getString(10),
-                            rs.getString(11),
-                            rs.getString(12),
-                            rs.getString(13));
+                return new Account(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getString(4),
+                        rs.getString(5),
+                        rs.getString(6),
+                        rs.getString(7),
+                        rs.getInt(8),
+                        rs.getString(9),
+                        rs.getString(10),
+                        rs.getString(11),
+                        rs.getString(12),
+                        rs.getString(13));
             }
         } catch (Exception e) {
             System.out.println("Login: " + e.getMessage());
@@ -82,7 +79,7 @@ public class accountDAO {
             while (rs.next()) {
                 if (checkBan(rs.getString(10))) {
                     return new Account(
-                            rs.getString(1),
+                            rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
@@ -144,7 +141,7 @@ public class accountDAO {
             rs = pstm.executeQuery();
             while (rs.next()) {
                 return new Account(
-                        rs.getString(1),
+                        rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
                         rs.getString(4),
@@ -200,7 +197,7 @@ public class accountDAO {
             if (phone.equals(rs.getString(5))) {
                 while (rs.next()) {
                     return new Account(
-                            rs.getString(1),
+                            rs.getInt(1),
                             rs.getString(2),
                             rs.getString(3),
                             rs.getString(4),
@@ -222,4 +219,5 @@ public class accountDAO {
         }
         return null;
     }
+
 }

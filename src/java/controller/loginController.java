@@ -1,10 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package controller;
 
-import dao.accountDAO;
+import dao.AccountDAO;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -29,7 +25,7 @@ public class loginController extends HttpServlet {
         String username = req.getParameter("user");
         String password = req.getParameter("password");
         req.setAttribute("user", username);
-        accountDAO accountDAO = new accountDAO();
+        AccountDAO accountDAO = new AccountDAO();
         Account acc = accountDAO.loginUser(username, password);
         if (acc == null) {
             req.setAttribute("mess", "Your account is wrong! Please try again!");

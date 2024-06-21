@@ -1,6 +1,6 @@
 package controller;
 
-import dao.accountDAO;
+import dao.AccountDAO;
 import entity.Account;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -28,7 +28,7 @@ public class changePassController extends HttpServlet {
         String newPass = req.getParameter("newPass");
         String Re_newPass = req.getParameter("re_newPass");
         req.setAttribute("user", username);
-        accountDAO accountDAO = new accountDAO();
+        AccountDAO accountDAO = new AccountDAO();
         Account a = (Account) session.getAttribute("acc");
         Account acc = accountDAO.loginUser(username, password);
         if (acc == null) {
