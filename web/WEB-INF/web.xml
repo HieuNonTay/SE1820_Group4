@@ -48,6 +48,14 @@
         <servlet-name>HistoryOrderController</servlet-name>
         <servlet-class>controller.HistoryOrderController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>BrandController</servlet-name>
+        <servlet-class>controller.BrandController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CategoryController</servlet-name>
+        <servlet-class>controller.CategoryController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart</url-pattern>
@@ -151,5 +159,13 @@
     <servlet-mapping>
         <servlet-name>HistoryOrderController</servlet-name>
         <url-pattern>/historyOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>BrandController</servlet-name>
+        <url-pattern>/brand</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CategoryController</servlet-name>
+        <url-pattern>/category</url-pattern>
     </servlet-mapping>
 </web-app>

@@ -68,7 +68,7 @@
         <div class="container" style="margin-top: 10px">
             <div class="row">
                 <div class="col-md-12">
-                    <h3>Cập Nhật Thông Tin Đơn Hàng</h3>
+                    <h3>Order Information</h3>
                     <form action="order" method="post">
                         <input type="hidden" name="service" value="updateOrderAction">
                         <input type="hidden" name="orderId" value="<%= order.getOrderId() %>">

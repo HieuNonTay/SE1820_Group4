@@ -23,16 +23,14 @@ import model.DBContext;
  */
 public class CategoryDAO extends DBContext {
 
-    public int insertCategory(Category obj) {
+    public int insertCategory(String CategoryName) {
         int n = 0;
         String sql = "INSERT INTO [dbo].[Category]\n"
-                + "           ([CategoryID]\n"
-                + "           ,[CategoryName]\n"
-                + "     VALUES(?,?)";
+                + "           ([CategoryName])\n"
+                + "     VALUES(?)";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, obj.getCategoryID());
-            pre.setString(2, obj.getCategoryName());
+            pre.setString(1, CategoryName);
             n = pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -117,5 +115,6 @@ public class CategoryDAO extends DBContext {
 //        List<Category> categorys = categoryDAO.searchCategory("Tops");
 //        categorys.stream().forEach(y -> System.out.println(y));
 
+        int add = categoryDAO.insertCategory("DuyDung");
     }
 }

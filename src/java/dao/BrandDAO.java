@@ -18,16 +18,15 @@ import model.DBContext;
  */
 public class BrandDAO extends DBContext{
     
-    public  int insertBrand(Brand obj){
+    public  int insertBrand(String BrandName){
         int n = 0;
         String sql = "INSERT INTO [dbo].[Brand]\n"
-                + "           ([BrandID]\n"
-                + "           ,[BrandName]\n"
-                + "     VALUES(?,?)";
+                + "           ([BrandName])\n"
+                + "     VALUES(?)";
         try{
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, obj.getBrandID());
-            pre.setString(2, obj.getBrandName());
+            
+            pre.setString(1, BrandName);
             n = pre.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
@@ -35,16 +34,15 @@ public class BrandDAO extends DBContext{
         return n;
     }
     
-    public int updateBrand(Brand obj){
+    public int updateBrand(int BrandID, String BrandName){
         int n = 0;
         String sql = "UPDATE [dbo].[Brand]\n"
-                + "        SET [BrandID] = ?\n"
-                + "           ,[BrandName] = ?\n"
+                + "        SET [BrandName] = ?\n"
                 + " WHERE [BrandID] = ?";
         try{
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, obj.getBrandID());
-            pre.setString(2, obj.getBrandName());
+            pre.setString(1, BrandName);
+            pre.setInt(2, BrandID);
             n = pre.executeUpdate();
         } catch (SQLException e){
             e.printStackTrace();
@@ -88,5 +86,11 @@ public class BrandDAO extends DBContext{
             Logger.getLogger(BrandDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return n;
+    }
+    
+    
+    public static void main(String[] args) {
+        BrandDAO brand = new BrandDAO();
+        int add = brand.insertBrand("DuyDung12");
     }
 }
