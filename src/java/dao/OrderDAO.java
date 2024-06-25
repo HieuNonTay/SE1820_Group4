@@ -201,10 +201,10 @@ public class OrderDAO extends DBContext {
         return vector;
     }
 
-    public int addOrder(int accountId, Vector<ProductCart> listProdcut, String firstName, String lastName,
+    public int addOrder(int accountId, Vector<ProductCart> listProduct, String firstName, String lastName,
             String DiscountCode, String line1, String line2, String city, String province, String payment) {
         int orderId = 0; // Lưu trữ ID của đơn hàng được thêm vào
-        double totalPrice = listProdcut.stream()
+        double totalPrice = listProduct.stream()
                 .mapToDouble(ProductCart::getPrice)
                 .reduce(0.0, (subtotal, price) -> subtotal + price);
         String sql = "INSERT INTO [dbo].[Order]\n"
@@ -240,7 +240,7 @@ public class OrderDAO extends DBContext {
             }
 
             if (orderId != 0) {
-                for (ProductCart productCart : listProdcut) {
+                for (ProductCart productCart : listProduct) {
                     String sql2 = "INSERT INTO [dbo].[OrderDetail]\n"
                             + "           ([OrderID]\n"
                             + "           ,[ProductID]\n"
@@ -284,11 +284,16 @@ public class OrderDAO extends DBContext {
 
     public static void main(String[] args) {
         OrderDAO orderDao = new OrderDAO();
-        String search = "0904216197";
-        Vector<Order> list = orderDao.getByAccountId(2);
-        for (Order order : list) {
-            System.out.println(order);
-        }
+//        String search = "0904216197";
+//        Vector<Order> list = orderDao.getByAccountId(2);
+//        for (Order order : list) {
+//            System.out.println(order);
+//        }
+        Vector<ProductCart> list = new Vector<>();
+        list.add(new ProductCart(1, "nike", 2, 30));
+        list.add(new ProductCart(2, "nike", 2, 35));
+
+        int add = orderDao.addOrder(1, list, "aa", "aa2", "NULL", "012", "asv", "asss", "aaaa", "avvv");
 
     }
 

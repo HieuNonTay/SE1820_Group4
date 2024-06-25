@@ -103,7 +103,12 @@ public class CartController extends HttpServlet {
                     int quantity = Integer.parseInt(request.getParameter(key));
                     ProductCart productCart = (ProductCart) session.getAttribute(key);
                     Product product = dao.getById(productCart.getProductId());
-
+                    if (quantity <= 0) {
+                        int id = productCart.getProductId();
+                        session.removeAttribute(key);
+                        response.sendRedirect("CartURL");
+                        return;
+                    }
                     if (quantity > product.getQuantity()) {
                         request.setAttribute("mess", "Đơn hàng đã được thêm vào tối đa");
                         productCart.setQuantity(product.getQuantity());
@@ -204,7 +209,7 @@ public class CartController extends HttpServlet {
         //BookDAO bookDao = new BookDAO();
         while (em.hasMoreElements()) {
             String key = em.nextElement().toString(); //get key
-            if (key.equals("user") || key.equals("vecKey")) {
+            if (key.equals("acc") || key.equals("vecKey")) {
                 continue;
             } else {
                 listBook.add((ProductCart) session.getAttribute(key));
