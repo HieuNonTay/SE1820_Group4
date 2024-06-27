@@ -4,6 +4,9 @@
  */
 package controller;
 
+import dao.*;
+import entity.*;
+import java.util.Vector;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -11,12 +14,13 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author ASUS
  */
-@WebServlet(name = "HomeController", urlPatterns = {"/home"})
+//home
 public class HomeController extends HttpServlet {
 
     /**
@@ -40,7 +44,28 @@ public class HomeController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
-        request.getRequestDispatcher("homePage.jsp").forward(request, response);
+        HttpSession session = request.getSession(true);
+        ProductDAO productDao = new ProductDAO();
+        BrandDAO brandDao = new BrandDAO();
+        Vector<Product> listProduct = productDao.getProductTOP5Sold();
+        String cartItemCount = (String) request.getAttribute("cartItemCount");
+        request.setAttribute("cartItemCount", cartItemCount);
+        String service = request.getParameter("service");
+        String submit = request.getParameter("submit");
+        
+        if(service == null){
+            service = "home";
+        }
+        request.setAttribute("listProduct", listProduct);
+        if(service.equals("shop")){
+            request.getRequestDispatcher("/product_list.jsp").forward(request, response);
+        }
+        if(service.equals("home")){
+            request.getRequestDispatcher("/home.jsp").forward(request, response);
+        }
+//        request.getRequestDispatcher("/homePage.jsp").forward(request, response);
+        
+        
     }
 
     @Override

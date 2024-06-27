@@ -1,4 +1,8 @@
+
 <!DOCTYPE html>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.sql.ResultSet, entity.*, dao.*, java.util.*"%>
 <html lang="en">
     <head>
         <meta charset="utf-8">
@@ -37,6 +41,7 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet">
+        
     </head>
 
 
@@ -48,7 +53,53 @@
                 <h2 class="fables-page-title fables-second-border-color">Home Page</h2>
             </div>
         </div>
-        <!-- Start page content -->
+
+        <!-- Start page content --> 
+
+        <div class="container">
+            <div class="row my-4 my-md-5">
+                <div class="col-12 col-md-8 col-lg-9"> 
+                    <div class="row">
+                        <%
+                                            Vector<Product> listProduct = (Vector<Product>) request.getAttribute("listProduct");
+                                            for (Product product : listProduct) {
+                                                BrandDAO brandDao = new BrandDAO();
+                                                Brand brand = brandDao.getById(product.getBrandId());
+                        %>
+                        <div class="col-12 col-sm-6 col-lg-4 fables-product-block">
+                            <div class="card rounded-0 mb-4">
+                                <div class="row">
+                                    <div class="fables-product-img col-12">
+                                        <img class="card-img-top rounded-0" src="assets/custom/images/product1.jpg" alt="dress fashion">
+                                        <div class="fables-img-overlay">                                          
+                                            <ul class="nav fables-product-btns">
+                                                <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>
+                                                <li><a href="" class="fables-product-btn"><span class="fables-iconcompare"></span></a></li>
+                                                <li><button class="fables-product-btn"><span class="fables-iconheart"></span></button></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="card-body col-12">
+                                        <h5 class="card-title mx-xl-3">
+                                            <a href="detail?action=productdetail&product_id=<%=product.getProductId()%>" class="fables-main-text-color fables-store-product-title fables-second-hover-color"><%=product.getName()%></a>
+                                        </h5>
+                                        <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3">DOUBLE</p>
+                                        <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3"><%=product.getPrice()%></p>
+                                        <p class="fables-product-info">
+                                            <a href="CartURL?service=addToCart&id=<%=product.getProductId()%>" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
+                                                <span class="fables-iconcart"></span> 
+                                                <span class="fables-btn-value">ADD TO CART</span></a></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <%}%>
+                    </div> 
+                </div>
+            </div>
+
+        </div> 
+
 
         <!-- /End page content -->
 
