@@ -65,36 +65,7 @@
         <link href="css1/theme.css" rel="stylesheet" media="all">
         <link rel="stylesheet" href="css1/bootstrap.min.css">
         <link rel="stylesheet" href="css1/toastr.min.css">
-        <style>
-            table {
-                width: 100%;
-                border-collapse: collapse;
-            }
 
-            th, td {
-                border: 1px solid #ddd;
-                padding: 8px;
-                text-align: left;
-            }
-
-            .table-data-feature {
-                display: flex;
-                align-items: center; /* Aligns items vertically in the center */
-                justify-content: flex-start; /* Starts items from the beginning of the flex container */
-            }
-
-            .table-data-feature form {
-                margin: 0; /* Removes margin around the form */
-                display: inline-block; /* Displays form in line */
-            }
-
-            .table-data-feature button {
-                background: none; /* Removes any background styling from the buttons */
-                border: none; /* Removes the border */
-                cursor: pointer; /* Changes cursor to pointer on hover */
-                padding: 8px; /* Adds padding for better touch area */
-            }
-        </style>
     </head>
 
     <body class="animsition" onload="${sessionScope.functionToast}">
@@ -102,18 +73,8 @@
             request.getSession().removeAttribute("functionToast");
         %>
         <div class="page-wrapper">
-            <!-- HEADER MOBILE-->
             <jsp:include page="header.jsp"/>
-
-            <!-- END MENU SIDEBAR-->
-
-            <!-- PAGE CONTAINER-->
             <div class="page-container">
-                <!-- HEADER DESKTOP-->
-
-                <!-- END HEADER DESKTOP-->
-
-                <!-- MAIN CONTENT-->
                 <div class="main-content">
                     <div class="section__content section__content--p30">
                         <div class="container-fluid">
@@ -123,18 +84,7 @@
                                     <div class="table-data__tool">
                                         <div class="table-data__tool-left">
                                             <form id="myForm" action="news" method="post">
-                                                <div class="rs-select2--light rs-select2--md">
-                                                    <select class="js-select2" name="sortBy" onchange="submitForm()">
-                                                        <c:set var="so" value="${requestScope.sortBy}"/>
-                                                        <option ${(so == 0)?'selected':''} value="0">Sort by</option>
-<!--                                                        <option ${(so == 1)?'selected':''} value="1">Latest</option>
-                                                        <option ${(so == 2)?'selected':''} value="2">Most viewed</option>-->
-                                                        <c:forEach var="sos" items="${requestScope.sorts}">
-                                                            <option ${(so == sos.id)?'selected':''} value="${sos.id}">${sos.title}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <div class="dropDownSelect2"></div>
-                                                </div>
+
                                                 <div class="rs-select2--light rs-select2--md">
                                                     <select class="js-select2" name="groupBy" onchange="submitForm()">
                                                         <c:set var="gr" value="${requestScope.groupBy}"/>

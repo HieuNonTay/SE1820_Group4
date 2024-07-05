@@ -2,7 +2,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
-
 package controller;
 
 import Model.Account;
@@ -17,6 +16,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
 import dal.*;
+
 /**
  *
  * @author Dell
@@ -25,12 +25,10 @@ public class newsController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // do task of group, sort and page
-        String sorted = req.getParameter("sortBy");
         String grouped = req.getParameter("groupBy");
         String page = req.getParameter("page");
         String search = req.getParameter("search");
-        if (search.isEmpty()) {
+        if (search == null || search.isEmpty()) {
             search = "";
         }
         if (page == null || page.equals("0")) {
@@ -38,65 +36,39 @@ public class newsController extends HttpServlet {
         }
         NewsDAO n = new NewsDAO();
         NewsGroupDAO ng = new NewsGroupDAO();
-        String sortedPhase;
-        if (sorted.equals("0")) {
-            sortedPhase = "-1";
-        }else{
-            sortedPhase = n.getContentById(Integer.parseInt(sorted)).getContent();
-        }
+
         if (grouped.equals("0")) {
             grouped = "-1";
         }
+
         req.setAttribute("count", calThePage(5, Integer.parseInt(grouped), search));
-        req.setAttribute("sortBy", Integer.parseInt(req.getParameter("sortBy")));
-        req.setAttribute("groupBy", Integer.parseInt(req.getParameter("groupBy")));
-        req.setAttribute("search", req.getParameter("search"));
-        if (Integer.parseInt(page) > calThePage(5, Integer.parseInt(grouped), search)) {
-            page = calThePage(5, Integer.parseInt(grouped), search) + "";
-        }
-        req.setAttribute("sorts", n.getListContentsByName("newsSort"));
+        req.setAttribute("groupBy", Integer.parseInt(grouped));
+        req.setAttribute("search", search);
         req.setAttribute("page", page);
         req.setAttribute("groups", ng.getListNewsGroup());
-//        req.setAttribute("news", n.getListByPagesAndGroupAndSort(Integer.parseInt(page), grouped, sorted));
-        req.setAttribute("news", n.getListByPagesAndGroupAndSortAndSearch(Integer.parseInt(page), grouped, sortedPhase, search));
+        req.setAttribute("news", n.getListByPagesAndGroupAndSortAndSearch(Integer.parseInt(page), grouped, "-1", search));
         req.getRequestDispatcher("news.jsp").forward(req, resp);
     }
-    public static void main(String[] args) {
-        NewsDAO n = new NewsDAO();
-        News news1=new News();
-        List<News> news = n.getListByPagesAndGroupAndSortAndSearch(1, "-1", "-1", null);
-        for (News aNew : news) {
-            System.out.println(aNew.getStt());
-        }
-        System.out.println(n.getNewsById(1).getStt());
-    }
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // display the news page with default page, group, sort
-        HttpSession s = req.getSession();
-        if (s.getAttribute("acc") == null) {
+        HttpSession session = req.getSession();
+        Account userAccount = (Account) session.getAttribute("acc");
+        if (userAccount == null || (userAccount.getRoleID() != 1 && userAccount.getRoleID() != 3)) {
             req.getRequestDispatcher("403.jsp").forward(req, resp);
+            return;
         }
-        Account ch = (Account) s.getAttribute("acc");
-        if (!(ch.getRoleID()==1 || ch.getRoleID()==3)) {
-            req.getRequestDispatcher("403.jsp").forward(req, resp);
-        }
-        s.removeAttribute("updateNewsId");
-        NewsDAO n = new NewsDAO();
-        NewsGroupDAO ng = new NewsGroupDAO();
-        List<NewsGroup> listng = ng.getListNewsGroup();
-        List<News> listsort = n.getListContentsByName("newsSort");
+
+        NewsDAO newsDao = new NewsDAO();
+        NewsGroupDAO newsGroupDao = new NewsGroupDAO();
+        List<NewsGroup> listNewsGroups = newsGroupDao.getListNewsGroup();
 
         req.setAttribute("page", "1");
         req.setAttribute("count", calThePage(5, -1, ""));
-        req.setAttribute("groups", listng);
-        req.setAttribute("sorts", listsort);
-        //req.setAttribute("news", n.getListByPagesAndGroupAndSort(1, "-1", "-1"));
-        req.setAttribute("news", n.getListByPagesAndGroupAndSortAndSearch(1, "-1", "-1", null));
-        
+        req.setAttribute("groups", listNewsGroups);
+        req.setAttribute("news", newsDao.getListByPagesAndGroupAndSortAndSearch(1, "-1", "-1", null));
         req.setAttribute("groupBy", "0");
-        req.setAttribute("sortBy", "0");
-        req.setAttribute("search", null);
+        req.setAttribute("search", "");
         req.getRequestDispatcher("news.jsp").forward(req, resp);
     }
 

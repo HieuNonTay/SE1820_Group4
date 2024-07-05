@@ -51,24 +51,7 @@ public class NewsGroupDAO {
         }
         return data;
     }
-    public List<NewsGroup> getListNewsGroupWithoutPolicy() {
-        List<NewsGroup> data = new ArrayList<NewsGroup>();
-        try {
-            connect();
-            String strSelect = "select id, [name] from newsgroup where [type] = 'news' and [name] != 'Policy'";
-            stm = cnn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
-            rs = stm.executeQuery(strSelect);
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                String name = rs.getString(2);
-                data.add(new NewsGroup(id, name));
-            }
-            cnn.close();
-        } catch (SQLException e) {
-            System.out.println("getListNewsGroupWithoutPolicy: " + e.getMessage());
-        }
-        return data;
-    }
+   
     public NewsGroup getNewsGroupById(int gid) {
         try {
             connect();
