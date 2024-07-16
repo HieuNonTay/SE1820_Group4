@@ -6,13 +6,7 @@
 <html lang="en">
 
     <head>
-        <!-- Required meta tags-->
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-        <meta name="description" content="au theme template">
-        <meta name="author" content="Hau Nguyen">
-        <meta name="keywords" content="au theme template">
-
+        
         <!-- Title Page-->
         <title>Discount Detail Management</title>
 
@@ -112,10 +106,10 @@
                                             <form action="discountDetail" method="post">
                                                
 
-                                                <div class="form-group">
+<!--                                                <div class="form-group">
                                                     <label class="mr-2">Code</label>
                                                     <input type="text" name="code" class="form-control" required="" value="${requestScope.code}" maxlength="14">
-                                                </div>
+                                                </div>-->
                                                 <h2 class="text-center" style="color: red">${sessionScope.errorCode}</h2>
                                                 <div class="form-group">
                                                     <label class="mr-2">Name</label>
@@ -133,24 +127,16 @@
                                                 <div class="form-group">
                                                     <label class="mr-2">Type:</label>
                                                     <input type="radio" name="type" value="User" onchange="show()" id="user" required> For the user &nbsp;
-                                                    <input type="radio" name="type" value="Product" onchange="show()" id="product" required> For the product<br>                                            </div>         
-                                                <!--
-                                                                                                <div id="user-div" hidden>
-                                                                                                    <div class="form-group" >
-                                                                                                        <label class="mr-2">User Id:</label>
-                                                                                                        <input type="number" name="userId" class="form-control" required id="userId">
-                                                                                                    </div>
-                                                                                                    <div class="form-group" >
-                                                                                                        <label class="mr-2">Number:</label>
-                                                                                                        <input type="number" name="number" class="form-control" required id="number" min="1">
-                                                                                                    </div>
-                                                                                                </div>-->
+                                                    <input type="radio" name="type" value="Product" onchange="show()" id="product" required> For the product<br> 
+                                                </div>
+                                                                                                     
+                                               
                                                 <div id="product-div" hidden>
                                                     <div class="form-group" >
                                                         <label class="mr-2">Product model code(s):</label>
                                                         <select class="js-example-basic-multiple" name="models[]" multiple="multiple">
                                                             <c:forEach var="pro" items="${sessionScope.products}">
-                                                                <option value="${pro.model}">${pro.model}</option>
+                                                                <option value="${pro.productId}">${pro.name}</option>
                                                             </c:forEach>
                                                         </select>                                                        
                                                     </div>
@@ -187,7 +173,7 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label class="mr-2">Amount (%)</label>                                                   
-                                                    <input type="number" step="any" name="amount" class="form-control" required="" value="${ud.amount}" ${(requestScope.checkUpdate == false)?'readonly':''}>
+                                                    <input type="number" step="any" name="amount" class="form-control" required="" value="${ud.amount}"}>
                                                 </div> 
                                                 <h2 class="text-center" style="color: red">${sessionScope.errorAmount}</h2>
                                                 <div class="form-group">
@@ -200,34 +186,34 @@
                                                 <c:if test="${requestScope.updateProductDiscount != null}">
                                                     <c:set var="upd" value="${requestScope.updateProductDiscount}"/>
 
-                                                    <c:if test="${(requestScope.checkUpdate == false)}">
+                                                    <%--<c:if test="${(requestScope.checkUpdate == false)}">--%>
                                                         <div class="form-group">
                                                             <label class="mr-2">Product model(s) of this discount: ${requestScope.updateModels}</label>   
                                                             <input type="hidden" value="0" name="canUpdate"/>                                                            
                                                         </div>                                                         
-                                                    </c:if>
-                                                    <c:if test="${(requestScope.checkUpdate == true)}">
-                                                        <div class="form-group">
+                                                    <%--</c:if>--%>
+                                                    <%--<c:if test="${(requestScope.checkUpdate == true)}">--%>
+<!--                                                        <div class="form-group">
                                                             <label class="mr-2">Product model(s) of this discount before update: ${requestScope.updateModels}</label>                                                    
                                                         </div> 
                                                         <div class="form-group" >
                                                             <label class="mr-2">Product model code(s):</label>
                                                             <select class="js-example-basic-multiple" name="models[]" multiple="multiple">
                                                                 <c:forEach var="pro" items="${sessionScope.products}">
-                                                                    <option value="${pro.model}">${pro.model}</option>
+                                                                    <option value="${pro.productId}">${pro.name}</option>
                                                                 </c:forEach>
                                                             </select>
                                                             <input type="hidden" value="1" name="canUpdate"/>
-                                                        </div> 
-                                                    </c:if>
+                                                        </div> -->
+                                                    <%--</c:if>--%>
 
                                                     <div class="form-group">
                                                         <label class="mr-2">From: </label>
-                                                        <input type="date" name="fromDate" class="form-control" required value="${requestScope.updateFromDate}" ${(requestScope.checkUpdate == false)?'readonly':''}>
+                                                        <input type="date" name="fromDate" class="form-control" required value="${requestScope.updateFromDate}" readonly>
                                                     </div> 
                                                     <div class="form-group">
                                                         <label class="mr-2">To: </label>
-                                                        <input type="date" name="toDate" class="form-control" required value="${requestScope.updateToDate}" ${(requestScope.checkUpdateTo == false)?'readonly':''}>
+                                                        <input type="date" name="toDate" class="form-control" required value="${requestScope.updateToDate}" readonly>
                                                     </div> 
                                                 </c:if>
                                                 <input type="hidden" name="checkUpdate" value="${requestScope.checkUpdate}"> 

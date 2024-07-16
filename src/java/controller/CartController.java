@@ -4,9 +4,11 @@
  */
 package controller;
 
+import dao.DisCountDAO;
 import dao.OrderDAO;
 import dao.ProductDAO;
 import entity.Account;
+import entity.Discount;
 import entity.Product;
 import entity.ProductCart;
 import java.io.PrintWriter;
@@ -18,6 +20,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Enumeration;
 import java.util.Vector;
 
@@ -97,7 +103,7 @@ public class CartController extends HttpServlet {
             Enumeration<String> em = (Enumeration<String>) session.getAttributeNames();
             while (em.hasMoreElements()) {
                 String key = em.nextElement();
-                if (key.equals("acc") || key.equals("vecKey")) {
+                if (key.equals("acc") || key.equals("vecKey") || key.equals("products") || key.equals("functionToast")) {
                     continue;
                 } else {
                     int quantity = Integer.parseInt(request.getParameter(key));
@@ -146,6 +152,7 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession(true);
         String service = request.getParameter("service");
         ProductDAO productDao = new ProductDAO();
+        DisCountDAO dao = new DisCountDAO();
         OrderDAO orderDao = new OrderDAO();
         Enumeration<String> emm = session.getAttributeNames();
         if (service.equals("checkOut")) {
@@ -155,7 +162,6 @@ public class CartController extends HttpServlet {
             } else {
                 Enumeration<String> em = session.getAttributeNames();
                 int accountId = Integer.parseInt(request.getParameter("accountId"));
-                System.out.println(accountId);
                 String firstName = request.getParameter("firstName");
                 String lastName = request.getParameter("lastName");
                 String discountCode = request.getParameter("discountCode");
@@ -165,6 +171,7 @@ public class CartController extends HttpServlet {
                 String province = request.getParameter("province");
 
                 Vector<ProductCart> listProductCart = new Vector<>();
+                Vector<Integer> listProductCartId = new Vector<>();
                 boolean enoughQuantity = true;
 
                 while (em.hasMoreElements()) {
@@ -179,19 +186,75 @@ public class CartController extends HttpServlet {
                             request.setAttribute("mess", "Đơn hàng trong kho không đủ để thực hiện yêu cầu");
                         } else {
                             listProductCart.add(productCart);
+                            listProductCartId.add(productCart.getProductId());
                         }
                     }
                 }
                 if (enoughQuantity) {
+                    int accountIDD = 2;
                     String payment = "Check";
-                    int checkOut = orderDao.addOrder(accountId, listProductCart, firstName, lastName, discountCode, line1, line2, city, province, payment);
+                    double grandTotal = 0;
+                    Discount d = null;
+                    if (discountCode != null && !discountCode.trim().equals("")) {
+                        //check discount
+                        d = dao.getDisCountByCode(discountCode);
+                        if (d != null) {
+                            Discount d2 = dao.getProductDiscountByCode(discountCode);
+                            d.setToDate(d2.getToDate());
+                            d.setProductId(d2.getProductId());
+                            if (d.getStatus().equals("activate")) {
+                                //đã dùng rồi -> k được dùng nữa
+                                request.setAttribute("error", "Không thể dùng mã này do nó đã được dùng");
+                                request.getRequestDispatcher("/checkOut.jsp").include(request, response);
+                                return;
+                            } else {
+                                LocalDate toDate = LocalDate.parse(convertDateTimeFormat(d.getToDate()));
+
+                                LocalDate currentDate = LocalDate.now();
+                                int result = currentDate.compareTo(toDate);
+                                if (result > 0) {
+                                    //hết hạn
+                                    request.setAttribute("error", "Mã này đã hết hạn");
+                                    request.getRequestDispatcher("/checkOut.jsp").include(request, response);
+                                    return;
+                                }
+                                if (!listProductCartId.contains(d.getProductId())) {
+                                    request.setAttribute("error", "Không sản phẩm nào trong giỏ hàng có thể dùng mã này");
+                                    request.getRequestDispatcher("/checkOut.jsp").include(request, response);
+                                    return;
+                                }
+                            }
+                        } else {
+                            // khong co ma nay
+                            request.setAttribute("error", "Mã không tồn tại");
+                            request.getRequestDispatcher("/checkOut.jsp").include(request, response);
+                            return;
+//                            request.getRequestDispatcher("/SE1820_Group4/checkOut.jsp").include(request, response);
+                        }
+                    }
+                    for (ProductCart productCart : listProductCart) {
+                        if (d != null && productCart.getProductId() == d.getProductId()) {
+                            grandTotal += productCart.getPrice() * productCart.getQuantity() * ((100 - d.getAmount()) / 100);
+                        } else {
+                            grandTotal += productCart.getPrice() * productCart.getQuantity();
+                        }
+                    }
+                    int checkOut = orderDao.addOrder(accountIDD, listProductCart, firstName, lastName, (discountCode == null || discountCode.trim().equals("")) ? null : discountCode, line1, line2, city, province, payment, grandTotal);
                     if (checkOut > 0) {
-                        response.sendRedirect("home");
+                        if (discountCode != null && !discountCode.trim().equals("")) {
+                            //update status discount
+                            dao.updateStatusDiscount("activate", discountCode);
+                        }
+
+                        response.sendRedirect("/SE1820_Group4/home");
+                        return;
                     } else {
-                        response.sendRedirect("CartURL?service=checkOut");
+                        response.sendRedirect("/SE1820_Group4/CartURL?service=checkOut");
+                        return;
                     }
                 } else {
-                    request.getRequestDispatcher("CartURL?service=checkOut").forward(request, response);
+                    request.getRequestDispatcher("/SE1820_Group4/CartURL?service=checkOut").forward(request, response);
+                    return;
                 }
             }
         }
@@ -219,6 +282,22 @@ public class CartController extends HttpServlet {
 
         }
         return listBook;
+    }
+
+    private String convertDateTimeFormat(String inputDateTime) {
+        if (inputDateTime == null) {
+            return null;
+        } else {
+            DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            try {
+                java.util.Date date = inputFormat.parse(inputDateTime);
+                return outputFormat.format(date);
+            } catch (ParseException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
     }
 
 }

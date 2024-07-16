@@ -82,7 +82,7 @@
                                 Vector<String> vecKey = new Vector<>();
                                 while(em.hasMoreElements()){
                                     String key = em.nextElement().toString();
-                                    if(key.equals("user") || key.equals("vecKey") ||key.equals("acc") ){
+                                    if(key.equals("vecKey") ||key.equals("acc")||key.equals("products")||key.equals("functionToast")  ){
                                         continue;
                                     }else{
                                         vecKey.add(key);

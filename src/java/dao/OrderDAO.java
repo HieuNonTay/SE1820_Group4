@@ -202,11 +202,11 @@ public class OrderDAO extends DBContext {
     }
 
     public int addOrder(int accountId, Vector<ProductCart> listProduct, String firstName, String lastName,
-            String DiscountCode, String line1, String line2, String city, String province, String payment) {
+            String DiscountCode, String line1, String line2, String city, String province, String payment, double totalPrice) {
         int orderId = 0; // Lưu trữ ID của đơn hàng được thêm vào
-        double totalPrice = listProduct.stream()
-                .mapToDouble(ProductCart::getPrice)
-                .reduce(0.0, (subtotal, price) -> subtotal + price);
+//        double totalPrice = listProdcut.stream()
+//                .mapToDouble(ProductCart::getPrice)
+//                .reduce(0.0, (subtotal, price) -> subtotal + price);
         String sql = "INSERT INTO [dbo].[Order]\n"
                 + "           ([AccountID]\n"
                 + "           ,[firstName]\n"
@@ -293,7 +293,7 @@ public class OrderDAO extends DBContext {
         list.add(new ProductCart(1, "nike", 2, 30));
         list.add(new ProductCart(2, "nike", 2, 35));
 
-        int add = orderDao.addOrder(1, list, "aa", "aa2", "NULL", "012", "asv", "asss", "aaaa", "avvv");
+        int add = orderDao.addOrder(1, list, "aa", "aa2", "NULL", "012", "asv", "asss", "aaaa", "avvv", 000011);
 
     }
 

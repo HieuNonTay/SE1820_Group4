@@ -29,7 +29,7 @@ import java.util.Vector;
  *
  * @author Admin
  */
-@WebServlet(name = "ApplyDiscountController", urlPatterns = {"/discount/apply"})
+//@WebServlet(name = "ApplyDiscountController", urlPatterns = {"/discount/apply"})
 public class ApplyDiscountController extends HttpServlet {
 
     /**
@@ -73,7 +73,7 @@ public class ApplyDiscountController extends HttpServlet {
                     Vector<Integer> listProductCartId = new Vector<>();
                     while (em.hasMoreElements()) {
                         String key = em.nextElement().toString(); //get key
-                        if (key.equals("acc") || key.equals("vecKey")) {
+                        if (key.equals("acc") || key.equals("vecKey") || key.equals("products") || key.equals("functionToast")) {
                             continue;
                         } else {
                             ProductCart productCart = (ProductCart) session.getAttribute(key);
@@ -95,7 +95,7 @@ public class ApplyDiscountController extends HttpServlet {
                     request.setAttribute("discount", d);
                     request.setAttribute("isAdded", true);
                     request.setAttribute("message", "Đã áp mã giảm");
-                    request.getRequestDispatcher("/checkOut.jsp").include(request, response);
+                    request.getRequestDispatcher("/CartURL?service=checkOut").include(request, response);
                 }
             }
         } else {

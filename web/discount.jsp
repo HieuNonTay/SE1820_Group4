@@ -38,7 +38,7 @@
         <link rel="stylesheet" href="css1/toastr.min.css">
         <!-- Main CSS-->
         <link href="css1/theme.css" rel="stylesheet" media="all">
-        
+
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta name="description" content="Fables">
@@ -75,7 +75,7 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet">
-        
+
     </head>
 
     <body class="animsition" onload="${sessionScope.functionToast}">
@@ -83,18 +83,9 @@
             request.getSession().removeAttribute("functionToast");
         %>
         <div class="page-wrapper">
-            <!-- HEADER MOBILE-->
-           <jsp:include page="header.jsp"/>
-       
-            <!-- END MENU SIDEBAR-->
-
-            <!-- PAGE CONTAINER-->
+            <jsp:include page="header.jsp"/>
             <div class="page-container">
-                <!-- HEADER DESKTOP-->
-                
-                <!-- END HEADER DESKTOP-->
 
-                <!-- MAIN CONTENT-->
                 <div class="main-content">
                     <div class="section__content section__content--p30">
                         <div class="container-fluid">
@@ -106,21 +97,7 @@
                                     </div>
                                     <!-- DATA TABLE -->
                                     <div class="table-data__tool">
-                                        <div class="table-data__tool-left">
-                                            <form id="myForm" action="discount" method="post">
-                                                <div class="rs-select2--light rs-select2--md">
-                                                    <select class="js-select2" name="groupBy" onchange="submitForm()">
-                                                        <c:set var="gr" value="${requestScope.groupBy}"/>
-                                                        <option ${(gr == 0)?'selected':''} value="0" >Group by</option>
-                                                        <c:forEach var="g" items="${requestScope.types}">
-                                                            <option ${(g.id == gr)?'selected':''} value="${g.id}">${g.title}</option>
-                                                        </c:forEach>
-                                                    </select>
-                                                    <div class="dropDownSelect2"></div>
-                                                </div>
-                                                <input type="hidden" name="search" value="${requestScope.search}">     
-                                            </form>
-                                        </div>    
+
                                         <div class="table-data__tool">
                                             <form class="form-header" action="discount" method="post">
                                                 <input class="au-input au-input--xl" type="text" name="search" value="${requestScope.search}" style="width: 50%" placeholder="Search information related to discount..." />
@@ -149,10 +126,10 @@
                                                         <th>Code</th>
                                                         <th>Name</th>
                                                         <th>Amount (%)</th>
-                                                        <!--                                                    <th>From</th>
-                                                                                                            <th>To</th>-->
+
                                                         <th>Description</th>
                                                         <th>Type</th>
+                                                        <th>Status</th>
                                                         <th></th>
 
                                                     </tr>
@@ -163,27 +140,30 @@
                                                             <td>${d.code}</td>
                                                             <td class="desc">${d.name}</td>
                                                             <td>${d.amount}</td>                                                        
-    <!--                                                        <td>${d.fromDate}</td>
-                                                            <td>${d.toDate}</td>-->
+
                                                             <td>
                                                                 <span class="block-email">${d.description}</span>
                                                             </td>               
                                                             <td>${d.type}</td>
+                                                            <td>${d.status}</td>
                                                             <td>
                                                                 <div class="table-data-feature">
-                                                                    <form action="discountUpdate" method="post">
-                                                                        <input type="hidden" name="updateDiscountCode" value="${d.code}">
-                                                                        <button class="item" data-toggle="tooltip" data-placement="top" title="Edit" type="submit">
-                                                                            <i class="zmdi zmdi-edit"></i>
-                                                                        </button>
-                                                                    </form>
-                                                                    <form action="discountUpdate" method="get" id="${d.code}">
-                                                                        <input type="hidden" name="discountCode" value="${d.code}">
-                                                                        <button class="item" data-toggle="tooltip" data-placement="top" 
-                                                                                title="Delete" type="submit"  onclick="confirmDelete(${d.code})">
-                                                                            <i class="zmdi zmdi-delete"></i>
-                                                                        </button>
-                                                                    </form>                                                                
+                                                                    <c:if test="${d.status eq 'inactivated'}">
+                                                                        <form action="discountUpdate" method="post">
+                                                                            <input type="hidden" name="updateDiscountCode" value="${d.code}">
+                                                                            <button class="item" data-toggle="tooltip" data-placement="top" title="Edit" type="submit">
+                                                                                <i class="zmdi zmdi-edit"></i>
+                                                                            </button>
+                                                                        </form>
+
+                                                                        <form action="discountUpdate" method="get" id="${d.code}">
+                                                                            <input type="hidden" name="discountCode" value="${d.code}">
+                                                                            <button class="item" data-toggle="tooltip" data-placement="top" 
+                                                                                    title="Delete" type="submit"  onclick="confirmDelete('${d.code}', event)">
+                                                                                <i class="zmdi zmdi-delete"></i>
+                                                                            </button>
+                                                                        </form>    
+                                                                    </c:if>
                                                                 </div>
                                                             </td>
                                                         </tr>
@@ -193,7 +173,7 @@
                                         </div>
                                         <div class="product-pagination text-center">
                                             <form id="myForm1" action="discount" method="post">
-                                                <input type="hidden" name="groupBy" value="${requestScope.groupBy}">     
+
                                                 <input type="hidden" name="search" value="${requestScope.search}">     
 
                                                 <div class="d-flex justify-content-end">
@@ -235,12 +215,15 @@
             </div>
         </div>
         <script>
-            function confirmDelete(id) {
-                if (confirm('Are you sure do delete this discount?')) {
+            function confirmDelete(id, event) {
+                if (!confirm('Are you sure do delete this discount?')) {
+                    event.preventDefault();
+                } else {
                     var formDelete = document.getElementById(id);
                     formDelete.submit();
                 }
             }
+
             function submitForm() {
                 document.getElementById("myForm").submit();
             }
@@ -271,10 +254,10 @@
                 }
             }
         </script>
-        
+
         <script src="js/jquery.min.js"></script>
         <script src="js/toastr.min.js"></script>
-        
+
         <!-- Jquery JS-->
         <script src="vendor/jquery-3.2.1.min.js"></script>
         <!-- Bootstrap JS-->
@@ -298,7 +281,7 @@
 
         <!-- Main JS-->
         <script src="js/main.js"></script>
-         <jsp:include page="footer.jsp"/>
+        <jsp:include page="footer.jsp"/>
 
         <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
         <script src="assets/vendor/timeline/jquery.timelify.js"></script>

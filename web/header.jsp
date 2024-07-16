@@ -42,7 +42,11 @@
                                     Store
                                 </a>                                      
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="voucher" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
+                                    Voucher
+                                </a>                                      
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="contactus1.html" id="sub-nav7" aria-haspopup="true" aria-expanded="false">
                                     Contact Us
@@ -85,7 +89,7 @@
                                     Vector<String> vecKey = new Vector<>();
                                     while(em.hasMoreElements()){
                                         String key = em.nextElement().toString();
-                                        if(key.equals("vecKey") ||key.equals("acc") ){
+                                        if(key.equals("vecKey") ||key.equals("acc")||key.equals("products")||key.equals("functionToast") ){
                                             continue;
                                         }else{
                                             vecKey.add(key);
