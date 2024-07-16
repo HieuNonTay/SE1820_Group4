@@ -88,7 +88,7 @@
                         <h2 class="font-16 semi-font fables-forth-text-color fables-light-gary-background p-3 mb-4">Filter by price</h2>
                         <form action="product" method="get">
                             <div class="range-slider fables-forth-text-color" id="facet-price-range-slider" data-options='{"output":{"prefix":""},"maxSymbol":"+"}'>
-                                <input name="passPrice" value="0" min="0" max="200" step="1" type="range" id="priceRange" oninput="updatePriceValue(this.value)">
+                                <input name="passPrice" value="0" min="0" max="5000000" step="10000" type="range" id="priceRange" oninput="updatePriceValue(this.value)">
                                 <input name ="service" value="filterPrice" hidden=>
                                 <span id="priceValue">0</span>
                             </div>

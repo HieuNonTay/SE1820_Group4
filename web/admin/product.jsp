@@ -15,7 +15,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <!-- Main CSS-->
-        <link rel="stylesheet" type="text/css" href="./css/main.css">
+        <link rel="stylesheet" type="text/css" href="admin/css/main.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
         <!-- or -->
         <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
@@ -80,7 +80,7 @@
                         <div class="tile-body">
                             <div class="row element-button">
                                 <div class="col-sm-2">
-                                    <a class="btn btn-add btn-sm" href="#" title="Thêm"><i class="fas fa-plus"></i>
+                                    <a class="btn btn-add btn-sm" href="productmanager?action=insert" title="Thêm"><i class="fas fa-plus"></i>
                                         Insert a new Product</a>
                                 </div>
                                 <div class="col-sm-2">
@@ -88,51 +88,52 @@
                                             class="fas fa-print"></i> Print</a>
                                 </div>
                             </div>
-                            <form action="productmanager?action=updateproduct" method="POST">
-                                <table class="table table-hover table-bordered" id="sampleTable">
-                                    <thead>
+
+                            <table class="table table-hover table-bordered" id="sampleTable">
+                                <thead>
+                                    <tr>
+                                        <th>Product ID</th>
+                                        <th>Model</th>
+                                        <th>Product Name</th>
+                                        <th>Description</th>
+                                        <th>Category</th>
+                                        <th>Price</th>
+                                        <th>Sold</th>
+                                        <th>Quantity</th>
+                                        <th>Product Image</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <c:forEach items="${ProductData}" var="p">
                                         <tr>
-                                            <th>Product ID</th>
-                                            <th>Category</th>
-                                            <th>Product Name</th>
-                                            <th>Price</th>
-                                            <th>Size</th>
-                                            <th>Color</th>
-                                            <th>Description</th>
-                                            <th>Quantity</th>
-                                            <th>Product Image</th>
-                                            <th>Action</th>
+                                            <td>${p.productId}</td>
+                                            <td>${p.model}</td>
+                                            <td>${p.name}</td>
+                                            <td>${p.description}</td>
+                                            <td>${p.catergoryId}</td>
+                                            <td>${p.price}</td>
+                                            <td>${p.sold}</td>
+                                            <td>${p.quantity}</td>
+                                            <td>null</td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm trash" type="button" title="Delete" value="${p.productId}"><i
+                                                        class="fas fa-trash-alt"></i>
+                                                </button>
+                                                <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp"
+                                                        data-toggle="modal" data-target="#ModalUP${p.productId}"><i class="fas fa-edit"></i>
+                                                </button>
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        
-                                            <tr>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>Sample</td>
-                                                <td>
-                                                    <button class="btn btn-primary btn-sm trash" type="button" title="Delete" "><i
-                                                            class="fas fa-trash-alt"></i>
-                                                    </button>
-                                                    <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp"
-                                                            data-toggle="modal" data-target="#ModalUP${1}"><i class="fas fa-edit"></i>
-                                                    </button>
-                                                </td>
-                                            </tr>
 
-                                            <!--
-                                            MODAL
-                                            -->
+                                        <!--
+                                        MODAL
+                                        -->
 
-                                        <div class="modal fade" id="ModalUP${1}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
-                                             data-keyboard="false">
-                                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                    <div class="modal fade" id="ModalUP${p.productId}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                                         data-keyboard="false">
+                                        <div class="modal-dialog modal-dialog-centered" role="document">
+                                            <form action="update?action=updateproduct">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <div class="row">
@@ -144,46 +145,56 @@
                                                         </div>
                                                         <div class="row">
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Product ID </label>
-                                                                <input class="form-control" type="text" readonly name="product_id" value="${1}">
+                                                                <label class="control-label">Brand</label>
+                                                                <select name="brand_id" class="form-control" id="exampleSelect1">
+                                                                    <c:forEach items="${BrandData}" var="b">
+                                                                        <option value="${b.brandID}">${b.brandName}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                                <input class="form-control" type="hidden" readonly name="product_id" value="${p.productId}">
                                                             </div>
+<!--                                                            <div class="form-group col-md-6">
+                                                                <label for="exampleSelect1" class="control-label">Category</label>
+                                                                <select name="category_id" class="form-control" id="exampleSelect1">
+                                                                    <c:forEach items="${BrandData}" var="b">
+                                                                        <option value="${b.brandID}">${b.brandName}</option>
+                                                                    </c:forEach>
+                                                                </select>
+                                                            </div>-->
                                                             <div class="form-group col-md-6">
                                                                 <label for="exampleSelect1" class="control-label">Category</label>
                                                                 <select name="category_id" class="form-control" id="exampleSelect1">
-                                                                    <option>-- Select Category --</option>
-                                                                   
-                                                                        <option>Sample</option>
-                                                                        <option>Sample</option>
-                                                                        <option>Sample</option>
-                                                                    
+                                                                    <c:forEach items="${CategoryData}" var="cat">
+                                                                        <option value="${cat.categoryID}">${cat.categoryName}</option>
+                                                                    </c:forEach>
                                                                 </select>
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Product Name</label>
-                                                                <input class="form-control" type="text" name="product_name" required>
+                                                                <input class="form-control" type="text" name="product_name" value="${p.name}" required>
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Price</label>
-                                                                <input class="form-control" type="number" name="product_price" required>
+                                                                <input class="form-control" type="number" name="product_price" value="${p.price}" required>
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Color</label>
-                                                                <input class="form-control" name="product_color" type="text"
-                                                                    </div>
+                                                                <input class="form-control" name="product_color" type="text" value="${p.colorId}">
+                                                            </div>
 
-                                                                    <div class="form-group col-md-6">
-                                                                        <label class="control-label">Size</label>
-                                                                        <input class="form-control" name="product_size" type="text">
-                                                                    </div>
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Size</label>
+                                                                <input class="form-control" name="product_size" type="text" value="${p.sizeId}">
+                                                            </div>
 
-                                                                    <div class="form-group col-md-6">
-                                                                        <label class="control-label">Description</label>
-                                                                        <input class="form-control" type="text" name="product_describe">
+                                                            <div class="form-group col-md-6">
+                                                                <label class="control-label">Description</label>
+                                                                <input class="form-control" type="text" name="product_describe" value="${p.description}">
                                                             </div>
 
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Quantity</label>
-                                                                <input class="form-control" type="text" name="product_quantity">
+                                                                <input class="form-control" type="text" name="product_quantity" value="${p.quantity}">
                                                             </div>
                                                             <!--anh san pham-->
                                                             <div class="form-group col-md-12">
@@ -207,14 +218,16 @@
                                                         <BR>
                                                     </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
-                                        <!--
-                                      MODAL
-                                        -->
-                                    </tbody>
-                                </table>
-                            </form>
+                                    </div>
+                                    <!--
+                                  MODAL
+                                    -->
+                                </c:forEach>
+                                </tbody>
+                            </table>
+
                         </div>
                     </div>
                 </div>
@@ -224,18 +237,18 @@
 
 
         <!-- Essential javascripts for application to work-->
-        <script src="./js/jquery-3.2.1.min.js"></script>
-        <script src="./js/popper.min.js"></script>
-        <script src="./js/bootstrap.min.js"></script>
+        <<script src="admin/js/jquery-3.2.1.min.js"></script>
+        <script src="admin/js/popper.min.js"></script>
+        <script src="admin/js/bootstrap.min.js"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-        <script src="./js/main.js"></script>
+        <script src="admin/js/main.js"></script>
         <!-- The javascript plugin to display page loading on top-->
-        <script src="./js/plugins/pace.min.js"></script>
+        <script src="admin/js/plugins/pace.min.js"></script>
         <!-- Page specific javascripts-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.3.2/jquery-confirm.min.js"></script>
         <!-- Data table plugin-->
-        <script type="text/javascript" src="./js/plugins/jquery.dataTables.min.js"></script>
-        <script type="text/javascript" src="./js/plugins/dataTables.bootstrap.min.js"></script>
+        <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
+        <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">
                                                                         $('#sampleTable').DataTable();
                                                                         //Thời Gian
@@ -258,7 +271,7 @@
                                                                             var s = today.getSeconds();
                                                                             m = checkTime(m);
                                                                             s = checkTime(s);
-                                                                            nowTime = h + " : " + m + " : " + s ;
+                                                                            nowTime = h + " : " + m + " : " + s;
                                                                             if (dd < 10) {
                                                                                 dd = '0' + dd
                                                                             }

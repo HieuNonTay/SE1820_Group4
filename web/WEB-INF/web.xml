@@ -80,6 +80,18 @@
         <servlet-name>ApplyDiscountController</servlet-name>
         <servlet-class>controller.ApplyDiscountController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddProductController</servlet-name>
+        <servlet-class>controller.AddProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UpdateProductController</servlet-name>
+        <servlet-class>controller.UpdateProductController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProductManagerController</servlet-name>
+        <servlet-class>controller.ProductManagerController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart</url-pattern>
@@ -215,5 +227,17 @@
     <servlet-mapping>
         <servlet-name>ApplyDiscountController</servlet-name>
         <url-pattern>/discount/apply</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddProductController</servlet-name>
+        <url-pattern>/addproduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UpdateProductController</servlet-name>
+        <url-pattern>/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProductManagerController</servlet-name>
+        <url-pattern>/productmanager</url-pattern>
     </servlet-mapping>
 </web-app>

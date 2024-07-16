@@ -49,6 +49,23 @@ public class Product {
         this.updatedAt = updatedAt;
     }
 
+    public Product(String name, String model, int brandId, int categoryId, int colorId, int sizeId, String description, double price, int quantity, int sold, int view, Timestamp publicationDate, Timestamp createdAt, Timestamp updatedAt) {
+        this.name = name;
+        this.model = model;
+        this.brandId = brandId;
+        this.catergoryId = categoryId;
+        this.colorId = colorId;
+        this.sizeId = sizeId;
+        this.description = description;
+        this.price = price;
+        this.quantity = quantity;
+        this.sold = sold;
+        this.view = view;
+        this.publicationDate = publicationDate;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
     public int getProductId() {
         return productId;
     }
@@ -173,6 +190,5 @@ public class Product {
     public String toString() {
         return "Product{" + "productId=" + productId + ", name=" + name + ", model=" + model + ", brandId=" + brandId + ", catergoryId=" + catergoryId + ", colorId=" + colorId + ", sizeId=" + sizeId + ", description=" + description + ", price=" + price + ", quantity=" + quantity + ", sold=" + sold + ", view=" + view + ", publicationDate=" + publicationDate + ", createdAt=" + createdAt + ", updatedAt=" + updatedAt + '}';
     }
-    
-    
+
 }

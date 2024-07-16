@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html lang="vi">
     <head>
-        <title>Thêm sản phẩm | Quản trị Admin</title>
+        <title>Add products | Dashboard</title>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -159,61 +159,72 @@
                                                 alt="User Image">
                 <div>
                     <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
-                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+                    <p class="app-sidebar__user-designation">Welcome back</p>
                 </div>
             </div>
             <hr>
             <ul class="app-menu">
-                <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Bảng điều khiển</span></a></li>
-                <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Quản lý khách hàng</span></a></li>
-                <li><a class="app-menu__item" href="productmanager"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
+                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-tachometer'></i><span
+                            class="app-menu__label">Dashboard</span></a></li>
+                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
+                            class="app-menu__label">Customer Management</span></a></li>
+                <li><a class="app-menu__item" href="#"><i
+                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Product Management</span></a>
                 </li>
-                <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span
-                            class="app-menu__label">Quản lý đơn hàng</span></a></li>
+                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-task'></i><span
+                            class="app-menu__label">Order Management</span></a></li>
             </ul>
         </aside>
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb">
-                    <li class="breadcrumb-item">Danh sách sản phẩm</li>
-                    <li class="breadcrumb-item"><a href="#">Thêm sản phẩm</a></li>
+                    <li class="breadcrumb-item">Product List</li>
+                    <li class="breadcrumb-item"><a href="#">Add products</a></li>
                 </ul>
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="tile">
-                        <h3 class="tile-title">Tạo mới sản phẩm</h3>
+                        <h3 class="tile-title">Create a new product</h3>
                         <div class="tile-body">
                             <div class="row element-button">
                                 <div class="col-sm-2">
                                     <a class="btn btn-add btn-sm" data-toggle="modal" data-target="#adddanhmuc"><i
-                                            class="fas fa-folder-plus"></i> Thêm danh mục</a>
+                                            class="fas fa-folder-plus"></i> Add a category</a>
                                 </div>
                             </div>
 
-                            <form class="row" action="productmanager?action=insertproduct" method="POST" enctype="multipart/form-data">
+                            <form class="row" action="addproduct?action=insertproduct" >
                                 <div class="form-group col-md-3">
-                                    <label class="control-label">Mã sản phẩm </label>
-                                    <input class="form-control" name="product_id" type="text" placeholder="">
+                                    <label class="control-label">Product Name</label>
+                                    <input class="form-control" name="product_name" type="text">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label for="exampleSelect1" class="control-label">Danh mục</label>
+                                    <label class="control-label">Product Model</label>
+                                    <input class="form-control" name="product_model" type="text">
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <label for="exampleSelect1" class="control-label">Category</label>
                                     <select name="category_id" class="form-control" id="exampleSelect1">
-                                        <option>-- Chọn danh mục --</option>
+                                        <option>-- Select Category --</option>
                                         <c:forEach items="${CategoryData}" var="cat">
-                                            <option value="${cat.category_id}">${cat.category_name}</option>
+                                            <option value="${cat.categoryID}">${cat.categoryName}</option>
                                         </c:forEach>
                                     </select>
                                 </div>
+                                
                                 <div class="form-group col-md-3">
-                                    <label class="control-label">Tên sản phẩm</label>
-                                    <input class="form-control" name="product_name" type="text">
+                                    <label for="exampleSelect1" class="control-label">Category</label>
+                                    <select name="brand_id" class="form-control" id="exampleSelect1">
+                                        <option>-- Select Brand --</option>
+                                        <c:forEach items="${BrandData}" var="b">
+                                            <option value="${b.brandID}">${b.brandName}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
+                                
                                 <div class="form-group  col-md-3">
-                                    <label class="control-label">Giá bán</label>
+                                    <label class="control-label">Price</label>
                                     <input class="form-control" name="price" type="number">
                                 </div>
                                 <div class="form-group col-md-3">
@@ -221,15 +232,15 @@
                                     <input class="form-control" name="size" type="text" placeholder="S,L,XL,...">
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <label class="control-label">Màu</label>
+                                    <label class="control-label">Color</label>
                                     <input class="form-control" placeholder="Blue,Gray,..." name="color" type="text">
                                 </div>
                                 <div class="form-group  col-md-3">
-                                    <label class="control-label">Số lượng</label>
+                                    <label class="control-label">Amount</label>
                                     <input class="form-control" name="quantity" type="number">
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label class="control-label">Ảnh sản phẩm</label>
+                                    <label class="control-label">Product Image</label>
                                     <div id="myfileupload">
                                         <input type="file" id="uploadfile" name="product_img" onchange="readURL(this);" />
                                     </div>
@@ -238,17 +249,17 @@
                                         <a class="removeimg" href="javascript:"></a>
                                     </div>
                                     <div id="boxchoice">
-                                        <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Chọn ảnh</a>
+                                        <a href="javascript:" class="Choicefile"><i class="fas fa-cloud-upload-alt"></i> Select Image</a>
                                         <p style="clear:both"></p>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-12">
-                                    <label class="control-label">Mô tả sản phẩm</label>
+                                    <label class="control-label">Product Description</label>
                                     <textarea class="form-control" name="describe" id="describe"></textarea>
                                 </div>
-                                <button class="btn btn-save" type="submit">Lưu lại</button>
+                                <button class="btn btn-save" type="submit">Save</button>
                                 &nbsp;
-                                <a class="btn btn-cancel" href="productmanager">Hủy bỏ</a>
+                                <a class="btn btn-cancel" href="productmanager">Cancel</a>
                             </form>
                         </div>
 
@@ -266,7 +277,7 @@
                         <div class="row">
                             <div class="form-group  col-md-12">
                                 <span class="thong-tin-thanh-toan">
-                                    <h5>Thêm mới danh mục </h5>
+                                    <h5>Add a new category</h5>
                                 </span>
                             </div>
 
@@ -274,19 +285,19 @@
 
                                 <h2 style="color: red; padding-left: 10px">
                                     ${error}</h2>
-                                <label class="control-label">Nhập tên danh mục mới</label>
+                                <label class="control-label">Enter a new category name</label>
                                 <form action="productmanager?action=insertcategory" method="post"> 
                                     <input class="form-control" type="text" name="name" required>
                                     <br>
-                                    <button class="btn btn-save" type="submit">Lưu lại</button>
-                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Hủy bỏ</a>
+                                    <button class="btn btn-save" type="submit">Save</button>
+                                    <a class="btn btn-cancel" data-dismiss="modal" href="#">Cancel</a>
                                 </form>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="control-label">Danh mục sản phẩm hiện đang có</label>
+                                <label class="control-label">Current Product Categories</label>
                                 <ul style="padding-left: 20px;">
                                     <c:forEach items="${CategoryData}" var="cat">
-                                        <li>${cat.category_name}</li>
+                                        <li>${cat.categoryName}</li>
                                         </c:forEach>
                                 </ul>
                             </div>

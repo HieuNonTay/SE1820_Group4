@@ -141,7 +141,7 @@
                         <input type="hidden" name="accountId" value="${sessionScope. acc.getAccountID()}">
 
                         <div class="p-4">
-                            <h1 class="display-6 mb-4">Cart <span class="fw-normal">Mua Hàng</span></h1>
+                            <h1 class="display-6 mb-4">Cart <span class="fw-normal">Buy</span></h1>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">First Name </h5>
                                 <input class="mb-0" type="hidden" name="isAdded" value="${isAdded}">

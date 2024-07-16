@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
  */
 package controller;
+
 import entity.Category;
 import dao.CategoryDAO;
 import java.util.Vector;
@@ -37,7 +38,7 @@ public class CategoryController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet CategoryController</title>");            
+            out.println("<title>Servlet CategoryController</title>");
             out.println("</head>");
             out.println("<body>");
             out.println("<h1>Servlet CategoryController at " + request.getContextPath() + "</h1>");
