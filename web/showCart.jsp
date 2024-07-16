@@ -93,14 +93,14 @@
                             <tr>                            
                                 <th scope="row">
                                     <div class="d-flex align-items-center">
-                                        <img src="img/" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                        <img src="assets/custom/images/Nike0001.webp" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                     </div>
                                 </th>
                                 <td>
                                     <p class="mb-0 mt-4"><%=productCart.getName()%></p>
                                 </td>
                                 <td>
-                                    <p class="mb-0 mt-4"><%=productCart.getPrice()%></p>
+                                    <p class="mb-0 mt-4"><%=df.format(productCart.getPrice()).replace(",",".")%></p>
                                 </td>
                                 <td>
                                     <div class="input-group quantity mt-4" style="width: 100px;">

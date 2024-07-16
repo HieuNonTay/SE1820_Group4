@@ -86,7 +86,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>UpdateInfoController</servlet-name>
-        <url-pattern>/updateInfoController</url-pattern>
+        <url-pattern>/updateInfo</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RegisterController</servlet-name>

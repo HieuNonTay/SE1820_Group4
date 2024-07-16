@@ -51,6 +51,7 @@
     <body>
 
         <jsp:include page="header.jsp"/>
+
         <div class="fables-header fables-after-overlay">
             <div class="container"> 
                 <h2 class="fables-page-title fables-second-border-color">Mua Hàng</h2>
@@ -88,14 +89,14 @@
                         <tr>                            
                             <th scope="row">
                                 <div class="d-flex align-items-center">
-                                    <img src="img/" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
+                                    <img src="assets/custom/images/Nike0001.webp" class="img-fluid me-5 rounded-circle" style="width: 80px; height: 80px;" alt="">
                                 </div>
                             </th>
                             <td>
                                 <p class="mb-0 mt-4"><%=productCart.getName()%></p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4"><%=productCart.getPrice()%></p>
+                                <p class="mb-0 mt-4"><%=df.format(productCart.getPrice()).replace(",",".")%></p>
                             </td>
                             <td>
                                 <div class="input-group quantity mt-4" style="width: 100px;">
@@ -125,11 +126,11 @@
                             <h1 class="display-6 mb-4">Giỏ <span class="fw-normal">Mua Hàng</span></h1>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Họ </h5>
-                                <input class="mb-0" name="firstName" value="" placeholder="Họ">
+                                <input class="mb-0" name="firstName" value="${sessionScope. acc.getLname()}" placeholder="Họ">
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Tên </h5>
-                                <input class="mb-0" name="lastName" value="" placeholder="Tên">
+                                <input class="mb-0" name="lastName" value="${sessionScope. acc.getFname()}" placeholder="Tên">
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Mã Giảm Giá </h5>
@@ -137,19 +138,19 @@
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Số Điện Thoại </h5>
-                                <input class="mb-0" name="line1" value="" placeholder="0123456789">
+                                <input class="mb-0" name="line1" value="${sessionScope. acc.getPhone()}" placeholder="0123456789">
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Địa Chỉ</h5>
-                                <input class="mb-0" name="line2" value="" placeholder="Địa Chỉ">
+                                <input class="mb-0" name="line2" value="${sessionScope. acc.getAddress()}" placeholder="Địa Chỉ">
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Thành Phố</h5>
-                                <input class="mb-0" name="city" value="" placeholder="Thành Phố">
+                                <input class="mb-0" name="city" value="${sessionScope. acc.getAddress()}" placeholder="Thành Phố">
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Tỉnh</h5>
-                                <input class="mb-0" name="province" value="" placeholder="Tỉnh">
+                                <input class="mb-0" name="province" value="${sessionScope. acc.getAddress()}" placeholder="Tỉnh">
                             </div>
                         </div>
                         <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">

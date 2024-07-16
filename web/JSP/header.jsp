@@ -1,3 +1,5 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@page import="java.sql.ResultSet, java.util.*, entity.*, dao.*, java.text.DecimalFormat, java.util.Enumeration" %>
 <!-- Loading Screen -->
 <div id="ju-loading-screen">
     <div class="sk-double-bounce">
@@ -7,21 +9,6 @@
 </div>
 
 <!-- Start Top Header -->
-<div class="search-section">
-    <a class="close-search" href="#"></a>
-    <div class="d-flex justify-content-center align-items-center h-100">
-        <form method="post" action="#" class="w-50">
-            <div class="row">
-                <div class="col-10">
-                    <input type="search" value="" class="form-control palce bg-transparent border-0 search-input" placeholder="Search Here ..." /> 
-                </div>
-                <div class="col-2 mt-3">
-                    <button type="submit" class="btn bg-transparent text-white"> <i class="fas fa-search"></i> </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div>
 
 <!-- Start Fables Navigation -->
 <div class="fables-navigation fables-main-background-color py-3 py-lg-0">
@@ -65,55 +52,102 @@
                     </div>
                 </nav>
             </div>
-            <div class="col-12 col-md-2 col-lg-3 pr-md-0 icons-header-mobile">
-
+            <%  
+                        HttpSession session1 = request.getSession(true);
+                        Enumeration<String> emm1 = session1.getAttributeNames();
+                        int cartItemCount = 0;
+                        while (emm1.hasMoreElements()) {
+                            String key = emm1.nextElement();
+                            if (!key.equals("acc") && !key.equals("vecKey")) {
+                                cartItemCount++;
+                            }
+                        }
+            %>
+            <div class="col-12 col-md-2 col-lg-3 pr-md-0">
                 <div class="fables-header-icons">
                     <div class="dropdown"> 
-                        <a href="#" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="fables-iconcart-icon font-20"></span>
-                            <span class="fables-cart-number fables-second-background-color text-center">3</span>
+                            <span class="fables-cart-number fables-second-background-color text-center"><%=cartItemCount%></span>
                         </a>
 
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <div class="p-3 cart-block">
-                                <p class="fables-second-text-color semi-font mb-4 font-17">(2) Items in my cart</p>
+                                <p class="fables-second-text-color semi-font mb-4 font-17">(<%=cartItemCount%>) Items in my cart</p>
+                                <%  
+                                    Enumeration<String> em = session1.getAttributeNames();
+                                    DecimalFormat df = new DecimalFormat("#.##");
+                                    double grandTotal = 0;
+                                    int itemCount = 0;
+                                    Vector<String> vecKey = new Vector<>();
+                                    while(em.hasMoreElements()){
+                                        String key = em.nextElement().toString();
+                                        if(key.equals("vecKey") ||key.equals("acc") ){
+                                            continue;
+                                        }else{
+                                            vecKey.add(key);
+                                            ProductCart productCart = (ProductCart)session.getAttribute(key);
+                                            grandTotal += productCart.getPrice()*productCart.getQuantity();
+                                            itemCount++;
+                                %>
                                 <div class="row mx-0 mb-3">
                                     <div class="col-4 p-0">
-                                        <a href="#"><img src="assets/custom/images/sml1.jpg" alt="" class="w-100"></a>
+                                        <a href="#"><img src="assets/custom/images/Nike0001.webp" alt="" class="w-100"></a>
                                     </div>
                                     <div class="col-8">
-                                        <h2><a href="#" class="fables-main-text-color font-13 d-block fables-main-hover-color">LUIS LEATHER DRIVING</a></h2>
-                                        <p class="fables-second-text-color font-weight-bold">$ 100.00</p>
-                                        <p class="fables-forth-text-color">QTY : 1</p>
+                                        <h2><a href="#" class="fables-main-text-color font-13 d-block fables-main-hover-color"><%=productCart.getName()%></a></h2>
+                                        <p class="fables-second-text-color font-weight-bold"><%=df.format(productCart.getPrice()).replace(",",".")%></p>
+                                        <p class="fables-forth-text-color">QTY : <%=productCart.getQuantity()%></p>
                                     </div>
                                 </div>
-                                <div class="row mx-0 mb-3">
-                                    <div class="col-4 p-0">
-                                        <a href="#"><img src="assets/custom/images/sml1.jpg" alt="" class="w-100"></a>
-                                    </div>
-                                    <div class="col-8">
-                                        <h2><a href="#" class="fables-main-text-color font-13 d-block fables-main-hover-color">LUIS LEATHER DRIVING</a></h2>
-                                        <p class="fables-second-text-color font-weight-bold">$ 100.00</p>
-                                        <p class="fables-forth-text-color">QTY : 1</p>
-                                    </div>
-                                </div>
+                                <% } 
+                            }%>
                                 <span class="font-16 semi-font fables-main-text-color">TOTAL</span>
-                                <span class="font-14 semi-font fables-second-text-color float-right">$200.00</span>
+                                <span class="font-14 semi-font fables-second-text-color float-right"><%=df.format(grandTotal).replace(",", ".")%></span>
                                 <hr>
                                 <div class="text-center">
-                                    <a href="cart?service=showCart" class="fables-second-background-color fables-btn-rounded  text-center white-color py-2 px-3 font-14 bg-hover-transparent border fables-second-border-color fables-second-hover-color">View my cart</a> 
-                                    <a href="#" class="fables-second-text-color border fables-second-border-color fables-btn-rounded text-center white-color p-2 px-4 font-14 fables-second-hover-background-color">Checkout</a>
+                                    <a href="cart" class="fables-second-background-color fables-btn-rounded  text-center white-color py-2 px-3 font-14 bg-hover-transparent border fables-second-border-color fables-second-hover-color">View my cart</a> 
+                                    <a href="cart?service=checkOut" class="fables-second-text-color border fables-second-border-color fables-btn-rounded text-center white-color p-2 px-4 font-14 fables-second-hover-background-color">Checkout</a>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    <!--                    <a href="signIn.jsp" class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"><span class="fables-iconuser"></span></a> -->
 
-                    <a href="signIn.jsp" class="fables-third-text-color fables-second-hover-color font-13 top-header-link px-3 px-md-2 px-lg-4 max-line-height"><span class="fables-iconuser"></span></a>
+                    <c:if test="${sessionScope.acc == null}">
+                        <div class="dropdown">
+                            <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="fables-iconuser">
+                            </a>
+                            <div class="nav-item dropdown">
+                                <ul class="dropdown-menu" aria-labelledby="sub-nav1">
+                                    <li><a href="signIn.jsp"  class="dropdown-item"> Sign In </a></li>
+                                    <li><a href="register.jsp"  class="dropdown-item"> Sign Up </a></li>
+                                </ul>
+                            </div>  
+                        </div>
+                    </c:if>
+
+                    <c:if test="${sessionScope.acc != null}">
+                        <div class="dropdown">
+                            <a href="#_" class="fables-third-text-color dropdown-toggle right px-3 px-md-2 px-lg-4 fables-second-hover-color top-header-link max-line-height position-relative" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                ${sessionScope. acc.getLname()} 
+                            </a>
+                            <div class="nav-item dropdown">
+                                <ul style="list-style-type: none" class="dropdown-menu" aria-labelledby="sub-nav1">
+                                    <li><a href="userDetail.jsp"  class="dropdown-item"> Profile </a></li>
+                                    <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
+                                    <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
+                                </ul>
+                            </div>  
+                        </div>
+                    </c:if>
 
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>     
 
 <!-- /End Header -->

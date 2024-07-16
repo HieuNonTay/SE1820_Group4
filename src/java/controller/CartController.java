@@ -128,11 +128,13 @@ public class CartController extends HttpServlet {
             if (s.getAttribute("acc") == null) {
                 request.getRequestDispatcher("403.jsp").forward(request, response);
             }
-            Account ch = (Account) s.getAttribute("acc");
-            if (!(ch.getRoleID() == 2)) {
+            Account acc = (Account) s.getAttribute("acc");
+            if (!(acc.getRoleID() == 2)) {
                 request.getRequestDispatcher("403.jsp").forward(request, response);
+            } else {
+
+                request.getRequestDispatcher("checkOut.jsp").forward(request, response);
             }
-            request.getRequestDispatcher("checkOut.jsp").forward(request, response);
         }
 
     }
