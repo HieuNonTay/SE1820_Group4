@@ -35,28 +35,9 @@ public class newsManageController extends HttpServlet {
             //Delete news here by id
             s.removeAttribute("updateNewsId");
 
-            if (gr.equalsIgnoreCase("Policy")) {
-                s.setAttribute("functionToast", "showToast('warning','You can not delete the policy!')");
-            } else {
-                if (news.getStt() == 1) {
-                    s.setAttribute("functionToast", "showToast('warning','You can not delete the news currently in slideshare!')");
-                } else {
-                    n.DeleteNews(nid);
-                    s.setAttribute("functionToast", "showToast('success','Delete news successfully!')");
-                }
-            }
-        } else if (act.equals("isSlide")) {
-            if (gr.equalsIgnoreCase("Policy")) {
-                s.setAttribute("functionToast", "showToast('warning','You can not show policy on slideshare!')");
-            } else {
-                n.isSlideBanner(nid);
-                s.setAttribute("functionToast", "showToast('success','Edit slideshare successfully!')");
-            }
-        } else {
-            if (news.getLink() == null) {
-                n.notSlideBanner(nid);
-                s.setAttribute("functionToast", "showToast('success','Edit slideshare successfully!')");
-            }
+            n.DeleteNews(nid);
+            s.setAttribute("functionToast", "showToast('success','Delete news successfully!')");
+
         }
         resp.sendRedirect("newsManage");
     }

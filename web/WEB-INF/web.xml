@@ -60,6 +60,26 @@
         <servlet-name>HomeController</servlet-name>
         <servlet-class>controller.HomeController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>imageController</servlet-name>
+        <servlet-class>controller.imageController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NewsUserController</servlet-name>
+        <servlet-class>controller.newsUserController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>newsUserDetailController</servlet-name>
+        <servlet-class>controller.newsUserDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>VoucherController</servlet-name>
+        <servlet-class>controller.VoucherController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ApplyDiscountController</servlet-name>
+        <servlet-class>controller.ApplyDiscountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
         <url-pattern>/cart</url-pattern>
@@ -175,5 +195,25 @@
     <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>imageController</servlet-name>
+        <url-pattern>/image</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NewsUserController</servlet-name>
+        <url-pattern>/newsUser</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newsUserDetailController</servlet-name>
+        <url-pattern>/newsUserDetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>VoucherController</servlet-name>
+        <url-pattern>/voucher</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ApplyDiscountController</servlet-name>
+        <url-pattern>/discount/apply</url-pattern>
     </servlet-mapping>
 </web-app>

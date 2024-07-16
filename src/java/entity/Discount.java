@@ -14,9 +14,11 @@ public class Discount {
     private double amount;
     private String fromDate, toDate;
     private String description, type;
+    private String status;
 
     private int acocountId, productId, number;
     private String productModel;
+    private String productName;
 
     public Discount() {
     }
@@ -34,6 +36,30 @@ public class Discount {
         this.amount = amount;
         this.description = description;
         this.type = type;
+    }
+
+    public Discount(String code, String name, double amount) {
+        this.code = code;
+        this.name = name;
+        this.amount = amount;
+    }
+
+    public Discount(String code, String name, double amount, String description, String type, String status) {
+        this.code = code;
+        this.name = name;
+        this.amount = amount;
+        this.description = description;
+        this.type = type;
+        this.status = status;
+    }
+
+    public Discount(String productName, String code, String name, double amount, String fromDate, String toDate) {
+        this.code = code;
+        this.name = name;
+        this.amount = amount;
+        this.productName = productName;
+        this.fromDate = fromDate;
+        this.toDate = toDate;
     }
 
     public String getCode() {
@@ -127,6 +153,22 @@ public class Discount {
     @Override
     public String toString() {
         return "Discount{" + "code=" + code + ", name=" + name + ", amount=" + amount + ", fromDate=" + fromDate + ", toDate=" + toDate + ", description=" + description + ", type=" + type + ", acocountId=" + acocountId + ", productId=" + productId + ", number=" + number + ", productModel=" + productModel + '}';
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
     }
 
 }

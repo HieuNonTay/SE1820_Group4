@@ -5,17 +5,20 @@
 package dao;
 
 import entity.Discount;
+import entity.Product;
 import model.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  *
@@ -60,6 +63,68 @@ public class DisCountDAO {
         return data;
     }
 
+    public List<Discount> getListDiscountToSelect(List<Integer> productIds) {
+        List<Discount> data = new ArrayList<>();
+        if (productIds.isEmpty()) {
+            System.out.println("No product IDs provided.");
+            return data;
+        }
+        // Chuyển đổi danh sách product IDs thành một chuỗi các giá trị
+        String productIdsStr = productIds.stream()
+                .map(String::valueOf)
+                .collect(Collectors.joining(","));
+        try {
+            connect();
+            String strSelect = "select d.Code, d.Amount, d.Name from Discount d\n"
+                    + "left join product_discount pd on d.Code = pd.DiscountCode\n"
+                    + "left join Product p on p.ProductID = pd.ProductId\n"
+                    + "where pd.ToDate >= CAST(GETDATE() AS DATE)\n"
+                    + "and pd.FromDate <= CAST(GETDATE() AS DATE)\n"
+                    + "and d.Status = 'inactivated'\n"
+                    + "and p.ProductID in (" + productIdsStr + ")";
+            pstm = cnn.prepareStatement(strSelect);
+//            pstm.setString(1, productIdsStr);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                String code = rs.getString(1);
+                String name = rs.getString(3);
+                double amount = rs.getDouble(2);
+                data.add(new Discount(code, name, amount));
+            }
+            cnn.close();
+        } catch (SQLException e) {
+            System.out.println("getListDiscountToSelect" + e.getMessage());
+        }
+        return data;
+    }
+
+    public List<Discount> getListVoucher() {
+        List<Discount> data = new ArrayList<>();
+
+        try {
+            connect();
+            String strSelect = "select d.Code, d.Name,d.Amount,p.Name,pd.FromDate,pd.ToDate from Discount d\n"
+                    + "left join product_discount pd on d.Code = pd.DiscountCode\n"
+                    + "left join Product p on p.ProductID = pd.ProductId\n"
+                    + "where pd.ToDate >= CAST(GETDATE() AS DATE)\n"
+                    + "and d.Status = 'inactivated'";
+            pstm = cnn.prepareStatement(strSelect);
+            rs = pstm.executeQuery();
+
+            while (rs.next()) {
+                String code = rs.getString(1);
+                String name = rs.getString(2);
+                double amount = rs.getDouble(3);
+                data.add(new Discount(rs.getString(4), code, name, amount, rs.getString(5), rs.getString(6)));
+            }
+            cnn.close();
+        } catch (SQLException e) {
+            System.out.println("getListVoucher" + e.getMessage());
+        }
+        return data;
+    }
+
     public List<Discount> getListDiscountByType(String t) {
         List<Discount> data = new ArrayList<Discount>();
         try {
@@ -83,14 +148,14 @@ public class DisCountDAO {
         return data;
     }
 
-    public List<Discount> getListDiscountByTypeAndSearch(String t, String search) {
+    public List<Discount> getListDiscountByTypeAndSearch(String search) {
         List<Discount> data = new ArrayList<Discount>();
         try {
             connect();
             String strSelect = "SELECT d.[Code], d.[Name], d.[Amount], d.[Description], d.[Type] FROM [dbo].[Discount] d \n"
-                    + "where d[type]=? and (d.[Name] like '%" + search + "%' or d.Code like '%" + search + "%')";
+                    + "where (d.[Name] like '%" + search + "%' or d.Code like '%" + search + "%')";
             pstm = cnn.prepareStatement(strSelect);
-            pstm.setString(1, t);
+            pstm.setString(1, search);
             rs = pstm.executeQuery();
             while (rs.next()) {
                 String code = rs.getString(1);
@@ -112,7 +177,7 @@ public class DisCountDAO {
         List<Discount> data = new ArrayList<Discount>();
         try {
             connect();
-            String strSelect = "SELECT d.[Code], d.[Name], d.[Amount], d.[Description], d.[Type] FROM [dbo].[Discount] d where 1=1";
+            String strSelect = "SELECT d.[Code], d.[Name], d.[Amount], d.[Description], d.[Type], Status FROM [dbo].[Discount] d where 1=1";
             if (t != null) {
                 strSelect += " and d.[type]= '" + t + "' ";
             }
@@ -131,7 +196,8 @@ public class DisCountDAO {
                 double amount = rs.getDouble(3);
                 String description = rs.getString(4);
                 String type = rs.getString(5);
-                data.add(new Discount(code, name, amount, description, type));
+                String status = rs.getString(6);
+                data.add(new Discount(code, name, amount, description, type, status));
 
             }
             cnn.close();
@@ -168,7 +234,7 @@ public class DisCountDAO {
     public Discount getDisCountByCode(String c) {
         try {
             connect();
-            String selectStr = "SELECT [Code], [Name], [Amount], [Description], [Type] FROM [dbo].[Discount] where Code = ?";
+            String selectStr = "SELECT [Code], [Name], [Amount], [Description], [Type], Status FROM [dbo].[Discount] where Code = ?";
             pstm = cnn.prepareStatement(selectStr);
             pstm.setString(1, c);
             rs = pstm.executeQuery();
@@ -178,7 +244,8 @@ public class DisCountDAO {
                 double amount = rs.getDouble(3);
                 String description = rs.getString(4);
                 String type = rs.getString(5);
-                return new Discount(code, name, amount, description, type);
+                String status = rs.getString(6);
+                return new Discount(code, name, amount, description, type, status);
             }
             cnn.close();
 
@@ -199,7 +266,7 @@ public class DisCountDAO {
                 int id = rs.getInt(1);
                 String code = rs.getString(2);
                 String fromDate = convertDateTimeFormat(rs.getString(3));
-                String toDate = convertDateTimeFormat(rs.getString(5));
+                String toDate = convertDateTimeFormat(rs.getString(4));
                 return new Discount(code, fromDate, toDate, id);
             }
             cnn.close();
@@ -285,6 +352,21 @@ public class DisCountDAO {
         }
     }
 
+    public void updateStatusDiscount(String status, String code) {
+        try {
+            String strUPdate = "UPDATE [dbo].[Discount]\n"
+                    + "   SET   [Status] = ?\n"
+                    + " WHERE Code=?";
+            pstm = cnn.prepareStatement(strUPdate);
+            pstm.setString(1, status);
+            pstm.setString(2, code);
+            pstm.execute();
+            pstm.close();
+        } catch (SQLException e) {
+            System.out.println("updateDiscount: " + e.getMessage());
+        }
+    }
+
     public void updateProductDiscount(int productId, String fromDate, String toDate, String code) {
         try {
             String strUpdate = "UPDATE [dbo].[product_discount]\n"
@@ -322,6 +404,7 @@ public class DisCountDAO {
 
     public void addProductDiscount(int productId, String discountCode, String fromDate, String toDate) {
         try {
+            connect();
             String strAdd = "INSERT INTO [product_discount](ProductId, DiscountCode, FromDate, ToDate) values (?, ?, ?, ?)";
             pstm = cnn.prepareStatement(strAdd);
             pstm.setInt(1, productId);
@@ -339,7 +422,7 @@ public class DisCountDAO {
     public int getProductIdByModel(String model) {
         try {
             connect();
-            String selectStr = "select ProductID where model=? ";
+            String selectStr = "select ProductID from Product where model=? ";
             pstm = cnn.prepareStatement(selectStr);
             pstm.setString(1, model);
             rs = pstm.executeQuery();
@@ -405,6 +488,39 @@ public class DisCountDAO {
             System.out.println("getListProductModelByProductDiscountCode: " + e.getMessage());
         }
         return list;
+    }
+
+    public Product getProductByProductDiscountCode(String code) {
+        try {
+            connect();
+            String selectStr = "select p.* from product_discount pd join Product p on pd.ProductId = p.ProductID where pd.DiscountCode = ?";
+            pstm = cnn.prepareStatement(selectStr);
+            pstm.setString(1, code);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                int productId = rs.getInt(1);
+                String name = rs.getNString(2);
+                String model = rs.getNString(3);
+                int brandId = rs.getInt(4);
+                int categoryId = rs.getInt(5);
+                int colorId = rs.getInt(6);
+                int sizeId = rs.getInt(7);
+                String description = rs.getNString(8);
+                double price = rs.getDouble(9);
+                int quantity = rs.getInt(10);
+                int sold = rs.getInt(11);
+                int view = rs.getInt(12);
+                Timestamp publicationDate = rs.getTimestamp(13);
+                Timestamp createdAt = rs.getTimestamp(14);
+                Timestamp updatedAt = rs.getTimestamp(15);
+
+                return new Product(productId, name, model, brandId, categoryId, colorId, sizeId, description, price, quantity, sold, view, publicationDate, createdAt, updatedAt);
+            }
+            cnn.close();
+        } catch (SQLException e) {
+            System.out.println("getListProductModelByProductDiscountCode: " + e.getMessage());
+        }
+        return null;
     }
 
     public List<Integer> getListProductIdByDiscountCode(String discountCode) {

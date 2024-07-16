@@ -39,35 +39,16 @@ public class discountUpdateController extends HttpServlet {
                 req.setAttribute("updateToDate", convertDateTimeFormat(updateProductDiscount.getToDate()));
                 req.setAttribute("updateProductDiscount", updateProductDiscount);
 
-                String models = "";
-                List<Integer> ids = d.getListProductIdByDiscountCode(code);
-                for (Integer id : ids) {
-                    String tmpMod = d.getProductModelByProductId(id);
-                    models += " " + tmpMod;
-                }
-                req.setAttribute("updateModels", models);
-                boolean checkUpdate = true;
-                boolean checkUpdateTo = true;
-                LocalDate localDate1 = LocalDate.parse(convertDateTimeFormat(updateProductDiscount.getFromDate()));
-                LocalDate localDate2 = LocalDate.parse(convertDateTimeFormat(updateProductDiscount.getToDate()));
-
-                LocalDate currentDate = LocalDate.now();
-                int result = localDate1.compareTo(currentDate);
-                int result1 = localDate2.compareTo(currentDate);
-
-                if (result <= 0) {
-                    checkUpdate = false;
-                }
-
-                if (result1 <= 0) {
-                    checkUpdateTo = false;
-                }
-                req.setAttribute("checkUpdate", checkUpdate);
-                req.setAttribute("checkUpdateTo", checkUpdateTo);
-
-            } else {
-                req.setAttribute("checkUpdate", false);
+//                String models = "";
+//                List<Integer> ids = d.getListProductIdByDiscountCode(code);
+//                for (Integer id : ids) {
+//                    String tmpMod = d.getProductModelByProductId(id);
+//                    models += " " + tmpMod;
+//                }
+//                req.setAttribute("updateModels", models);
             }
+            Product p = d.getProductByProductDiscountCode(code);
+            req.setAttribute("updateModels", p.getName());
             req.setAttribute("updateDiscount", updateDiscount);
         }
         ProductDAO p = new ProductDAO();
@@ -79,46 +60,23 @@ public class discountUpdateController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //delete discount here
         HttpSession s = req.getSession();
         String code = req.getParameter("discountCode");
         DisCountDAO d = new DisCountDAO();
         Discount selectDiscount = d.getDisCountByCode(code);
-        String type = selectDiscount.getType();
-        if (type.equalsIgnoreCase("User")) {
-            s.setAttribute("functionToast", "showToast('error','User discount can not be deleted!')");
-            resp.sendRedirect("discount");
-        }
-        if (type.equalsIgnoreCase("Product")) {
-            LocalDate localDate1 = LocalDate.parse(convertDateTimeFormat(d.getProductDiscountByCode(code).getFromDate()));
-            LocalDate currentDate = LocalDate.now();
-            int result = localDate1.compareTo(currentDate);
 
-            if (result <= 0) {
-                s.setAttribute("functionToast", "showToast('error','This product discount has been in use! (Can not delete)')");
-                resp.sendRedirect("discount");
-            } else {
-                d.deleteProductDiscount(code);
-                d.deleteDiscount(code);
-                s.setAttribute("functionToast", "showToast('success','Delete discount successfully!')");
-                resp.sendRedirect("discount");
-            }
-        } else if (type.equalsIgnoreCase("User")) {
-            d.deleteUserDiscount(code);
-        }
+        d.deleteProductDiscount(code);
+        d.deleteDiscount(code);
+        s.setAttribute("functionToast", "showToast('success','Delete discount successfully!')");
+        resp.sendRedirect("discount");
+
     }
 
-//    public static void main(String[] args) {
-//
-//        Discount d = new Discount();
-//        Discount selectDiscount = d.getDiscountByCode("ICT18362342");
-//        System.out.println(selectDiscount.getFromDate());
-//    }
     private static String convertDateTimeFormat(String inputDateTime) {
         if (inputDateTime == null) {
             return null;
         } else {
-            DateFormat inputFormat = new SimpleDateFormat("HH:mm:ss dd/MM/yyyy");
+            DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             DateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 java.util.Date date = inputFormat.parse(inputDateTime);

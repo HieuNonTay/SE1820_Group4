@@ -24,50 +24,29 @@ public class discountController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String typeId = req.getParameter("groupBy");
+
         String search = req.getParameter("search");
         String page = req.getParameter("page");
 
-        NewsDAO n = new NewsDAO();
         DisCountDAO d = new DisCountDAO();
-        if (search.isEmpty()) {
+        if (search == null) {
             search = "";
         }
         if (page == null || page.equals("0")) {
             page = "1";
         }
-        String type;
-        if (typeId.equals("0")) {
-            typeId = "-1";
-            type = null;
-        } else {
-            type = n.getContentById(Integer.parseInt(typeId)).getContent();
+        if (Integer.parseInt(page) > calThePage(5, search)) {
+            page = calThePage(5, search) + "";
         }
 
-        if (Integer.parseInt(page) > calThePage(5, Integer.parseInt(typeId), search)) {
-            page = calThePage(5, Integer.parseInt(typeId), search) + "";
-        }
-
-        req.setAttribute("groupBy", Integer.parseInt(req.getParameter("groupBy")));
+//        req.setAttribute("groupBy", Integer.parseInt(req.getParameter("groupBy")));
         req.setAttribute("search", req.getParameter("search"));
-        req.setAttribute("count", calThePage(5, Integer.parseInt(typeId), search));
+        req.setAttribute("count", calThePage(5, search));
         req.setAttribute("page", page);
-        req.setAttribute("discounts", d.getListDiscountByTypeAndSearchAndPage(Integer.parseInt(page), type, search));
-        req.setAttribute("types", n.getListContentsByName("discountFilter"));
+        req.setAttribute("discounts", d.getListDiscountByTypeAndSearchAndPage(Integer.parseInt(page), null, search));
+//        req.setAttribute("types", n.getListContentsByName("discountFilter"));
 
         req.getRequestDispatcher("discount.jsp").forward(req, resp);
-    }
-
-    public static void main(String[] args) {
-        DisCountDAO d = new DisCountDAO();
-        NewsDAO n = new NewsDAO();
-        String type = n.getContentById(50).getContent();
-        String se = "a";
-//        System.out.println(type);
-//        System.out.println(se);
-//        System.out.println(d.getListDiscountByTypeAndSearch(type, se).size());
-//
-        System.out.println(d.getListDiscountByTypeAndSearchAndPage(1, null, null));
     }
 
     @Override
@@ -83,10 +62,10 @@ public class discountController extends HttpServlet {
         DisCountDAO d = new DisCountDAO();
         NewsDAO n = new NewsDAO();
 
-        req.setAttribute("types", n.getListContentsByName("discountFilter"));
+//        req.setAttribute("types", n.getListContentsByName("discountFilter"));
         req.setAttribute("groupBy", "0");
         req.setAttribute("search", null);
-        req.setAttribute("count", calThePage(5, -1, ""));
+        req.setAttribute("count", calThePage(5, ""));
         req.setAttribute("page", "1");
         //req.setAttribute("discounts", d.getListDiscount());
         req.setAttribute("discounts", d.getListDiscountByTypeAndSearchAndPage(1, null, null));
@@ -94,17 +73,15 @@ public class discountController extends HttpServlet {
         req.getRequestDispatcher("discount.jsp").forward(req, resp);
     }
 
-    public int calThePage(int sizePage, int typeId, String search) {
+    public int calThePage(int sizePage, String search) {
         DisCountDAO d = new DisCountDAO();
         NewsDAO n = new NewsDAO();
 
         int pages = 0;
         int countDiscounts = 0;
-        if (typeId != -1) {
-            countDiscounts = d.getListDiscountByTypeAndSearch(n.getContentById(typeId).getContent(), search).size();
-        } else {
-            countDiscounts = d.getListDiscountBySearch(search).size();
-        }
+
+        countDiscounts = d.getListDiscountBySearch(search).size();
+
         if (countDiscounts % sizePage == 0) {
             pages = countDiscounts / sizePage;
         } else {

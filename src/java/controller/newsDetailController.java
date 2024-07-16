@@ -35,30 +35,29 @@ public class newsDetailController extends HttpServlet {
         HttpSession s = req.getSession();
         if (s.getAttribute("acc") == null) {
             req.getRequestDispatcher("403.jsp").forward(req, resp);
+            return;
         }
         Account ch = (Account) s.getAttribute("acc");
         if (!(ch.getRoleID() == 1 || ch.getRoleID() == 3)) {
             req.getRequestDispatcher("403.jsp").forward(req, resp);
+            return;
         }
+
         String nid = (String) s.getAttribute("updateNewsId");
-        NewsDAO newsDAO = new NewsDAO();
-        NewsGroupDAO newsGroupDAO = new NewsGroupDAO();
-
+        NewsDAO n = new NewsDAO();
+        NewsGroupDAO ng = new NewsGroupDAO();
+        News news = null;
         if (nid != null) {
-            try {
-                News news = newsDAO.getNewsById(Integer.parseInt(nid));
-                if (news != null) {
-                    String imageFormat = "<p><img src=\"" + news.getImage() + "\" width=\"572\" height=\"322\" /></p>";
-                    req.setAttribute("imageFormat", imageFormat);
-                    req.setAttribute("selectNews", news);
-                }
-            } catch (NumberFormatException e) {
-                // Handle exception if NID is not a valid integer
-                e.printStackTrace();
+            news = n.getNewsById(Integer.parseInt(nid));
+            if (news != null) {
+                String imageFormat = "<p><img src=\"" + news.getImage() + "\" width=\"572\" height=\"322\" /></p>";
+                req.setAttribute("imageFormat", imageFormat);
             }
+            req.setAttribute("selectNews", news);
+            s.removeAttribute("updateNewsId"); // Clear after use
         }
-
-        req.setAttribute("groups", newsGroupDAO.getListNewsGroupWithoutPolicy());
+        req.setAttribute("groups", ng.getListNewsGroup());
         req.getRequestDispatcher("newsDetailManagement.jsp").forward(req, resp);
+
     }
 }

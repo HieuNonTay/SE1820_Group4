@@ -6,36 +6,6 @@
 
     <head>
 
-        <title> Home </title>
-
-        <!-- animate.css-->  
-        <link href="assets/vendor/animate.css-master/animate.min.css" rel="stylesheet">
-        <!-- Load Screen -->
-        <link href="assets/vendor/loadscreen/css/spinkit.css" rel="stylesheet">
-        <!-- GOOGLE FONT -->
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i" rel="stylesheet">
-        <!-- Font Awesome 5 -->
-        <link href="assets/vendor/fontawesome/css/fontawesome-all.min.css" rel="stylesheet">
-        <!-- Fables Icons -->
-        <link href="assets/custom/css/fables-icons.css" rel="stylesheet"> 
-        <!-- Bootstrap CSS --> 
-        <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link href="assets/vendor/bootstrap/css/bootstrap-4-navbar.css" rel="stylesheet">
-        <!-- portfolio filter gallery -->
-        <link href="assets/vendor/portfolio-filter-gallery/portfolio-filter-gallery.css" rel="stylesheet">
-        <!-- Video Background -->
-        <link href="assets/vendor/video-background/video-background.css" rel="stylesheet"> 
-        <!-- FANCY BOX -->
-        <link href="assets/vendor/fancybox-master/jquery.fancybox.min.css" rel="stylesheet"> 
-        <!-- RANGE SLIDER -->
-        <link href="assets/vendor/range-slider/range-slider.css" rel="stylesheet">
-        <!-- OWL CAROUSEL  --> 
-        <link href="assets/vendor/owlcarousel/owl.carousel.min.css" rel="stylesheet">
-        <link href="assets/vendor/owlcarousel/owl.theme.default.min.css" rel="stylesheet">
-        <!-- FABLES CUSTOM CSS FILE -->
-        <link href="assets/custom/css/custom.css" rel="stylesheet">
-        <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
-        <link href="assets/custom/css/custom-responsive.css" rel="stylesheet">
 
         <!-- Title Page-->
         <title>Management</title>
@@ -71,7 +41,7 @@
         %>
         <div class="page-wrapper">
             <!-- HEADER MOBILE-->
-            <jsp:include page="header.jsp"/>
+           
             <!-- END MENU SIDEBAR-->
 
             <!-- PAGE CONTAINER-->
@@ -104,7 +74,7 @@
                                                     <label class="mr-2">Category</label>
                                                     <select name="cateId">
                                                         <c:forEach var="g" items="${requestScope.groups}">
-                                                            <option ${(g.id == sn.getGroupID())?'selected':''} value="${g.id}">${g.name}</option>
+                                                            <option ${(g.id == requestScope.cateId)?'selected':''} value="${g.id}">${g.name}</option>
                                                         </c:forEach>
                                                     </select>
                                                 </div>
@@ -128,7 +98,7 @@
                                             </c:if>
                                             <c:if test="${requestScope.selectNews != null}">
                                                 <c:set var="sn" value="${requestScope.selectNews}"/>
-                                                <c:if test="${sn.getGroupName() != 'Policy'}">
+                                               
                                                     <h3 class="title-5 m-b-35">Update news detail</h3>                                                  
                                                     <div class="form-group">
                                                         <label class="mr-2">Last updated</label>
@@ -140,7 +110,7 @@
                                                     </div>         
                                                     <div class="form-group">
                                                         <label class="mr-2">Posted admin</label>
-                                                        <input type="text" name="admin" value="${sn.adminName}" class="form-control" readonly   >
+                                                        <input type="text" name="admin" value="${sn.accountName}" class="form-control" readonly   >
                                                     </div>
                                                     <div class="form-group">
                                                         <label class="mr-2">Author</label>
@@ -153,8 +123,10 @@
                                                     <div class="form-group d-flex">
                                                         <label class="mr-2">Category</label>
                                                         <select name="cateId">
+                                                            
                                                             <c:forEach var="g" items="${requestScope.groups}">
-                                                                <option ${(g.id == sn.getGroupID())?'selected':''} value="${g.id}">${g.name}</option>
+                                                                
+                                                                <option ${(g.id == sn.getGroupId())?'selected':''} value="${g.id}">${g.name}</option>
                                                             </c:forEach>
                                                         </select>
                                                     </div>
@@ -171,37 +143,11 @@
                                                         <label class="mr-2">Content:</label>
                                                         <textarea rows="20" name="content" class="tinymce">${sn.content}</textarea>
                                                     </div>
-                                                </c:if>
-                                                <c:if test="${sn.getGroupName() == 'Policy'}">
-                                                    <h3 class="title-5 m-b-35">Update policy detail</h3>                                                  
-                                                    <div class="form-group">
-                                                        <label class="mr-2">Last updated</label>
-                                                        <input type="text" name="updatedAt" class="form-control" value="${sn.updateAt}" readonly>
-                                                    </div>                                                            
-                                                    <div class="form-group">
-                                                        <label class="mr-2">Posted admin</label>
-                                                        <input type="text" name="account" value="${sn.accountName}" class="form-control" readonly>
-                                                    </div>                                                                                                                       
-                                                    <div class="form-group">
-                                                        <label class="mr-2">Title</label>
-                                                        <textarea name="title" cols="100" rows="2" class="form-control" readonly>${sn.title}</textarea>
-                                                    </div>
-                                                    <div class="form-group d-flex">
-                                                        <label class="mr-2">Category: ${sn.getGroupName()}</label>
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="mr-2">Content:</label>
-                                                        <textarea rows="20" name="content" class="tinymce">${sn.content}</textarea>
-                                                    </div>
-                                                    <div>
-                                                        <input type="hidden" name="cateId" value="${sn.getGroupID()}"/>                                                           
-                                                        <input type="hidden" name="newsId" value="${sn.id}"/>
-                                                    </div>
-                                                </c:if>                                                
                                                 <div class="d-flex justify-content-center align-items-center">
                                                     <button class="au-btn au-btn-icon au-btn--blue au-btn--small" type="submit" name="submit" value="1">
                                                         Submit</button>        
-                                                </div>     
+                                                </div>    
+                                                    
                                             </c:if>                                
                                         </form>
                                     </div>
@@ -223,55 +169,25 @@
         <script>
             function configTheUrl() {
                 var content = document.getElementById('myTextarea').value;
-
-// Sử dụng biểu thức chính quy để lấy đường dẫn tới ảnh được chèn vào trình soạn thảo
                 var regex = /<img[^>]+src="?([^"\s]+)"?\s*\/>/g;
                 var match = regex.exec(content);
-
-// Lấy đường dẫn tới ảnh
                 var imageUrl = match[1];
             }
         </script>
         <!-- TINYMCE -->
         <script src="https://cdn.tiny.cloud/1/vmr41mglpliaf391pouum79gshee6pl6jqc86sxrnegt8nts/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
         <script>
-//            tinymce.init({
-//                selector: '#thumbnail',
-//                plugins: "image code",
-//                image_title: true,
-//                automatic_uploads: true,
-//                file_picker_types: 'image',
-//                file_picker_callback: function (cb, value, meta) {
-//                    var input = document.createElement('input');
-//                    input.setAttribute('type', 'file');
-//                    input.setAttribute('accept', 'image/*');
-//                    input.onchange = function () {
-//                        var file = this.files[0];
-//                        var reader = new FileReader();
-//
-//                        reader.onload = function () {
-//                            var id = 'blobid' + (new Date()).getTime();
-//                            var blobCache = tinymce.activeEditor.editorUpload.blobCache;
-//                            var base64 = reader.result.split(',')[1];
-//                            var blobInfo = blobCache.create(id, file, base64);
-//                            blobCache.add(blobInfo);
-//                            cb(blobInfo.blobUri(), {title: file.name});
-//                        };
-//                        reader.readAsDataURL(file);
-//                    };
-//                    input.click();
-//                }
-//            });
+
             tinymce.init({
                 selector: '.tinymce',
                 plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
-                images_upload_url: '/SE1706_SWP391_Group6_admin/image',
+                images_upload_url: '/SE1820_Group4/image',
                 images_upload_handler: function (blobInfo, success, failure) {
                     var xhr, formData;
                     xhr = new XMLHttpRequest();
                     xhr.withCredentials = false;
-                    xhr.open('POST', '/SE1706_SWP391_Group6_admin/image');
+                    xhr.open('POST', '/SE1820_Group4/image');
                     xhr.onload = function () {
                         var json;
 
@@ -299,12 +215,12 @@
                 plugins: 'image code',
                 toolbar: 'image code',
                 menubar: false,
-                images_upload_url: '/SE1706_SWP391_Group6_admin/image',
+                images_upload_url: '/SE1820_Group4/image',
                 images_upload_handler: function (blobInfo, success, failure) {
                     var xhr, formData;
                     xhr = new XMLHttpRequest();
                     xhr.withCredentials = false;
-                    xhr.open('POST', '/SE1706_SWP391_Group6_admin/image');
+                    xhr.open('POST', '/SE1820_Group4/image');
                     xhr.onload = function () {
                         var json;
 
@@ -327,16 +243,7 @@
                     xhr.send(formData);
                 }
             });
-//            document.getElementById('insert-image-button').addEventListener('click', function () {
-//                tinymce.activeEditor.windowManager.open({
-//                    title: 'Chọn ảnh',
-//                    file: 'image.html',
-//                    filetype: 'image',
-//                    oninsert: function (url) {
-//                        tinymce.activeEditor.execCommand('mceInsertContent', false, '<img src="' + url + '">');
-//                    }
-//                });
-//            });
+
         </script>
 
         <script>
@@ -391,20 +298,7 @@
 
 
 
-        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <script src="assets/vendor/timeline/jquery.timelify.js"></script>
-        <script src="assets/vendor/loadscreen/js/ju-loading-screen.js"></script>
-        <script src="assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
-        <script src="assets/vendor/popper/popper.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap-4-navbar.js"></script>
-        <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
-        <script src="assets/vendor/fancybox-master/jquery.fancybox.min.js"></script>
-        <script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
-        <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
-        <script src="assets/custom/js/custom.js"></script>  
-        <script>
-        </script>
+       
 
     </body>
 
