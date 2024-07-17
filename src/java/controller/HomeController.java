@@ -49,7 +49,9 @@ public class HomeController extends HttpServlet {
         ProductDAO productDao = new ProductDAO();
         BrandDAO brandDao = new BrandDAO();
         NewsDAO newsDao = new NewsDAO();
-        Vector<Product> listProduct = productDao.getProductTOP5Sold();
+        Vector<Product> listProductSold = productDao.getProductTOP5Sold();
+        Vector<Product> listProductNew = productDao.getProductTOP5Sold();
+
         List<News> listNews = newsDao.getListNews();
         String cartItemCount = (String) request.getAttribute("cartItemCount");
         request.setAttribute("cartItemCount", cartItemCount);
@@ -59,7 +61,7 @@ public class HomeController extends HttpServlet {
         if (service == null) {
             service = "home";
         }
-        request.setAttribute("listProduct", listProduct);
+        request.setAttribute("listProductSold", listProductSold);
         request.setAttribute("listNews", listNews);
         if (service.equals("shop")) {
             request.getRequestDispatcher("/product_list.jsp").forward(request, response);

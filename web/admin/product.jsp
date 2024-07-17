@@ -60,10 +60,10 @@
                             class="app-menu__label">Dashboard</span></a></li>
                 <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
                             class="app-menu__label">Customer Manager</span></a></li>
-                <li><a class="app-menu__item" href="#"><i
+                <li><a class="app-menu__item" href="productmanager"><i
                             class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Product Manager</span></a>
                 </li>
-                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-task'></i><span
+                <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
                             class="app-menu__label">Oder Manager</span></a></li>
             </ul>
         </aside>
@@ -153,14 +153,14 @@
                                                                 </select>
                                                                 <input class="form-control" type="hidden" readonly name="product_id" value="${p.productId}">
                                                             </div>
-<!--                                                            <div class="form-group col-md-6">
-                                                                <label for="exampleSelect1" class="control-label">Category</label>
-                                                                <select name="category_id" class="form-control" id="exampleSelect1">
-                                                                    <c:forEach items="${BrandData}" var="b">
-                                                                        <option value="${b.brandID}">${b.brandName}</option>
-                                                                    </c:forEach>
-                                                                </select>
-                                                            </div>-->
+                                                            <!--                                                            <div class="form-group col-md-6">
+                                                                                                                            <label for="exampleSelect1" class="control-label">Category</label>
+                                                                                                                            <select name="category_id" class="form-control" id="exampleSelect1">
+                                                            <c:forEach items="${BrandData}" var="b">
+                                                                <option value="${b.brandID}">${b.brandName}</option>
+                                                            </c:forEach>
+                                                        </select>
+                                                    </div>-->
                                                             <div class="form-group col-md-6">
                                                                 <label for="exampleSelect1" class="control-label">Category</label>
                                                                 <select name="category_id" class="form-control" id="exampleSelect1">

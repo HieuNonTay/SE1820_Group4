@@ -97,6 +97,41 @@ public class ProductDAO extends DBContext {
         return vector;
     }
 
+    public Vector<Product> getProductTOP5New() {
+        String sql = "SELECT TOP 5 * FROM Product\n"
+                + "ORDER BY createdAt DESC";
+        Vector<Product> vector = new Vector<>();
+        ResultSet rs = getData(sql);
+
+        try {
+            while (rs.next()) {
+                int productId = rs.getInt(1);
+                String name = rs.getNString(2);
+                String model = rs.getNString(3);
+                int brandId = rs.getInt(4);
+                int categoryId = rs.getInt(5);
+                int colorId = rs.getInt(6);
+                int sizeId = rs.getInt(7);
+                String description = rs.getNString(8);
+                double price = rs.getDouble(9);
+                int quantity = rs.getInt(10);
+                int sold = rs.getInt(11);
+                int view = rs.getInt(12);
+                Timestamp publicationDate = rs.getTimestamp(13);
+                Timestamp createdAt = rs.getTimestamp(14);
+                Timestamp updatedAt = rs.getTimestamp(15);
+
+                vector.add(new Product(productId, name, model, brandId, categoryId, colorId, sizeId, description, price, quantity, sold, view, publicationDate, createdAt, updatedAt));
+
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return vector;
+    }
+
     public Vector<Product> getBySql(String sql) {
         Vector<Product> vector = new Vector<>();
         ResultSet rs = getData(sql);
