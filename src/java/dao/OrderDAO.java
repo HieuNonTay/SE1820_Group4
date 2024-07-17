@@ -282,6 +282,23 @@ public class OrderDAO extends DBContext {
         return n;
     }
 
+    public int cancelOrder(int orderId) {
+        String status = "Cancelled";
+        int n = 0;
+        String sql = "UPDATE [dbo].[Order]\n"
+                + "   SET [Status] = ?"
+                + " WHERE [OrderId] = ?";
+        try {
+            PreparedStatement pre = conn.prepareStatement(sql);
+            pre.setString(1, status);
+            pre.setInt(2, orderId);
+            n = pre.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return n;
+    }
+
     public static void main(String[] args) {
         OrderDAO orderDao = new OrderDAO();
 //        String search = "0904216197";
@@ -289,12 +306,12 @@ public class OrderDAO extends DBContext {
 //        for (Order order : list) {
 //            System.out.println(order);
 //        }
-        Vector<ProductCart> list = new Vector<>();
-        list.add(new ProductCart(1, "nike", 2, 30));
-        list.add(new ProductCart(2, "nike", 2, 35));
-
-        int add = orderDao.addOrder(1, list, "aa", "aa2", "NULL", "012", "asv", "asss", "aaaa", "avvv", 000011);
-
+//        Vector<ProductCart> list = new Vector<>();
+//        list.add(new ProductCart(1, "nike", 2, 30));
+//        list.add(new ProductCart(2, "nike", 2, 35));
+//
+//        int add = orderDao.addOrder(1, list, "aa", "aa2", "NULL", "012", "asv", "asss", "aaaa", "avvv", 000011);
+        int cancel = orderDao.cancelOrder(2);
     }
 
 }

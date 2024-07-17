@@ -37,6 +37,7 @@ public class HistoryOrderController extends HttpServlet {
 //        processRequest(request, response);
         HttpSession session = request.getSession(true);
         HttpSession s = request.getSession();
+        String service = request.getParameter("service");
         if (s.getAttribute("acc") == null) {
             request.getRequestDispatcher("403.jsp").forward(request, response);
         }
@@ -47,13 +48,49 @@ public class HistoryOrderController extends HttpServlet {
         OrderDAO orderDao = new OrderDAO();
         Vector<Order> listOrder = orderDao.getByAccountId(ch.getAccountID());
         request.setAttribute("listOrder", listOrder);
-        request.getRequestDispatcher("historyOrder.jsp").forward(request, response);
+        if (service == null) {
+            service = "show";
+        }
+        if (service.equals("show")) {
+            request.getRequestDispatcher("historyOrder.jsp").forward(request, response);
+        }
+
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        HttpSession session = request.getSession(true);
+        HttpSession s = request.getSession();
+        String service = request.getParameter("service");
+        if (s.getAttribute("acc") == null) {
+            request.getRequestDispatcher("403.jsp").forward(request, response);
+        }
+        Account ch = (Account) s.getAttribute("acc");
+        if (!(ch.getRoleID() == 2)) {
+            request.getRequestDispatcher("403.jsp").forward(request, response);
+        }
+        OrderDAO orderDao = new OrderDAO();
+        Vector<Order> listOrder = orderDao.getByAccountId(ch.getAccountID());
+        request.setAttribute("listOrder", listOrder);
+        if (service == null) {
+            service = "show";
+        }
+        if (service.equals("cancel")) {
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
+            int cancel = orderDao.cancelOrder(orderId);
+            if (cancel > 0) {
+                request.setAttribute("mess", "Cancel successful");
+                request.getRequestDispatcher("historyOrder.jsp").forward(request, response);
+            } else {
+                request.setAttribute("mess", "Cann't Cancel");
+                request.getRequestDispatcher("historyOrder.jsp").forward(request, response);
+            }
+        }
+        if (service.equals("show")) {
+            request.getRequestDispatcher("historyOrder.jsp").forward(request, response);
+        }
     }
 
     @Override

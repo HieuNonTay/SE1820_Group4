@@ -94,8 +94,6 @@
                                 Vector<Order> listOrder = (Vector<Order>) request.getAttribute("listOrder");
                                 for (Order order : listOrder) { 
                             %>
-                        <form action="order?service=updateStatus" method="post">
-                            <input type="hidden" name="orderId" value="<%= order.getOrderId()%>">
                             <tr>
                                 <td><%= order.getAccountId()%></td>
                                 <td><%= order.getFirstName()%></td>
@@ -105,24 +103,23 @@
                                 <td><%= order.getLine2()%></td>
                                 <td><%= order.getCity()%></td>
                                 <td><%= order.getTotal()%></td>
+                                <td><%= order.getStatus()%></td>
 
                                 <td>
-                                    <label for="status"></label>
-                                    <select class="form-control" id="status" name="status">
-                                        <option value="Pending" <%= order.getStatus().equals("Pending") ? "selected" : "" %>>Pending</option>
-                                        <option value="Delivering" <%= order.getStatus().equals("Delivering") ? "selected" : "" %>>Delivering</option>
-                                        <option value="Delivered" <%= order.getStatus().equals("Delivered") ? "selected" : "" %>>Delivered</option>
-                                        <option value="Cancelled" <%= order.getStatus().equals("Cancelled") ? "selected" : "" %>>Cancelled</option>
-                                    </select></td>
-                                <td>
-                                    <a href="order?service=View&id=<%= order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
+                                    <a href="order?service=View&id=<%=order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
                                 </td>
+                                <% if(order.getStatus() != null && order.getStatus().equals("Pending")) { %>
                                 <td>
-                                    <input type="submit"  name="Cancel" value="Cancel" class="btn btn-sm btn-primary">
+                                    <form action="historyOrder?service=cancel" method="post">
+                                        <input type="hidden" name="orderId" value="<%= order.getOrderId()%>">
+                                        <input type="submit" name="cancelOrder" value="Cancel" class="btn btn-sm btn-primary">
+                                    </form>
                                 </td>
+                                <% } else { %>
+                                <td></td> 
+                                <% } %>
                             </tr>
-                        </form>
-                        <% } %>
+                            <% } %>
                         </tbody>
                     </table>
                 </div>

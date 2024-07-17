@@ -49,11 +49,11 @@ public class DBContext {
     }
 
     public DBContext() {
-        this("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore3", "sa", "123456");
+        this("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore4", "sa", "123456");
 
     }
 
     public static void main(String[] args) {
-        DBContext db = new DBContext("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore3", "sa", "123456");
+        DBContext db = new DBContext("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore4", "sa", "123456");
     }
 }

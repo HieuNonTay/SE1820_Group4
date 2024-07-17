@@ -89,16 +89,14 @@ public class CategoryDAO extends DBContext {
     }
 //////-------------------------------------------------------------------------------------------
 
-    public int insertCategory(Category obj) {
+    public int insertCategory(String name) {
         int n = 0;
         String sql = "INSERT INTO [dbo].[Category]\n"
-                + "           ([CategoryID]\n"
-                + "           ,[CategoryName]\n"
-                + "     VALUES(?,?)";
+                + "           ([CategoryName])\n"
+                + "     VALUES(?)";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setInt(1, obj.getCategoryID());
-            pre.setString(2, obj.getCategoryName());
+            pre.setString(1, name);
             n = pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
