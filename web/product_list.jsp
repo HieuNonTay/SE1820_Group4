@@ -139,7 +139,7 @@
                                 <div class="card rounded-0 mb-4">
                                     <div class="row">
                                         <div class="fables-product-img col-12">
-                                            <img class="card-img-top rounded-0" src="assets/custom/images/product1.jpg" alt="dress fashion">
+                                            <img class="card-img-top rounded-0" src="assets/custom/images/Nike0001.webp" alt="Product Image">
                                             <div class="fables-img-overlay">                                          
                                                 <ul class="nav fables-product-btns">
                                                     <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>

@@ -173,7 +173,7 @@
                                                             <input class="mb-0" type="button" class="btn btn-primary" value="Áp dụng" onclick="usingDiscountCode()">
                                                         </div>-->
                             <div class="d-flex justify-content-between mb-2">
-                                <h5 class="mb-0 me-4">Mã Giảm Giá </h5>
+                                <h5 class="mb-0 me-4">Discount Code </h5>
                                 <c:set var="codeParam" value="<%=code%>" />
                                 <select name="discountCode" class="mb-0" style="width: 191px" onchange="changeDiscount(this)">
                                     <option value=""></option>

@@ -41,7 +41,7 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet">
-        
+
     </head>
 
 
@@ -55,6 +55,34 @@
         </div>
 
         <!-- Start page content --> 
+        <!-- News section -->
+        <!-- News section -->
+        <div class="row">
+            <%
+                List<News> listNews = (List<News>) request.getAttribute("listNews");
+                for (News news : listNews) {
+            %>
+            <div class="col-12">
+                <div class="card rounded-0 mb-4">
+                    <div class="row">
+                        <div class="card-body col-12">
+                            <h5 class="card-title mx-xl-3">
+                                <a href="newsDetail.jsp?id=<%= news.getId() %>" class="fables-main-text-color fables-store-product-title fables-second-hover-color"><%= news.getTitle() %></a>
+                            </h5>
+                            <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3"><%= news.getTitle() %></p>
+                            <p class="fables-product-info">
+                                <a href="newsDetail.jsp?id=<%= news.getId() %>" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
+                                    <span class="fables-iconmore"></span> 
+                                    <span class="fables-btn-value">Read More</span>
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <% } %>
+        </div>
+
 
         <div class="container">
             <div class="row my-4 my-md-5">
@@ -70,7 +98,7 @@
                             <div class="card rounded-0 mb-4">
                                 <div class="row">
                                     <div class="fables-product-img col-12">
-                                        <img class="card-img-top rounded-0" src="assets/custom/images/product1.jpg" alt="dress fashion">
+                                        <img class="card-img-top rounded-0" src="assets/custom/images/Nike0001.webp" alt="dress fashion">
                                         <div class="fables-img-overlay">                                          
                                             <ul class="nav fables-product-btns">
                                                 <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>

@@ -425,15 +425,31 @@ public class ProductDAO extends DBContext {
         return list;
     }
 
+    public String getImage(int productId) {
+        String image = "";
+        String sql = "SELECT source FROM ProductImage WHERE ProductID = ?";
+        try (PreparedStatement ps = conn.prepareStatement(sql)) {
+            ps.setInt(1, productId);
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                image = rs.getString("source");
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return image;
+    }
+
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        Vector<Product> list = dao.getProductTOP5Sold();
-
-        for (Product product : list) {
-            System.out.println(product);
-        }
+//        Vector<Product> list = dao.getProductTOP5Sold();
+//
+//        for (Product product : list) {
+//            System.out.println(product);
+//        }
 //        List<Product> categorys = dao.filterProductsByPrice(30, "ascending");
 //        categorys.stream().forEach(y -> System.err.println(y.getPrice()));
-
+        String img = dao.getImage(1);
+        System.out.println(img);
     }
 }
