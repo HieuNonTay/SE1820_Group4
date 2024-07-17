@@ -32,8 +32,8 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link" href="about1.html" id="sub-nav3"  aria-haspopup="true" aria-expanded="false">
-                                    About
+                                <a class="nav-link" href="newsUser" id="sub-nav3"  aria-haspopup="true" aria-expanded="false">
+                                    News
                                 </a>
                             </li>
 
@@ -129,8 +129,8 @@
                             </a>
                             <div class="nav-item dropdown">
                                 <ul class="dropdown-menu" aria-labelledby="sub-nav1">
-                                    <li><a href="signIn.jsp"  class="dropdown-item"> Sign In </a></li>
-                                    <li><a href="register.jsp"  class="dropdown-item"> Sign Up </a></li>
+                                    <li><a href="login"  class="dropdown-item"> Sign In </a></li>
+                                    <li><a href="register"  class="dropdown-item"> Sign Up </a></li>
                                 </ul>
                             </div>  
                         </div>

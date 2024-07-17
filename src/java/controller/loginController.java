@@ -29,6 +29,9 @@ public class loginController extends HttpServlet {
         String username = req.getParameter("user");
         String password = req.getParameter("password");
         req.setAttribute("user", username);
+        if (username == null) {
+            req.getRequestDispatcher("signIn.jsp").forward(req, resp);
+        }
         AccountDAO accountDAO = new AccountDAO();
         Account acc = accountDAO.loginUser(username, password);
         if (acc == null) {
