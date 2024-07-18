@@ -4,6 +4,8 @@
  */
 package entity;
 
+import java.util.Date;
+
 /**
  *
  * @author quyen
@@ -13,7 +15,7 @@ public class Account {
     private int accountID;
     private String fname;
     private String lname;
-    private String dob;
+    private Date dob;
     private String phone;
     private String email;
     private String passwordHash;
@@ -27,7 +29,7 @@ public class Account {
     public Account() {
     }
 
-    public Account(int accountID, String fname, String lname, String dob, String phone, String email, String passwordHash, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout) {
+    public Account(int accountID, String fname, String lname, Date dob, String phone, String email, String passwordHash, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout) {
         this.accountID = accountID;
         this.fname = fname;
         this.lname = lname;
@@ -67,11 +69,11 @@ public class Account {
         this.lname = lname;
     }
 
-    public String getDob() {
+    public Date getDob() {
         return dob;
     }
 
-    public void setDob(String dob) {
+    public void setDob(Date dob) {
         this.dob = dob;
     }
 
@@ -146,6 +148,7 @@ public class Account {
     public void setLastLogout(String lastLogout) {
         this.lastLogout = lastLogout;
     }
+
 
     
 

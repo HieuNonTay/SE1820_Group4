@@ -36,6 +36,14 @@
         <servlet-name>resetPassword</servlet-name>
         <servlet-class>controller.resetPasswordController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>account</servlet-name>
+        <servlet-class>controller.accountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>accountManage</servlet-name>
+        <servlet-class>controller.accountController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>HomePage</servlet-name>
         <url-pattern>/home</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>resetPassword</servlet-name>
         <url-pattern>/resetPassword</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>account</servlet-name>
+        <url-pattern>/account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>accountManage</servlet-name>
+        <url-pattern>/accountManage</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

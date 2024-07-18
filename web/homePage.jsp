@@ -8,6 +8,7 @@
         <link rel="shortcut icon" href="assets/custom/images/shortcut.png">
 
         <title> Home </title>
+        <link rel="stylesheet" href="assets/custom/css/cssfile.css">	
 
         <!-- animate.css-->  
         <link href="assets/vendor/animate.css-master/animate.min.css" rel="stylesheet">
@@ -66,6 +67,7 @@
         <script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
         <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
         <script src="assets/custom/js/custom.js"></script>  
+        <script src="assets/custom/js/jsfile.js"></script>
         <script>
         </script>
     </body>
