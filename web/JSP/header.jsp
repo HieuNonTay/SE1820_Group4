@@ -32,17 +32,21 @@
 
 
                             <li class="nav-item">
-                                <a class="nav-link" href="about1.html" id="sub-nav3"  aria-haspopup="true" aria-expanded="false">
-                                    About
+                                <a class="nav-link" href="newsUser" id="sub-nav3"  aria-haspopup="true" aria-expanded="false">
+                                    News
                                 </a>
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="store_grid_list.html" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" href="product" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
                                     Store
                                 </a>                                      
                             </li>
-
+                            <li class="nav-item">
+                                <a class="nav-link" href="voucher" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
+                                    Voucher
+                                </a>                                      
+                            </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="contactus1.html" id="sub-nav7" aria-haspopup="true" aria-expanded="false">
                                     Contact Us
@@ -74,7 +78,10 @@
                         <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                             <div class="p-3 cart-block">
                                 <p class="fables-second-text-color semi-font mb-4 font-17">(<%=cartItemCount%>) Items in my cart</p>
-                                <%  
+                                <%  //public static String formatPriceWithSpaces(double price) {
+                                    //    DecimalFormat df = new DecimalFormat("#,###.##");
+                                    //    return df.format(price);
+                                    //}
                                     Enumeration<String> em = session1.getAttributeNames();
                                     DecimalFormat df = new DecimalFormat("#.##");
                                     double grandTotal = 0;
@@ -82,13 +89,14 @@
                                     Vector<String> vecKey = new Vector<>();
                                     while(em.hasMoreElements()){
                                         String key = em.nextElement().toString();
-                                        if(key.equals("vecKey") ||key.equals("acc") ){
+                                        if(key.equals("vecKey") ||key.equals("acc")||key.equals("products")||key.equals("functionToast") ){
                                             continue;
                                         }else{
                                             vecKey.add(key);
                                             ProductCart productCart = (ProductCart)session.getAttribute(key);
                                             grandTotal += productCart.getPrice()*productCart.getQuantity();
                                             itemCount++;
+                                            //String formattedPrice = formatPriceWithSpaces(productCart.getPrice());
                                 %>
                                 <div class="row mx-0 mb-3">
                                     <div class="col-4 p-0">
@@ -121,8 +129,8 @@
                             </a>
                             <div class="nav-item dropdown">
                                 <ul class="dropdown-menu" aria-labelledby="sub-nav1">
-                                    <li><a href="signIn.jsp"  class="dropdown-item"> Sign In </a></li>
-                                    <li><a href="register.jsp"  class="dropdown-item"> Sign Up </a></li>
+                                    <li><a href="login"  class="dropdown-item"> Sign In </a></li>
+                                    <li><a href="register"  class="dropdown-item"> Sign Up </a></li>
                                 </ul>
                             </div>  
                         </div>
@@ -135,7 +143,7 @@
                             </a>
                             <div class="nav-item dropdown">
                                 <ul style="list-style-type: none" class="dropdown-menu" aria-labelledby="sub-nav1">
-                                    <li><a href="userDetail.jsp"  class="dropdown-item"> Profile </a></li>
+                                    <li><a href="updateInfo"  class="dropdown-item"> Profile </a></li>
                                     <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
                                     <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
                                 </ul>

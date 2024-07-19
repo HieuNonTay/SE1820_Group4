@@ -1,7 +1,7 @@
 <%-- 
-    Document   : signIn
-    Created on : 23 thg 5, 2024, 14:23:43
-    Author     : Quyen
+    Document   : resetPassword.jsp
+    Created on : Jun 21, 2024, 3:44:16 AM
+    Author     : quyen
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,7 +14,7 @@
         <meta name="author" content="Enterprise Development">
         <link rel="shortcut icon" href="assets/custom/images/shortcut.png">
 
-        <title> Signin</title>
+        <title>Reset Password</title>
 
         <!-- animate.css-->  
         <link href="assets/vendor/animate.css-master/animate.min.css" rel="stylesheet">
@@ -40,18 +40,16 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet"> 
-        <!--        add new icon-->
-        <script src="https://kit.fontawesome.com/d9088230f9.js" crossorigin="anonymous"></script>
+
     </head>
 
     <body>
         <jsp:include page="header.jsp"/>
-
         <div class="fables-header fables-after-overlay">
             <div class="container"> 
-                <h2 class="fables-page-title fables-second-border-color">Sign In</h2>
+                <h2 class="fables-page-title fables-second-border-color">Change Password</h2>
             </div>
-        </div>  
+        </div>
 
         <!-- Start Breadcrumbs -->
         <div class="fables-light-background-color">
@@ -59,48 +57,61 @@
                 <nav aria-label="breadcrumb">
                     <ol class="fables-breadcrumb breadcrumb px-0 py-3">
                         <li class="breadcrumb-item"><a href="home" class="fables-second-text-color">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Sign In</li>
+                        <li class="breadcrumb-item active" aria-current="page">Change Password</li>
                     </ol>
                 </nav> 
             </div>
         </div>
         <!-- /End Breadcrumbs -->
+        <%-- Kiểm tra xem cookie resetEmail có tồn tại không --%>
+        <% Cookie[] cookies = request.getCookies();
+           String resetEmail = null;
+           if (cookies != null) {
+               for (Cookie cookie : cookies) {
+                   if (cookie.getName().equals("resetEmail")) {
+                       resetEmail = cookie.getValue();
+                       break;
+                   }
+               }
+           }
+        %>
 
         <!-- Start page content -->   
         <div class="container">
             <div class="row my-4 my-lg-5">
-                <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">
-                    <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Sign In</p>
-                    <form action="login" method="get">
+                <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">                 
+                    <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Change Password</p>
+                    <form action="resetPassword" method="post">
 
                         <p class="text-danger">${mess}</p>                      
 
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconemail fables-input-icon mt-2 font-13"></span>
-                                <input  name="user" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email" value="${user}" required> 
+                                <input name="user" type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Email"  value="<%= resetEmail %>" readonly> 
                             </div>
-
                         </div>
+
+
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input name="password" id="passwordInput" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password" required>          
+                                <input id="password" name="newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="New Password" required>
+                            </div>
+                        </div> 
+
+                        <div class="form-group"> 
+                            <div class="input-icon">
+                                <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
+                                <input id="password" name="re_newPass" type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Re New Password" required>
                             </div>
                         </div>
-                        <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Sign in</button>
+
+                        <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Change password</button>
+                        <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">For Got Password</a>
+                        <a href="signIn.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Sign In</a>
+                        <p class="fables-forth-text-color">Dont have an account ?  <a href="register.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                     </form>
-                    <br>
-                    <div class="form-group">
-                        <a href="https://accounts.google.com/o/oauth2/auth?scope=email%20profile&redirect_uri=http://localhost:9999/SE1820_Group4/loginGG&response_type=code&client_id=82568343053-8aatbq2dj2gst27tk6mb2gb544bmgf7l.apps.googleusercontent.com&approval_prompt=force">
-                            <i class="fa-brands fa-google fa-3x" style="color: #d31212;"></i>
-                        </a>
-                    </div>
-
-
-                    <a href="forgotpass" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Forgot Password</a>
-                    <a href="changePass" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Change Password</a>
-                    <p class="fables-forth-text-color">Dont have an account ?  <a href="register" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                 </div>
             </div>
 
@@ -121,7 +132,6 @@
         <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
         <script src="assets/vendor/timeline/jquery.timelify.js"></script>
         <script src="assets/custom/js/custom.js"></script>  
-        <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 
     </body>

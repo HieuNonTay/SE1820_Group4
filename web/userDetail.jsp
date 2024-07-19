@@ -94,7 +94,7 @@
                     <div class="card mb-4">
                         <div class="card-header">Account Details</div>
                         <div class="card-body">
-                            <form id="myForm" method="Get">
+                            <form id="myForm" method="POST">
 
                                 <p class="text-danger">${mess}</p> 
 

@@ -69,7 +69,7 @@
             <div class="row my-4 my-lg-5">
                 <div class="col-12 col-md-10 offset-md-1 col-lg-6 offset-lg-3 text-center">
                     <p class="font-20 semi-font fables-main-text-color mt-4 mb-5">Create a new account</p>
-                    <form action="register" method="get">
+                    <form action="register" method="post">
 
                         <p class="text-danger">${mess}</p>                      
 
@@ -135,8 +135,8 @@
 
                         </div> 
                         <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Register Now</button>
-                        <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 mb-lg-5 d-block">Forgot Password ?</a>
-                        <p class="fables-forth-text-color">Already have an account ?  <a href="signIn.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Login</a></p>
+                        <a href="forgotpass" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 mb-lg-5 d-block">Forgot Password ?</a>
+                        <p class="fables-forth-text-color">Already have an account ?  <a href="login" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Login</a></p>
                     </form>
                 </div>
             </div>

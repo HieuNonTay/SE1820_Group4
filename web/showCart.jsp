@@ -67,16 +67,16 @@
 
                         <table class="table">
                             <tr>
-                                <th scope="col">Sản Phẩm</th>
-                                <th scope="col">Tên</th>
-                                <th scope="col">Giá</th>
-                                <th scope="col">Số Lượng</th>
-                                <th scope="col">Tổng</th>
-                                <th scope="col">Xoá</th>
+                                <th scope="col">Product</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Price</th>
+                                <th scope="col">Quantity</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Delete</th>
                             </tr>
                             <%  
                                 Enumeration<String> em = session.getAttributeNames();
-                                DecimalFormat df = new DecimalFormat("#.##");
+                                DecimalFormat df = new DecimalFormat("#,###");
                                 double grandTotal = 0;
                                 int itemCount = 0;
                                 Vector<String> vecKey = new Vector<>();
@@ -130,20 +130,21 @@
                     </div>
 
                     <div class="d-flex justify-content-between mb-4">
-                        <h5 class="mb-0 me-4">Tổng Giá: <%=df.format(grandTotal).replace(",", ".")%></h5>
+                        <h5 class="mb-0 me-4">Total: <%=df.format(grandTotal).replace(",", ".")%></h5>
                     </div>
 
                     <a href="CartURL?service=removeAll" class="btn btn-danger px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Remove all</a>
 
                     <input type="submit" name="service" value="update" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4"  />
                     <c:if test="${sessionScope.acc == null}">
-                        <a href="signIn.jsp" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>                        
+                        <a href="login" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>                        
                     </c:if>
                     <c:if test="${sessionScope.acc != null}">
                         <a href="CartURL?service=checkOut" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4" type="button">Checkout</a>
                     </c:if>
                     <% } %>
-
+                    <div id="qrCodeContainer"></div>
+                    <div id="confirmButtonContainer"></div>
                 </div>
             </form>
         </div>  

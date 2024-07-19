@@ -17,11 +17,6 @@ public class changePassController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String username = req.getParameter("user");
         String password = req.getParameter("password");
@@ -54,6 +49,11 @@ public class changePassController extends HttpServlet {
                 }
             }
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
     }
 
     public static boolean isIncludedDigits(String s) {

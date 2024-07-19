@@ -24,7 +24,7 @@ import model.DBContext;
 public class OrderDAO extends DBContext {
 
     public Vector<Order> getAll() {
-        String sql = "select * from [Order]";
+        String sql = "select * from [Order] Order by OrderDate DESC";
         Vector<Order> vector = new Vector<>();
         ResultSet rs = getData(sql);
 
@@ -41,15 +41,14 @@ public class OrderDAO extends DBContext {
                 String line2 = rs.getString(9);
                 String city = rs.getString(10);
                 String province = rs.getString(11);
-                String countryId = rs.getString(12);
-                Timestamp createdAt = rs.getTimestamp(13);
-                Timestamp updateAt = rs.getTimestamp(14);
-                String payment = rs.getString(15);
-                String status = rs.getString(16);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
 
                 vector.add(new Order(orderId, accountId, firstName, lastName,
                         Orderdate, discountCode, total, line1, line2, city, province,
-                        countryId, createdAt, updateAt, payment, status));
+                        createdAt, updateAt, payment, status));
 
             }
 
@@ -77,15 +76,14 @@ public class OrderDAO extends DBContext {
                 String line2 = rs.getString(9);
                 String city = rs.getString(10);
                 String province = rs.getString(11);
-                String countryId = rs.getString(12);
-                Timestamp createdAt = rs.getTimestamp(13);
-                Timestamp updateAt = rs.getTimestamp(14);
-                String payment = rs.getString(15);
-                String status = rs.getString(16);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
 
                 vector.add(new Order(orderId, accountId, firstName, lastName,
                         Orderdate, discountCode, total, line1, line2, city, province,
-                        countryId, createdAt, updateAt, payment, status));
+                        createdAt, updateAt, payment, status));
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class
@@ -112,13 +110,12 @@ public class OrderDAO extends DBContext {
                 String line2 = rs.getString(9);
                 String city = rs.getString(10);
                 String province = rs.getString(11);
-                String countryId = rs.getString(12);
-                Timestamp createdAt = rs.getTimestamp(13);
-                Timestamp updateAt = rs.getTimestamp(14);
-                String payment = rs.getString(15);
-                String status = rs.getString(16);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
 
-                return new Order(orderId, accountId, firstName, lastName, Orderdate, discountCode, total, line1, line2, city, province, countryId, createdAt, updateAt, payment, status);
+                return new Order(orderId, accountId, firstName, lastName, Orderdate, discountCode, total, line1, line2, city, province, createdAt, updateAt, payment, status);
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class.getName()).
@@ -145,15 +142,14 @@ public class OrderDAO extends DBContext {
                 String line2 = rs.getString(9);
                 String city = rs.getString(10);
                 String province = rs.getString(11);
-                String countryId = rs.getString(12);
-                Timestamp createdAt = rs.getTimestamp(13);
-                Timestamp updateAt = rs.getTimestamp(14);
-                String payment = rs.getString(15);
-                String status = rs.getString(16);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
 
                 vector.add(new Order(orderId, accountId, firstName, lastName,
                         Orderdate, discountCode, total, line1, line2, city, province,
-                        countryId, createdAt, updateAt, payment, status));
+                        createdAt, updateAt, payment, status));
             }
         } catch (SQLException ex) {
             Logger.getLogger(OrderDAO.class
@@ -182,15 +178,14 @@ public class OrderDAO extends DBContext {
                 String line2 = rs.getString(9);
                 String city = rs.getString(10);
                 String province = rs.getString(11);
-                String countryId = rs.getString(12);
-                Timestamp createdAt = rs.getTimestamp(13);
-                Timestamp updateAt = rs.getTimestamp(14);
-                String payment = rs.getString(15);
-                String status = rs.getString(16);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
 
                 vector.add(new Order(orderId, accountId, firstName, lastName,
                         Orderdate, discountCode, total, line1, line2, city, province,
-                        countryId, createdAt, updateAt, payment, status));
+                        createdAt, updateAt, payment, status));
 
             }
 
@@ -302,16 +297,16 @@ public class OrderDAO extends DBContext {
     public static void main(String[] args) {
         OrderDAO orderDao = new OrderDAO();
 //        String search = "0904216197";
-//        Vector<Order> list = orderDao.getByAccountId(2);
-//        for (Order order : list) {
-//            System.out.println(order);
-//        }
+        Vector<Order> list = orderDao.getAll();
+        for (Order order : list) {
+            System.out.println(order);
+        }
 //        Vector<ProductCart> list = new Vector<>();
 //        list.add(new ProductCart(1, "nike", 2, 30));
 //        list.add(new ProductCart(2, "nike", 2, 35));
 //
 //        int add = orderDao.addOrder(1, list, "aa", "aa2", "NULL", "012", "asv", "asss", "aaaa", "avvv", 000011);
-        int cancel = orderDao.cancelOrder(2);
+//        int cancel = orderDao.cancelOrder(2);
     }
 
 }

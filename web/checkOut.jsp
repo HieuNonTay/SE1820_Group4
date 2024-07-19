@@ -63,11 +63,11 @@
                 <div class="table-responsive">
                     <table class="table">
                         <tr>
-                            <th scope="col">Sản Phẩm</th>
-                            <th scope="col">Tên</th>
-                            <th scope="col">Giá</th>
-                            <th scope="col">Số Lượng</th>
-                            <th scope="col">Tổng</th>
+                            <th scope="col">Product</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Quantity</th>
+                            <th scope="col">Total</th>
                         </tr>
                         <%  
                             DisCountDAO disDao = new DisCountDAO();
@@ -131,12 +131,13 @@
             </div>
         </div>
         <!-- checkOut -->
+
         <div class="row g-4 justify-content-end">
             <div class="col-8"></div>
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                 <div class="bg-light rounded">
 
-                    <form action="/SE1820_Group4/CartURL?service=checkOut" method="post">
+                    <form id="purchaseForm" action="/SE1820_Group4/CartURL?service=checkOut" method="post">
                         <input type="hidden" name="accountId" value="2">
 
                         <div class="p-4">
@@ -173,13 +174,20 @@
                                                             <input class="mb-0" type="button" class="btn btn-primary" value="Áp dụng" onclick="usingDiscountCode()">
                                                         </div>-->
                             <div class="d-flex justify-content-between mb-2">
-                                <h5 class="mb-0 me-4">Discount Code </h5>
+                                <h5 class="mb-0 me-4 " >Discount Code </h5>
                                 <c:set var="codeParam" value="<%=code%>" />
                                 <select name="discountCode" class="mb-0" style="width: 191px" onchange="changeDiscount(this)">
                                     <option value=""></option>
                                     <c:forEach var="pro" items="<%=lstDiscount%>">
                                         <option value="${pro.code}" ${pro.code == codeParam ? 'selected' : ''}>${pro.name} - ${pro.amount}%</option>
                                     </c:forEach>
+                                </select>
+                            </div>
+                            <div class="d-flex justify-content-between mb-2">
+                                <h5 class="mb-0 me-4">Payment Method</h5>
+                                <select name="paymentMethod" class="mb-0" onchange="handlePaymentMethodChange(this)">
+                                    <option value="direct">Direct</option>
+                                    <option value="online">Online</option>
                                 </select>
                             </div>
                         </div>
@@ -195,8 +203,11 @@
                             <h5 class="mb-0 ps-4 me-4">Total</h5>
                             <p class="mb-0 pe-4"><%=df.format(grandTotal).replace(",", ".")%></p>
                         </div>
+                        <div id="qrCodeContainer" class="text-center d-none" >
+                            <img src="https://img.vietqr.io/image/MB-2003666886789-compact2.png?amount=<%=df.format(grandTotal).replace(",", "")%>&addInfo=SHOES&accountName=BUI+VAN+HIEU" height="300px" width=250" alt="QR Code Image">
+                            <button type="submit" name="submit" value="submit" margin-top="2px" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Submit</button>
+                        </div>
 
-                        <button type="submit" name="submit" value="submit" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Xác Nhận Mua</button>
                     </form>
 
                 </div>
@@ -205,8 +216,25 @@
 
         <!-- /End page content -->
 
-        <jsp:include page="footer.jsp"/>
 
+        <jsp:include page="footer.jsp"/>
+        <script>
+            // Function to handle changes in the payment method dropdown
+            function handlePaymentMethodChange(selectElement) {
+                var qrCodeContainer = document.getElementById('qrCodeContainer');
+                var paymentMethod = selectElement.value;
+
+                if (paymentMethod === 'online') {
+                    qrCodeContainer.classList.remove('d-none');
+                } else {
+                    qrCodeContainer.classList.add('d-none');
+                }
+            }
+
+            document.getElementById('submitOrderBtn').addEventListener('click', function () {
+                document.getElementById('purchaseForm').submit();
+            });
+        </script>
 
         <script src="/SE1820_Group4/assets/vendor/jquery/jquery-3.3.1.min.js"></script>
         <script src="/SE1820_Group4/assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
@@ -222,7 +250,8 @@
         <script src="/SE1820_Group4/js/toastr.min.js"></script>
         <c:if test="${message != null}">
             <script type="text/javascript">
-                                    toastr.success(`${message}`, 'Success', {timeOut: 1000});
+            toastr.success(`${message}`, 'Success', {timeOut: 1000});
+
             </script>
         </c:if> <c:if test="${error != null}">
             <script type="text/javascript">

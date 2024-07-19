@@ -138,47 +138,12 @@
             }
         </style>
         <!-- Navbar-->
-        <header class="app-header">
-            <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-                                            aria-label="Hide Sidebar"></a>
-            <!-- Navbar Right Menu-->
-            <ul class="app-nav">
+        <jsp:include page="Sidebar.jsp"/>
 
-
-                <!-- User Menu-->
-                <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-                </li>
-            </ul>
-        </header>
-        <!-- Sidebar menu-->
-        <!-- Sidebar menu-->
-        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <aside class="app-sidebar">
-            <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
-                                                alt="User Image">
-                <div>
-                    <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
-                    <p class="app-sidebar__user-designation">Welcome back</p>
-                </div>
-            </div>
-            <hr>
-            <ul class="app-menu">
-                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Dashboard</span></a></li>
-                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Customer Management</span></a></li>
-                <li><a class="app-menu__item" href="#"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Product Management</span></a>
-                </li>
-                <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-task'></i><span
-                            class="app-menu__label">Order Management</span></a></li>
-            </ul>
-        </aside>
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb">
-                    <li class="breadcrumb-item">Product List</li>
+                    <li class="breadcrumb-item"><a href="productmanager">Products</a></li>
                     <li class="breadcrumb-item"><a href="#">Add products</a></li>
                 </ul>
             </div>
@@ -212,7 +177,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group col-md-3">
                                     <label for="exampleSelect1" class="control-label">Category</label>
                                     <select name="brand_id" class="form-control" id="exampleSelect1">
@@ -222,7 +187,7 @@
                                         </c:forEach>
                                     </select>
                                 </div>
-                                
+
                                 <div class="form-group  col-md-3">
                                     <label class="control-label">Price</label>
                                     <input class="form-control" name="price" type="number">
@@ -313,25 +278,25 @@
         <script src="admin/js/main.js"></script>
         <script src="admin/js/plugins/pace.min.js"></script>
         <script>
-                                        const inpFile = document.getElementById("inpFile");
-                                        const loadFile = document.getElementById("loadFile");
-                                        const previewContainer = document.getElementById("imagePreview");
-                                        const previewContainer = document.getElementById("imagePreview");
-                                        const previewImage = previewContainer.querySelector(".image-preview__image");
-                                        const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-                                        const object = new ActiveXObject("Scripting.FileSystemObject");
-                                        inpFile.addEventListener("change", function () {
-                                            const file = this.files[0];
-                                            if (file) {
-                                                const reader = new FileReader();
-                                                previewDefaultText.style.display = "none";
-                                                previewImage.style.display = "block";
-                                                reader.addEventListener("load", function () {
-                                                    previewImage.setAttribute("src", this.result);
-                                                });
-                                                reader.readAsDataURL(file);
-                                            }
-                                        });
+                                            const inpFile = document.getElementById("inpFile");
+                                            const loadFile = document.getElementById("loadFile");
+                                            const previewContainer = document.getElementById("imagePreview");
+                                            const previewContainer = document.getElementById("imagePreview");
+                                            const previewImage = previewContainer.querySelector(".image-preview__image");
+                                            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+                                            const object = new ActiveXObject("Scripting.FileSystemObject");
+                                            inpFile.addEventListener("change", function () {
+                                                const file = this.files[0];
+                                                if (file) {
+                                                    const reader = new FileReader();
+                                                    previewDefaultText.style.display = "none";
+                                                    previewImage.style.display = "block";
+                                                    reader.addEventListener("load", function () {
+                                                        previewImage.setAttribute("src", this.result);
+                                                    });
+                                                    reader.readAsDataURL(file);
+                                                }
+                                            });
 
 
         </script>

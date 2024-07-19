@@ -14,7 +14,7 @@
         <meta name="author" content="Enterprise Development">
         <link rel="shortcut icon" href="assets/custom/images/shortcut.png">
 
-        <title> Signin</title>
+        <title> Forgot Password</title>
 
         <!-- animate.css-->  
         <link href="assets/vendor/animate.css-master/animate.min.css" rel="stylesheet">
@@ -70,24 +70,20 @@
             <div class="row my-4 my-lg-5">
                 <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">
                     <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Forgot Password</p>
-                    <form>
+
+                    <form action="sendEmail" method="post">
+                        <p class="text-danger">${mess}</p>
+
                         <div class="form-group"> 
                             <div class="input-icon">
                                 <span class="fables-iconemail fables-input-icon mt-2 font-13"></span>
-                                <input type="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Gmail"> 
-                            </div>
-
-                        </div>
-                        <div class="form-group"> 
-                            <div class="input-icon">
-                                <span class="fables-iconpassword fables-input-icon font-19 mt-1"></span>
-                                <input type="password" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input" placeholder="Password">
+                                <input type="email" name="email" class="form-control rounded-0 py-3 pl-5 font-13 sign-register-input"  placeholder="Gmail" required> 
                             </div>
 
                         </div> 
                         <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Change Password</button>
-                        <a href="signIn.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-block">Sign in</a>
-                        <p class="fables-forth-text-color">Dont have an account ?  <a href="register.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
+                        <a href="login" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-block">Sign in</a>
+                        <p class="fables-forth-text-color">Dont have an account ?  <a href="register" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                     </form>
                 </div>
             </div>

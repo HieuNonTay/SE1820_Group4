@@ -4,25 +4,19 @@
  */
 package controller;
 
-import dao.*;
-import entity.*;
-import java.util.Vector;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import java.util.List;
 
 /**
  *
  * @author ASUS
  */
-//home
-public class HomeController extends HttpServlet {
+//forgotpass
+public class ForgotPasswordController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,41 +31,23 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet ForgotPasswordController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet ForgotPasswordController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
         }
     }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        HttpSession session = request.getSession(true);
-        ProductDAO productDao = new ProductDAO();
-        BrandDAO brandDao = new BrandDAO();
-        NewsDAO newsDao = new NewsDAO();
-        Vector<Product> listProductSold = productDao.getProductTOP5Sold();
-        Vector<Product> listProductNew = productDao.getProductTOPNew();
-
-        List<News> listNews = newsDao.getListNews();
-        String cartItemCount = (String) request.getAttribute("cartItemCount");
-        request.setAttribute("cartItemCount", cartItemCount);
-        String service = request.getParameter("service");
-        String submit = request.getParameter("submit");
-
-        if (service == null) {
-            service = "home";
-        }
-        request.setAttribute("listProductSold", listProductSold);
-        request.setAttribute("listProductNew", listProductNew);
-        request.setAttribute("listNews", listNews);
-        if (service.equals("shop")) {
-            request.getRequestDispatcher("/product_list.jsp").forward(request, response);
-        }
-        if (service.equals("home")) {
-            request.getRequestDispatcher("/home.jsp").forward(request, response);
-        }
-//        request.getRequestDispatcher("/homePage.jsp").forward(request, response);
-
+        request.getRequestDispatcher("forGotPassword.jsp").forward(request, response);
     }
 
     @Override

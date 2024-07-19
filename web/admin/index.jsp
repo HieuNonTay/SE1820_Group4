@@ -30,50 +30,14 @@
 
     <body onload="time()" class="app sidebar-mini rtl">
         <!-- Navbar-->
-        <header class="app-header">
-            <!-- Sidebar toggle button--><a class="app-sidebar__toggle" href="#" data-toggle="sidebar"
-                                            aria-label="Hide Sidebar"></a>
-            <!-- Navbar Right Menu-->
-            <ul class="app-nav">
+        <jsp:include page="Sidebar.jsp"/>
 
-
-                <!-- User Menu-->
-                <li><a class="app-nav__item" href="home"><i class='bx bx-log-out bx-rotate-180'></i> </a>
-
-                </li>
-            </ul>
-        </header>
-        <!-- Sidebar menu-->
-        <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
-        <aside class="app-sidebar">
-            <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
-                                                alt="User Image">
-                <div>
-                    <p class="app-sidebar__user-name"><b>${sessionScope.user.user_name}</b></p>
-                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
-                </div>
-            </div>
-            <hr>
-            <ul class="app-menu">
-                <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
-                            class="app-menu__label">Bảng điều khiển</span></a></li>
-                <li><a class="app-menu__item" href="customermanager"><i class='app-menu__icon bx bx-user-voice'></i><span
-                            class="app-menu__label">Quản lý khách hàng</span></a></li>
-                <li><a class="app-menu__item" href="productmanager"><i
-                            class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Quản lý sản phẩm</span></a>
-                </li>
-                <li><a class="app-menu__item" href="ordermanager"><i class='app-menu__icon bx bx-task'></i><span
-                            class="app-menu__label">Quản lý đơn hàng</span></a></li>
-                <li><a class="app-menu__item" href="https://docs.google.com/spreadsheets/d/1elWy0LYj9ngbmywMGwy8Noe_K7WmyisQ6aHOK6RnXZI" target="_blank"><i class='app-menu__icon bx bx-task'></i><span
-                            class="app-menu__label">Kiểm tra phản hồi</span></a></li>
-            </ul>
-        </aside>
         <main class="app-content">
             <div class="row">
                 <div class="col-md-12">
                     <div class="app-title">
                         <ul class="app-breadcrumb breadcrumb">
-                            <li class="breadcrumb-item"><a href="#"><b>Bảng điều khiển</b></a></li>
+                            <li class="breadcrumb-item"><a href="dashboard"><b>Dashboard</b></a></li>
                         </ul>
                         <div id="clock"></div>
                     </div>
@@ -86,9 +50,9 @@
                         <div class="col-md-6">
                             <div class="widget-small primary coloured-icon"><i class='icon bx bxs-user-account fa-3x'></i>
                                 <div class="info">
-                                    <h4>Tổng khách hàng</h4>
-                                    <p><b>${requestScope.user} khách hàng</b></p>
-                                    <p class="info-tong">Tổng số khách hàng được quản lý.</p>
+                                    <h4>Customer</h4>
+                                    <p><b>${requestScope.countTotalCusomters} Online</b></p>
+                                    <p class="info-tong">${requestScope.countTotalCusomters} Total Customer</p>
                                 </div>
                             </div>
                         </div>
@@ -97,8 +61,8 @@
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
                                 <div class="info">
                                     <h4>Tổng sản phẩm</h4>
-                                    <p><b>${requestScope.product} sản phẩm</b></p>
-                                    <p class="info-tong">Tổng số sản phẩm được quản lý.</p>
+                                    <p><b>${requestScope.countTotalProducts} Product</b></p>
+                                    <p class="info-tong">${requestScope.countTotalProducts} Total Product.</p>
                                 </div>
                             </div>
                         </div>
@@ -107,8 +71,8 @@
                             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
                                 <div class="info">
                                     <h4>Tổng đơn hàng</h4>
-                                    <p><b>${requestScope.bill} đơn hàng</b></p>
-                                    <p class="info-tong">Tổng số hóa đơn bán hàng trong tháng.</p>
+                                    <p><b>${requestScope.countTotalOrders} đơn hàng</b></p>
+                                    <p class="info-tong">${requestScope.countTotalOrdersInDay} Total Order in week</p>
                                 </div>
                             </div>
                         </div>
@@ -138,7 +102,7 @@
                                                 <th>Tổng tiền</th>
                                                 <th>Thanh Toán</th>
                                                 <th>Chức năng</th>
-                                                
+
                                             </tr>
                                         </thead>
                                         <tbody>

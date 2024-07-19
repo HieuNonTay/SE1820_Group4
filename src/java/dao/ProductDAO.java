@@ -63,7 +63,7 @@ public class ProductDAO extends DBContext {
     }
 
     public Vector<Product> getProductTOP5Sold() {
-        String sql = "SELECT TOP 5 * FROM Product\n"
+        String sql = "SELECT TOP 4 * FROM Product\n"
                 + "ORDER BY sold DESC";
         Vector<Product> vector = new Vector<>();
         ResultSet rs = getData(sql);
@@ -97,8 +97,8 @@ public class ProductDAO extends DBContext {
         return vector;
     }
 
-    public Vector<Product> getProductTOP5New() {
-        String sql = "SELECT TOP 5 * FROM Product\n"
+    public Vector<Product> getProductTOPNew() {
+        String sql = "SELECT TOP 6 * FROM Product\n"
                 + "ORDER BY createdAt DESC";
         Vector<Product> vector = new Vector<>();
         ResultSet rs = getData(sql);
@@ -462,7 +462,7 @@ public class ProductDAO extends DBContext {
 
     public String getImage(int productId) {
         String image = "";
-        String sql = "SELECT source FROM ProductImage WHERE ProductID = ?";
+        String sql = "SELECT TOP 1 source FROM ProductImage WHERE ProductID = ?";
         try (PreparedStatement ps = conn.prepareStatement(sql)) {
             ps.setInt(1, productId);
             ResultSet rs = ps.executeQuery();
@@ -484,7 +484,7 @@ public class ProductDAO extends DBContext {
 //        }
 //        List<Product> categorys = dao.filterProductsByPrice(30, "ascending");
 //        categorys.stream().forEach(y -> System.err.println(y.getPrice()));
-        String img = dao.getImage(1);
-        System.out.println(img);
+        String img = dao.getImage(8);
+        System.out.println();
     }
 }

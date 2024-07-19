@@ -31,11 +31,6 @@ public class UpdateInfoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String logout = req.getParameter("logout");
         if (logout != null) {
             resp.sendRedirect("logout");
@@ -52,7 +47,7 @@ public class UpdateInfoController extends HttpServlet {
             if (a == null) {
                 if (!checkDob(dob)) {
                     req.setAttribute("mess", "Please enter your birth day before today");
-                    req.getRequestDispatcher("userDetail.jsp").forward(req, resp);
+                    req.getRequestDispatcher("updateInfo").forward(req, resp);
                 } else {
                     accountDAO.Update(fname, lname, dob, phone, address, email);
                     session.removeAttribute("acc");
@@ -65,6 +60,11 @@ public class UpdateInfoController extends HttpServlet {
                 req.getRequestDispatcher("userDetail.jsp").forward(req, resp);
             }
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("userDetail.jsp").forward(req, resp);
     }
 
     public static boolean checkDob(String dobString) {

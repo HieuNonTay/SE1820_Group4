@@ -8,14 +8,17 @@ import entity.Account;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.DBContext;
 
 /**
  *
  * @author quyen
  */
-public class AccountDAO {
+public class AccountDAO extends DBContext {
 
     Connection conn;  //ket noi
     Statement stm;   //thuc hien cau lenh sql
@@ -221,6 +224,13 @@ public class AccountDAO {
         } catch (Exception e) {
         }
         return null;
+    }
+
+    //=============================================================
+    public static void main(String[] args) {
+        AccountDAO accountDao = new AccountDAO();
+
+//        DBContext db = new DBContext("jdbc:sqlserver://localhost:1433;databaseName=ShoesStore4", "sa", "123456");
     }
 
 }

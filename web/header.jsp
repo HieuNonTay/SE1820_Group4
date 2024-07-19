@@ -38,7 +38,7 @@
                             </li>
 
                             <li class="nav-item">
-                                <a class="nav-link" href="store_grid_list.html" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
+                                <a class="nav-link" href="product" id="sub-nav4" aria-haspopup="true" aria-expanded="false">
                                     Store
                                 </a>                                      
                             </li>
@@ -143,7 +143,7 @@
                             </a>
                             <div class="nav-item dropdown">
                                 <ul style="list-style-type: none" class="dropdown-menu" aria-labelledby="sub-nav1">
-                                    <li><a href="userDetail.jsp"  class="dropdown-item"> Profile </a></li>
+                                    <li><a href="updateInfo"  class="dropdown-item"> Profile </a></li>
                                     <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
                                     <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
                                 </ul>

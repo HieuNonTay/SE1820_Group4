@@ -136,7 +136,7 @@
 
         <table>
             <tr>
-                
+
                 <th>OrderID</th>
                 <th>Product Name</th>
                 <th>Quantity</th>
@@ -149,14 +149,14 @@
                 
             %>
             <tr>
-                 <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
+                <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
                 <td><%= orderDetail.getOrderID()%></td>
                 <td><%= product.getName()%></td>
                 <td><%= orderDetail.getQuantity()%></td>
                 <td><%= orderDetail.getPrice()%></td>
             </tr>
             <%}%>
-            
+
 
         </table>
 
