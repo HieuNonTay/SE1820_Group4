@@ -478,37 +478,37 @@ public class NewsDAO {
         return data;
     }
 
-    public List<News> getListContentsByName(String name) {
-        List<News> data = new ArrayList<News>();
-        try {
-            connect();
-            String strSelect = " select News.id, News.adminId, News.groupId, News.title, News.STT, News.[image],"
-                    + " News.link, News.createdAt, News.updatedAt, News.content from News \n"
-                    + " join NewsGroup on News.groupId = NewsGroup.id\n"
-                    + " where NewsGroup.name = ? \n"
-                    + " ORDER BY News.id ASC";
-            pstm = cnn.prepareStatement(strSelect);
-            pstm.setString(1, name);
-            rs = pstm.executeQuery();
-            while (rs.next()) {
-                int id = rs.getInt(1);
-                int accountID = rs.getInt(2);
-                int groupId = rs.getInt(3);
-                String title = rs.getString(4);
-                int stt = rs.getInt(5);
-                String image = rs.getString(6);
-                String link = rs.getString(7);
-                String createAt = convertDateTimeFormat(rs.getString(8));
-                String updateAt = convertDateTimeFormat(rs.getString(9));
-                String content = rs.getString(10);
-                data.add(new News(id, accountID, groupId, title, image, stt, link, createAt, updateAt, content));
-            }
-            cnn.close();
-        } catch (Exception e) {
-            System.out.println("getListContentsByName: " + e.getMessage());
-        }
-        return data;
-    }
+//    public List<News> getListContentsByName(String name) {
+//        List<News> data = new ArrayList<News>();
+//        try {
+//            connect();
+//            String strSelect = " select News.id, News.adminId, News.groupId, News.title, News.STT, News.[image],"
+//                    + " News.link, News.createdAt, News.updatedAt, News.content from News \n"
+//                    + " join NewsGroup on News.groupId = NewsGroup.id\n"
+//                    + " where NewsGroup.name = ? \n"
+//                    + " ORDER BY News.id ASC";
+//            pstm = cnn.prepareStatement(strSelect);
+//            pstm.setString(1, name);
+//            rs = pstm.executeQuery();
+//            while (rs.next()) {
+//                int id = rs.getInt(1);
+//                int accountID = rs.getInt(2);
+//                int groupId = rs.getInt(3);
+//                String title = rs.getString(4);
+//                int stt = rs.getInt(5);
+//                String image = rs.getString(6);
+//                String link = rs.getString(7);
+//                String createAt = convertDateTimeFormat(rs.getString(8));
+//                String updateAt = convertDateTimeFormat(rs.getString(9));
+//                String content = rs.getString(10);
+//                data.add(new News(id, accountID, groupId, title, image, stt, link, createAt, updateAt, content));
+//            }
+//            cnn.close();
+//        } catch (Exception e) {
+//            System.out.println("getListContentsByName: " + e.getMessage());
+//        }
+//        return data;
+//    }
 
     public News getContentById(int id) {
         try {
@@ -541,66 +541,66 @@ public class NewsDAO {
         return null;
     }
 
-    public void UpdateSTT(int[] order, String nid) {
-        List<Integer> data = new ArrayList<Integer>();
-        connect();
-        int x = 1;
-        try {
+//    public void UpdateSTT(int[] order, String nid) {
+//        List<Integer> data = new ArrayList<Integer>();
+//        connect();
+//        int x = 1;
+//        try {
+//
+//            for (int i = 0; i < order.length; i++) {
+//                String strSelect = "select id from [News] where groupId = ? and STT = ? ";
+//                pstm = cnn.prepareStatement(strSelect);
+//                pstm.setString(1, nid);
+//                pstm.setInt(2, order[i]);
+//                rs = pstm.executeQuery();
+//                while (rs.next()) {
+//                    int id = rs.getInt(1);
+//                    data.add(id);
+//                }
+//            }
+//        } catch (Exception e) {
+//            System.out.println("UpdateSTT_1: " + e.getMessage());
+//        }
+//
+//        try {
+//            for (Integer n : data) {
+//                System.out.println(n);
+//                String strUpdate = "UPDATE [News]\n"
+//                        + "   SET [STT] = ?\n"
+//                        + " WHERE id = ?";
+//                pstm = cnn.prepareStatement(strUpdate);
+//                pstm.setInt(1, x);
+//                pstm.setInt(2, n);
+//                pstm.execute();
+//                x++;
+//            }
+//            System.out.println(x);
+//            cnn.close();
+//        } catch (Exception e) {
+//            System.out.println("UpdateSTT_2: " + e.getMessage());
+//        }
+//    }
 
-            for (int i = 0; i < order.length; i++) {
-                String strSelect = "select id from [News] where groupId = ? and STT = ? ";
-                pstm = cnn.prepareStatement(strSelect);
-                pstm.setString(1, nid);
-                pstm.setInt(2, order[i]);
-                rs = pstm.executeQuery();
-                while (rs.next()) {
-                    int id = rs.getInt(1);
-                    data.add(id);
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("UpdateSTT_1: " + e.getMessage());
-        }
-
-        try {
-            for (Integer n : data) {
-                System.out.println(n);
-                String strUpdate = "UPDATE [News]\n"
-                        + "   SET [STT] = ?\n"
-                        + " WHERE id = ?";
-                pstm = cnn.prepareStatement(strUpdate);
-                pstm.setInt(1, x);
-                pstm.setInt(2, n);
-                pstm.execute();
-                x++;
-            }
-            System.out.println(x);
-            cnn.close();
-        } catch (Exception e) {
-            System.out.println("UpdateSTT_2: " + e.getMessage());
-        }
-    }
-
-    public void AddContents(String name, String accountID, int STT, String link, String cr, String gr) {
-        try {
-            connect();
-            String strSelect = " insert into [News](accountID, groupId, title, STT, link, createdAt)\n"
-                    + " values\n"
-                    + " (?, ?, ?, ?, ?, ?)";
-            pstm = cnn.prepareStatement(strSelect);
-            pstm.setString(1, accountID);
-            pstm.setString(2, gr);
-            pstm.setString(3, name);
-            pstm.setInt(4, STT);
-            pstm.setString(5, link);
-            pstm.setString(6, cr);
-            pstm.execute();
-            cnn.close();
-        } catch (Exception e) {
-            System.out.println("AddContents: " + e.getMessage());
-        }
-
-    }
+//    public void AddContents(String name, String accountID, int STT, String link, String cr, String gr) {
+//        try {
+//            connect();
+//            String strSelect = " insert into [News](accountID, groupId, title, STT, link, createdAt)\n"
+//                    + " values\n"
+//                    + " (?, ?, ?, ?, ?, ?)";
+//            pstm = cnn.prepareStatement(strSelect);
+//            pstm.setString(1, accountID);
+//            pstm.setString(2, gr);
+//            pstm.setString(3, name);
+//            pstm.setInt(4, STT);
+//            pstm.setString(5, link);
+//            pstm.setString(6, cr);
+//            pstm.execute();
+//            cnn.close();
+//        } catch (Exception e) {
+//            System.out.println("AddContents: " + e.getMessage());
+//        }
+//
+//    }
 
     public String convertDateTimeFormat(String inputDateTime) {
         if (inputDateTime == null) {

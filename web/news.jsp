@@ -48,10 +48,8 @@
         <link href="vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
         <link href="vendor/font-awesome-5/css/fontawesome-all.min.css" rel="stylesheet" media="all">
         <link href="vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
-
         <!-- Bootstrap CSS-->
         <link href="vendor/bootstrap-4.1/bootstrap.min.css" rel="stylesheet" media="all">
-
         <!-- Vendor CSS-->
         <link href="vendor/animsition/animsition.min.css" rel="stylesheet" media="all">
         <link href="vendor/bootstrap-progressbar/bootstrap-progressbar-3.3.4.min.css" rel="stylesheet" media="all">
@@ -88,7 +86,7 @@
                                                 <div class="rs-select2--light rs-select2--md">
                                                     <select class="js-select2" name="groupBy" onchange="submitForm()">
                                                         <c:set var="gr" value="${requestScope.groupBy}"/>
-                                                        <option ${(gr == 0)?'selected':''} value="0">Group by</option>
+                                                        <option ${(gr == 0)} value="0">Group by</option>
                                                         <c:forEach var="g" items="${requestScope.groups}">
                                                             <option ${(g.id == gr)?'selected':''} value="${g.id}">${g.name}</option>
                                                         </c:forEach>
@@ -104,7 +102,7 @@
                                                 <button class="au-btn--submit" type="submit">
                                                     <i class="zmdi zmdi-search"></i>
                                                 </button>
-                                                <input type="hidden" name="sortBy" value="${requestScope.sortBy}">
+                                                
                                                 <input type="hidden" name="groupBy" value="${requestScope.groupBy}"> 
                                             </form>
                                         </div>
@@ -127,7 +125,6 @@
                                                         <th>Author</th>
                                                         <th>Title</th>
                                                         <th>Post date</th>
-
                                                         <th>Edit</th>
 
                                                     </tr>
@@ -168,7 +165,7 @@
 
                                         <div class="product-pagination text-center">
                                             <form id="myForm1" action="news" method="post">
-                                                <input type="hidden" name="sortBy" value="${requestScope.sortBy}">
+                                                
                                                 <input type="hidden" name="groupBy" value="${requestScope.groupBy}">     
                                                 <input type="hidden" name="search" value="${requestScope.search}">     
 
