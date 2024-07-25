@@ -60,7 +60,7 @@ public class OrderController extends HttpServlet {
         } else {
             listOrder = orderDao.getAll();
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("orderManage.jsp").forward(request, response);
+            request.getRequestDispatcher("admin/order.jsp").forward(request, response);
         }
     }
 
@@ -77,28 +77,28 @@ public class OrderController extends HttpServlet {
             service = "nothing";
         }
 
-        if (service != null && service.equals("updateOrderAction")) {
-            String orderIdStr = request.getParameter("orderId");
-            String firstName = request.getParameter("firstName");
-            String lastName = request.getParameter("lastName");
-            String totalStr = request.getParameter("total");
-            String city = request.getParameter("city");
-            String status = request.getParameter("status");
-            System.out.println(orderIdStr);
-            try {
-                int orderId = Integer.parseInt(orderIdStr);
-                double total = Double.parseDouble(totalStr);
-                int update = orderDao.updateStatus(orderId, status);
-                if (update > 0) {
-                    response.sendRedirect("admin?service=listOrder");
-                } else {
-                    response.sendRedirect("order?service=updateOrder");
-                }
-            } catch (NumberFormatException e) {
-                request.setAttribute("error", "Vui lòng nhập một số hợp lệ");
-                request.getRequestDispatcher("errorPage.jsp").forward(request, response);
-            }
-        }
+//        if (service != null && service.equals("updateOrderAction")) {
+//            String orderIdStr = request.getParameter("orderId");
+//            String firstName = request.getParameter("firstName");
+//            String lastName = request.getParameter("lastName");
+//            String totalStr = request.getParameter("total");
+//            String city = request.getParameter("city");
+//            String status = request.getParameter("status");
+//            System.out.println(orderIdStr);
+//            try {
+//                int orderId = Integer.parseInt(orderIdStr);
+//                double total = Double.parseDouble(totalStr);
+//                int update = orderDao.updateStatus(orderId, status);
+//                if (update > 0) {
+//                    response.sendRedirect("admin?service=listOrder");
+//                } else {
+//                    response.sendRedirect("order?service=updateOrder");
+//                }
+//            } catch (NumberFormatException e) {
+//                request.setAttribute("error", "Vui lòng nhập một số hợp lệ");
+//                request.getRequestDispatcher("errorPage.jsp").forward(request, response);
+//            }
+//        }
         if (service.equals("updateStatus")) {
             int orderId = Integer.parseInt(request.getParameter("orderId"));
             String status = request.getParameter("status");
@@ -116,11 +116,6 @@ public class OrderController extends HttpServlet {
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";

@@ -32,5 +32,9 @@
         </li>
         <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
                     class="app-menu__label">Oder Manager</span></a></li>
+        <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
+                    class="app-menu__label">News Manager</span></a></li>
+        <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
+                    class="app-menu__label">Discount Manager</span></a></li>
     </ul>
 </aside>

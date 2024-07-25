@@ -76,35 +76,31 @@
         <c:set var="pr" value="Product" />
         <c:set var="ac" value="News" />
         <c:set var="n" value="1" />
-
-        <div class="product-big-title-area">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="product-bit-title text-center">
-                            <h2>News</h2>
-                        </div>
-                    </div>
-                </div>
+        <div class="fables-header fables-after-overlay">
+            <div class="container"> 
+                <h2 class="fables-page-title fables-second-border-color">News</h2>
             </div>
+        </div>
+        <div class="product-big-title-area">
+
             <div class="mainmenu-area" style="background: #2C3E4F; padding: 5px 0; overflow: auto;"> 
                 <div class="container">
                     <div class="row">
                         <div class="navbar-collapse collapse" style="display: flex; justify-content: center;">
                             <ul class="nav navbar-nav" style="display: flex; flex-direction: row; list-style: none; padding: 0; margin: 0; align-items: center; width: 100%;">
                                 <li style="flex-grow: 1; text-align: center; padding: 5px 10px;">
-                                    <a href="newsUser?groupName=all" style="text-decoration: none; color: white; font-size: 14px;">All</a>
+                                    <a href="newsUser?groupName=all" style="text-decoration: none; color: red; font-size: 14px;">All</a>
                                 </li>
                                 <c:forEach var="g" items="${requestScope.groups}">
                                     <c:set var="sg" value="${requestScope.selectGroup}"/>
                                     <c:if test="${sg.getName() == g.getName()}">
                                         <li class="active" style="flex-grow: 1; text-align: center; padding: 5px 10px;"> 
-                                            <a href="newsUser?groupName=${g.getName().toLowerCase().replaceAll(' ', '-').replaceAll('[^a-z0-9-]', '')}" style="text-decoration: none; color: white; font-size: 14px;">${g.getName()}</a> <!-- Giảm font-size -->
+                                            <a href="newsUser?groupName=${g.getName().toLowerCase().replaceAll(' ', '-').replaceAll('[^a-z0-9-]', '')}" style="text-decoration: none; color: red; font-size: 14px;">${g.getName()}</a> <!-- Giảm font-size -->
                                         </li>
                                     </c:if>
                                     <c:if test="${sg.getName() != g.getName()}">
                                         <li style="flex-grow: 1; text-align: center; padding: 5px 10px;"> 
-                                            <a href="newsUser?groupName=${g.getName().toLowerCase().replaceAll(' ', '-').replaceAll('[^a-z0-9-]', '')}" style="text-decoration: none; color: white; font-size: 14px;">${g.getName()}</a> <!-- Giảm font-size -->
+                                            <a href="newsUser?groupName=${g.getName().toLowerCase().replaceAll(' ', '-').replaceAll('[^a-z0-9-]', '')}" style="text-decoration: none; color: red; font-size: 14px;">${g.getName()}</a> <!-- Giảm font-size -->
                                         </li>
                                     </c:if>
                                 </c:forEach>

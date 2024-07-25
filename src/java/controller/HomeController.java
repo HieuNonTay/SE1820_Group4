@@ -52,7 +52,8 @@ public class HomeController extends HttpServlet {
         Vector<Product> listProductSold = productDao.getProductTOP5Sold();
         Vector<Product> listProductNew = productDao.getProductTOPNew();
 
-        List<News> listNews = newsDao.getListNews();
+        List<News> listNews = newsDao.getNewsTop3();
+
         String cartItemCount = (String) request.getAttribute("cartItemCount");
         request.setAttribute("cartItemCount", cartItemCount);
         String service = request.getParameter("service");

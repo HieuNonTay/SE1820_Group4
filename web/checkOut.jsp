@@ -78,7 +78,7 @@
                             }
                             List<Integer> productIds = new ArrayList<>();
                             Enumeration<String> em = session.getAttributeNames();
-                            DecimalFormat df = new DecimalFormat("#.##");
+                            DecimalFormat df = new DecimalFormat("#,###");
                             double grandTotal = 0;
                             double discountTotal = 0;
                              double oldTotal = 0;
@@ -111,7 +111,7 @@
                                 <p class="mb-0 mt-4"><%=productCart.getName()%></p>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4"><%=df.format(productCart.getPrice()).replace(",",".")%></p>
+                                <p class="mb-0 mt-4"><%=df.format(productCart.getPrice()).replace(",",".")%> VND</p>
                             </td>
                             <td>
                                 <div class="input-group quantity mt-4" style="width: 100px;">
@@ -119,7 +119,7 @@
                                 </div>
                             </td>
                             <td>
-                                <p class="mb-0 mt-4"><%=df.format((productCart.getPrice()*productCart.getQuantity())).replace(",",".")%></p>
+                                <p class="mb-0 mt-4"><%=df.format((productCart.getPrice()*productCart.getQuantity())).replace(",",".")%> VND</p>
                             </td>                     
                         </tr>
                         <% } 
@@ -139,7 +139,7 @@
 
                     <form id="purchaseForm" action="/SE1820_Group4/CartURL?service=checkOut" method="post">
                         <input type="hidden" name="accountId" value="2">
-
+                        <p class="text-danger" >${mess}</p> 
                         <div class="p-4">
                             <h1 class="display-6 mb-4">Cart <span class="fw-normal">Buy</span></h1>
                             <div class="d-flex justify-content-between mb-2">
@@ -186,6 +186,7 @@
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Payment Method</h5>
                                 <select name="paymentMethod" class="mb-0" onchange="handlePaymentMethodChange(this)">
+                                    <option value=""></option>
                                     <option value="direct">Direct</option>
                                     <option value="online">Online</option>
                                 </select>
@@ -201,7 +202,7 @@
                         </div>
                         <div class="py-4 mb-4 border-top border-bottom d-flex justify-content-between">
                             <h5 class="mb-0 ps-4 me-4">Total</h5>
-                            <p class="mb-0 pe-4"><%=df.format(grandTotal).replace(",", ".")%></p>
+                            <p class="mb-0 pe-4"><%=df.format(grandTotal).replace(",", ".")%> VND</p>
                         </div>
                         <div id="qrCodeContainer" class="text-center d-none" >
                             <img src="https://img.vietqr.io/image/MB-2003666886789-compact2.png?amount=<%=df.format(grandTotal).replace(",", "")%>&addInfo=SHOES&accountName=BUI+VAN+HIEU" height="300px" width=250" alt="QR Code Image">

@@ -75,6 +75,42 @@ public class NewsDAO {
         return data;
     }
 
+    public List<News> getNewsTop3() {
+        List<News> data = new ArrayList<News>();
+        try {
+            connect();
+            String strSelect = "SELECT TOP 3 \n"
+                    + "    n.id, n.accountID, n.groupId, n.title, n.heading, n.author, n.[image], n.[view], n.createdAt, \n"
+                    + "	n.updatedAt,n.content, ng.[name], (a.firstName + ' ' + a.lastName) AS adminName \n"
+                    + "FROM News n JOIN [Account] a ON a.AccountID = n.accountID JOIN NewsGroup ng ON ng.Id = n.groupId \n"
+                    + "ORDER BY n.createdAt DESC;";
+            stm = cnn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_UPDATABLE);
+            rs = stm.executeQuery(strSelect);
+            while (rs.next()) {
+                int id = rs.getInt(1);
+                int accountId = rs.getInt(2);
+                int groupId = rs.getInt(3);
+                String title = rs.getString(4);
+                String heading = rs.getString(5);
+                String author = rs.getString(6);
+                String image = rs.getString(7);
+                int view = rs.getInt(8);
+                String createAt = convertDateTimeFormat(rs.getString(9));
+                String updateAt = convertDateTimeFormat(rs.getString(10));
+                String content = rs.getString(11);
+                String groupName = rs.getString(12);
+                String accountName = rs.getString(13);
+                data.add(new News(id, accountId, groupId, title, heading, author, image, view, createAt, updateAt, content, groupName, accountName));
+            }
+
+            cnn.close();
+
+        } catch (SQLException e) {
+            System.out.println("getListNews" + e.getMessage());
+        }
+        return data;
+    }
+
     public static void main(String[] args) {
         NewsDAO dao = new NewsDAO();
         List<News> list = dao.getNewsByGid(1);

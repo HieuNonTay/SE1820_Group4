@@ -108,10 +108,10 @@
                             </div>
 
                             <div class="card-body">
-                                <h5><a href="#" class="font-20 semi-font fables-forth-text-color fables-second-hover-color team-name"><%=product.getName()%></a></h5>
-                                <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3"><%=product.getProductId()%>, <%=brand.getBrandName()%></p>
+                                <h5><a href="detail?action=productdetail&product_id=<%=product.getProductId()%>" class="font-20 semi-font fables-forth-text-color fables-second-hover-color team-name"><%=product.getName()%></a></h5>
+                                <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3"><%=brand.getBrandName()%></p>
                             </div>
-                            <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3"><%=formattedPrice%></p>
+                            <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3"><%=formattedPrice%> VND</p>
                             <p class="fables-product-info">
                                 <a href="CartURL?service=addToCart&id=<%=product.getProductId()%>" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
                                     <span class="fables-iconcart"></span> 
@@ -151,7 +151,7 @@
                     <div class="filter-img-block position-relative image-container translate-effect-right"> 
                         <img src="<%=image%>" alt="image" class="img-fluid w-100"> 
                         <div class="img-filter-overlay fables-main-color-transparent flex-center">
-                            <a href="#" class="fables-third-text-color fables-second-hover-color work-icon mx-3"><span class="fables-iconlink "></span></a>
+                            <a href="detail?action=productdetail&product_id=<%=product.getProductId()%>" class="fables-third-text-color fables-second-hover-color work-icon mx-3"><span class="fables-iconlink "></span></a>
                             <a data-fancybox="gallery" href="assets/custom/images/blog-slider2.jpg" class="fables-third-text-color fables-second-hover-color work-icon mx-3"><span class="fables-iconsearch-icon"></span></a>
                         </div>
                     </div>

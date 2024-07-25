@@ -146,6 +146,9 @@
                                     <li><a href="updateInfo"  class="dropdown-item"> Profile </a></li>
                                     <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
                                     <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
+                                        <c:if test="${sessionScope.acc.roleID != 2}">
+                                        <li><a href="dashboard"  class="dropdown-item"> Dash Board </a></li>
+                                        </c:if>
                                 </ul>
                             </div>  
                         </div>

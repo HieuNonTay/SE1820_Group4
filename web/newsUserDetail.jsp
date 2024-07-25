@@ -70,7 +70,7 @@
         <c:set var="pr" value="Product" />
         <c:set var="ac" value="News" />
         <c:set var="n" value="1" />
-        
+
         <div class="product-big-title-area">
             <div class="container">
                 <div class="row">
@@ -97,14 +97,12 @@
                                 <p style="color: gray">Postdate: ${n.getCreateAt()}</p>
                                 <span></span>      
                                 <article>
-                                    
+
                                     <p class="Normal" style="text-align:justify;">${n.getContent()}</p>
                                     <p class="Normal" style="text-align:right;">Author: <strong>${n.getAuthor()}</strong></p>
                                 </article>
 
-
                             </div>
-
                         </div>
                     </div>
                 </div>

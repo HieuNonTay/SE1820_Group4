@@ -5,6 +5,8 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page import="java.sql.ResultSet, entity.*, dao.*, java.util.*"%>
+<%@ page import="java.text.DecimalFormat" %>
 <c:set var="pageSize" value="9" />
 <!DOCTYPE html>
 <html lang="en">
@@ -145,37 +147,44 @@
                         </div>
                     </div>
                     <div class="row">
-                        <c:forEach items="${listProduct}"
-                                   var="product" >
-
-                            <div class="col-12 col-sm-6 col-lg-4 fables-product-block">
-                                <div class="card rounded-0 mb-4">
-                                    <div class="row">
-                                        <div class="fables-product-img col-12">
-                                            <img class="card-img-top rounded-0" src="assets/custom/images/Nike0001.webp" alt="Product Image">
-                                            <div class="fables-img-overlay">                                          
-                                                <ul class="nav fables-product-btns">
-                                                    <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>
-                                                    <li><a href="" class="fables-product-btn"><span class="fables-iconcompare"></span></a></li>
-                                                    <li><button class="fables-product-btn"><span class="fables-iconheart"></span></button></li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                        <div class="card-body col-12">
-                                            <h5 class="card-title mx-xl-3">
-                                                <a href="detail?action=productdetail&product_id=${product.productId}" class="fables-main-text-color fables-store-product-title fables-second-hover-color">${product.name}</a>
-                                            </h5>
-                                            <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3">DOUBLE</p>
-                                            <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3">${product.price} $</p>
-                                            <p class="fables-product-info">
-                                                <a href="CartURL?service=addToCart&id=${product.productId}" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
-                                                    <span class="fables-iconcart"></span> 
-                                                    <span class="fables-btn-value">ADD TO CART</span></a></p>
+                        <%
+                        Vector<Product> listProduct = (Vector<Product>) request.getAttribute("listProduct");
+                            for (Product product : listProduct) {
+                                BrandDAO brandDao = new BrandDAO();
+                                Brand brand = brandDao.getById(product.getBrandId());
+                                ProductDAO productDao = new ProductDAO();
+                                String image = productDao.getImage(product.getProductId());
+                                DecimalFormat formatter = new DecimalFormat("#,###");
+                                String formattedPrice = formatter.format(product.getPrice());
+                        %>
+                        <div class="col-12 col-sm-6 col-lg-4 fables-product-block">
+                            <div class="card rounded-0 mb-4">
+                                <div class="row">
+                                    <div class="fables-product-img col-12">
+                                        <img class="card-img-top rounded-0" src="<%=image%>" height="250" width="300" alt="Product Image">
+                                        <div class="fables-img-overlay">                                          
+                                            <ul class="nav fables-product-btns">
+                                                <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>
+                                                <li><a href="" class="fables-product-btn"><span class="fables-iconcompare"></span></a></li>
+                                                <li><button class="fables-product-btn"><span class="fables-iconheart"></span></button></li>
+                                            </ul>
                                         </div>
                                     </div>
+                                    <div class="card-body col-12">
+                                        <h5 class="card-title mx-xl-3">
+                                            <a href="detail?action=productdetail&product_id=<%=product.getProductId()%>" class="fables-main-text-color fables-store-product-title fables-second-hover-color"><%=product.getName()%></a>
+                                        </h5>
+                                        <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3"><%=brand.getBrandName()%></p>
+                                        <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3"><%=formattedPrice%> VND</p>
+                                        <p class="fables-product-info">
+                                            <a href="CartURL?service=addToCart&id=<%=product.getProductId()%>" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
+                                                <span class="fables-iconcart"></span> 
+                                                <span class="fables-btn-value">ADD TO CART</span></a></p>
+                                    </div>
                                 </div>
-                            </div>  
-                        </c:forEach>
+                            </div>
+                        </div>  
+                        <%}%>
                     </div> 
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">                                 

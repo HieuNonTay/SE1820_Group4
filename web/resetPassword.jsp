@@ -81,7 +81,7 @@
             <div class="row my-4 my-lg-5">
                 <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">                 
                     <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Change Password</p>
-                    <form action="resetPassword" method="post">
+                    <form action="forgotpass" method="post">
 
                         <p class="text-danger">${mess}</p>                      
 
@@ -108,9 +108,9 @@
                         </div>
 
                         <button type="submit" class="btn btn-block rounded-0 white-color fables-main-hover-background-color fables-second-background-color font-16 semi-font py-3">Change password</button>
-                        <a href="forGotPassword.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">For Got Password</a>
-                        <a href="signIn.jsp" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Sign In</a>
-                        <p class="fables-forth-text-color">Dont have an account ?  <a href="register.jsp" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
+                        <a href="forGotPassword" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">For Got Password</a>
+                        <a href="login" class="fables-forth-text-color font-16 fables-second-hover-color underline mt-3 mb-4 m-lg-5 d-inline-block">Sign In</a>
+                        <p class="fables-forth-text-color">Dont have an account ?  <a href="register" class="font-16 semi-font fables-second-text-color underline fables-main-hover-color ml-2">Register</a></p>
                     </form>
                 </div>
             </div>

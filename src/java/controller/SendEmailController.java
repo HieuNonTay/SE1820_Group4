@@ -72,7 +72,6 @@ public class SendEmailController extends HttpServlet {
             String host = "smtp.gmail.com";
             String port = "587";
             String username = "quyennvhe172461@fpt.edu.vn";
-            System.out.println("khong");
             String password = "tmxrtmjxraoeegjo"; // Consider more secure methods for storing passwords
             String fromAddress = "quyennvhe172461@fpt.edu.vn";
             String toAddress = email;
@@ -179,11 +178,6 @@ public class SendEmailController extends HttpServlet {
         req.getRequestDispatcher("resetPassword.jsp").forward(req, resp);
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
