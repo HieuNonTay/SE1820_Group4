@@ -144,6 +144,7 @@
                                                         <textarea rows="20" name="content" class="tinymce">${sn.content}</textarea>
                                                     </div>
                                                 <div class="d-flex justify-content-center align-items-center">
+                                                    <input type="hidden" name="updateNewsId" value="${sn.id}">
                                                     <button class="au-btn au-btn-icon au-btn--blue au-btn--small" type="submit" name="submit" value="1">
                                                         Submit</button>        
                                                 </div>    
