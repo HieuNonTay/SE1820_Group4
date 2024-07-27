@@ -7,7 +7,6 @@ package controller;
 import dao.DisCountDAO;
 import dao.OrderDAO;
 import dao.ProductDAO;
-import entity.Account;
 import entity.Discount;
 import entity.Product;
 import entity.ProductCart;
@@ -32,7 +31,7 @@ import java.util.Vector;
  * @author ASUS
  */
 //cart
-@WebServlet(name = "Cart", urlPatterns = {"/CartURL"})
+@WebServlet(name = "CartController", urlPatterns = {"/CartURL"})
 public class CartController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -47,14 +46,6 @@ public class CartController extends HttpServlet {
             throws ServletException, IOException {
 //        processRequest(request, response);
         HttpSession session = request.getSession(true);
-        HttpSession s = request.getSession();
-//        if (s.getAttribute("acc") == null) {
-//            request.getRequestDispatcher("403.jsp").forward(request, response);
-//        }
-//        Account ch = (Account) s.getAttribute("acc");
-//        if (!(ch.getRoleID() == 1 || ch.getRoleID() == 3)) {
-//            request.getRequestDispatcher("403.jsp").forward(request, response);
-//        }
         ProductDAO dao = new ProductDAO();
         String service = request.getParameter("service");
         ProductDAO productDao = new ProductDAO();
@@ -103,18 +94,13 @@ public class CartController extends HttpServlet {
             Enumeration<String> em = (Enumeration<String>) session.getAttributeNames();
             while (em.hasMoreElements()) {
                 String key = em.nextElement();
-                if (key.equals("acc") || key.equals("vecKey") || key.equals("products") || key.equals("functionToast")) {
+                if (key.equals("acc") || key.equals("vecKey")) {
                     continue;
                 } else {
                     int quantity = Integer.parseInt(request.getParameter(key));
                     ProductCart productCart = (ProductCart) session.getAttribute(key);
                     Product product = dao.getById(productCart.getProductId());
-                    if (quantity <= 0) {
-                        int id = productCart.getProductId();
-                        session.removeAttribute(key);
-                        response.sendRedirect("CartURL");
-                        return;
-                    }
+
                     if (quantity > product.getQuantity()) {
                         request.setAttribute("mess", "Đơn hàng đã được thêm vào tối đa");
                         productCart.setQuantity(product.getQuantity());
@@ -131,16 +117,7 @@ public class CartController extends HttpServlet {
             return;
         }
         if (service.equals("checkOut")) {
-            if (s.getAttribute("acc") == null) {
-                request.getRequestDispatcher("403.jsp").forward(request, response);
-            }
-            Account acc = (Account) s.getAttribute("acc");
-            if (!(acc.getRoleID() == 2)) {
-                request.getRequestDispatcher("403.jsp").forward(request, response);
-            } else {
-
-                request.getRequestDispatcher("checkOut.jsp").forward(request, response);
-            }
+            request.getRequestDispatcher("checkOut.jsp").forward(request, response);
         }
 
     }
@@ -162,6 +139,7 @@ public class CartController extends HttpServlet {
             } else {
                 Enumeration<String> em = session.getAttributeNames();
                 int accountId = Integer.parseInt(request.getParameter("accountId"));
+//                Account account = accountDao.getByAccountId(accountId);
                 String firstName = request.getParameter("firstName");
                 String lastName = request.getParameter("lastName");
                 String discountCode = request.getParameter("discountCode");
@@ -176,7 +154,7 @@ public class CartController extends HttpServlet {
 
                 while (em.hasMoreElements()) {
                     String key = em.nextElement().toString(); //get key
-                    if (key.equals("acc") || key.equals("vecKey")) {
+                    if (key.equals("acc") || key.equals("vecKey") || key.equals("products") || key.equals("functionToast") || key.equals("roleID") || key.equals("roleName")) {
                         continue;
                     } else {
                         ProductCart productCart = (ProductCart) session.getAttribute(key);
@@ -191,7 +169,7 @@ public class CartController extends HttpServlet {
                     }
                 }
                 if (enoughQuantity) {
-                    int accountIDD = 2;
+                    int accountIDD = 1;
                     String payment = "Check";
                     double grandTotal = 0;
                     Discount d = null;
@@ -241,19 +219,20 @@ public class CartController extends HttpServlet {
                     }
                     int checkOut = orderDao.addOrder(accountIDD, listProductCart, firstName, lastName, (discountCode == null || discountCode.trim().equals("")) ? null : discountCode, line1, line2, city, province, payment, grandTotal);
                     if (checkOut > 0) {
+                        System.out.println("oke");
                         if (discountCode != null && !discountCode.trim().equals("")) {
                             //update status discount
                             dao.updateStatusDiscount("activate", discountCode);
                         }
-
-                        response.sendRedirect("/SE1820_Group4/home");
+                        System.out.println("oke");
+                        response.sendRedirect("home");
                         return;
                     } else {
-                        response.sendRedirect("/SE1820_Group4/CartURL?service=checkOut");
+                        response.sendRedirect("CartURL?service=checkOut");
                         return;
                     }
                 } else {
-                    request.getRequestDispatcher("/SE1820_Group4/CartURL?service=checkOut").forward(request, response);
+                    request.getRequestDispatcher("CartURL?service=checkOut").forward(request, response);
                     return;
                 }
             }
@@ -274,7 +253,7 @@ public class CartController extends HttpServlet {
         //BookDAO bookDao = new BookDAO();
         while (em.hasMoreElements()) {
             String key = em.nextElement().toString(); //get key
-            if (key.equals("acc") || key.equals("vecKey")) {
+            if (key.equals("user") || key.equals("vecKey") || key.equals("products") || key.equals("functionToast") || key.equals("roleID") || key.equals("roleName")) {
                 continue;
             } else {
                 listBook.add((ProductCart) session.getAttribute(key));
@@ -299,5 +278,4 @@ public class CartController extends HttpServlet {
             }
         }
     }
-
 }

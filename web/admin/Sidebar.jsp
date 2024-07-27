@@ -6,7 +6,7 @@
 
 
         <!-- User Menu-->
-        <li><a class="app-nav__item" href="dashboard"><i class='bx bx-log-out bx-rotate-180'></i> </a>
+        <li><a class="app-nav__item" href="home"><i class='bx bx-log-out bx-rotate-180'></i> </a>
 
         </li>
     </ul>
@@ -17,24 +17,25 @@
     <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
                                         alt="User Image">
         <div>
-            <p class="app-sidebar__user-name"><b>${sessionScope.acc.lname}</b></p>
-            <p class="app-sidebar__user-designation">Welcome back</p>
+            <p class="app-sidebar__user-name"><b>${sessionScope. acc.fname}</b></p>
+            <p class="app-sidebar__user-designation">${sessionScope.roleName}</p>
         </div>
     </div>
     <hr>
     <ul class="app-menu">
         <li><a class="app-menu__item" href="dashboard"><i class='app-menu__icon bx bx-tachometer'></i><span
                     class="app-menu__label">Dashboard</span></a></li>
-        <li><a class="app-menu__item" href="#"><i class='app-menu__icon bx bx-user-voice'></i><span
-                    class="app-menu__label">Customer Manager</span></a></li>
+        <li><a class="app-menu__item" href="accountmanager"><i class='app-menu__icon bx bx-user-voice'></i><span
+                    class="app-menu__label">Account Manager</span></a></li>
         <li><a class="app-menu__item" href="productmanager"><i
                     class='app-menu__icon bx bx-purchase-tag-alt'></i><span class="app-menu__label">Product Manager</span></a>
         </li>
         <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
                     class="app-menu__label">Oder Manager</span></a></li>
-        <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
+        <li><a class="app-menu__item" href="news"><i class='app-menu__icon bx bx-task'></i><span
                     class="app-menu__label">News Manager</span></a></li>
-        <li><a class="app-menu__item" href="order"><i class='app-menu__icon bx bx-task'></i><span
+        <li><a class="app-menu__item" href="discount"><i class='app-menu__icon bx bx-task'></i><span
                     class="app-menu__label">Discount Manager</span></a></li>
+
     </ul>
 </aside>

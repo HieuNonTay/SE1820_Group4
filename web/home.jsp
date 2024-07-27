@@ -71,7 +71,7 @@
                     <div class="position-relative"> 
                         <div class="image-container translate-effect-right">
                             <a href="newsUserDetail?title=<%=news.getTitle().toLowerCase().replaceAll(" ", "-").replaceAll("[^a-z0-9-]", "")%>">
-                                <img height="300" width="300" src="<%=news.getImage()%>"  alt="News" class="img-fluid w-100">
+                                <img src="<%=news.getImage()%>" alt="News" class="img-fluid w-100 fixed-image">
                             </a>
                         </div> 
                         <a href="newsUserDetail?title=<%=news.getTitle().toLowerCase().replaceAll(" ", "-").replaceAll("[^a-z0-9-]", "")%>" class="fables-main-text-color fables-second-hover-color"><%=news.getTitle()%></a>
@@ -80,6 +80,15 @@
                         </p>
                     </div> 
                 </div>
+                <style>
+                    .fixed-image {
+                        height: 200px; /* Đặt chiều cao cố định */
+                        width: 100%;   /* Chiều rộng đầy đủ cho khối chứa */
+                        object-fit: cover; /* Cắt hình ảnh sao cho toàn bộ khối chứa được lấp đầy */
+                        object-position: center; /* Căn chỉnh hình ảnh ở giữa */
+                    }
+                </style>
+
                 <%}%>  
             </div>
         </div>
@@ -88,7 +97,7 @@
 
         <div class="container py-3 py-lg-5">
             <div class="fables-team my-3">             
-                <h3 class="fables-second-text-color mb-5 font-weight-bold"> Top 5 Product Sales </h3>
+                <h3 class="fables-second-text-color mb-5 font-weight-bold"> Top 4 Product Sales </h3>
 
                 <div class="row">
                     <%
@@ -99,7 +108,7 @@
                                 ProductDAO productDao = new ProductDAO();
                                 String image = productDao.getImage(product.getProductId());
                                 DecimalFormat formatter = new DecimalFormat("#,###");
-                                String formattedPrice = formatter.format(product.getPrice());
+                                String formattedPrice = formatter.format(product.getPrice()).replace(",",".");
                     %>
                     <div class="col-6 col-md-3 mb-4 mb-lg-5">
                         <div class="card fables-team-block fables-second-hover-text-color fables-team-border fables-second-border-color">
@@ -180,7 +189,11 @@
         <script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
         <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
         <script src="assets/custom/js/custom.js"></script>  
-        <script>
-        </script>
+        <c:if test="${message != null}">
+            <script type="text/javascript">
+                toastr.success(`${message}`, 'Success', {timeOut: 1000});
+
+            </script>
+        </c:if> 
     </body>
 </html>

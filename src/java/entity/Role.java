@@ -6,35 +6,35 @@ package entity;
 
 /**
  *
- * @author ASUS
+ * @author quyen
  */
 public class Role {
 
-    private int roleId;
-    private String name;
+    private int roleID;
+    private String roleName;
 
     public Role() {
     }
 
-    public Role(int roleId, String name) {
-        this.roleId = roleId;
-        this.name = name;
+    public Role(int roleID, String roleName) {
+        this.roleID = roleID;
+        this.roleName = roleName;
     }
 
-    public int getRoleId() {
-        return roleId;
+    public int getRoleID() {
+        return roleID;
     }
 
-    public void setRoleId(int roleId) {
-        this.roleId = roleId;
+    public void setRoleID(int roleID) {
+        this.roleID = roleID;
     }
 
-    public String getName() {
-        return name;
+    public String getRoleName() {
+        return roleName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
     }
 
 }

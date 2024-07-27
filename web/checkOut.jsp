@@ -86,7 +86,7 @@
                             Vector<String> vecKey = new Vector<>();
                             while(em.hasMoreElements()){
                                 String key = em.nextElement().toString();
-                                if(key.equals("acc") || key.equals("vecKey")||key.equals("products")||key.equals("functionToast") ){
+                                if(key.equals("acc") || key.equals("vecKey")||key.equals("products")||key.equals("functionToast")||key.equals("roleID")||key.equals("roleName") ){
                                     continue;
                                 }else{
                                     vecKey.add(key);
@@ -137,7 +137,7 @@
             <div class="col-sm-8 col-md-7 col-lg-6 col-xl-4">
                 <div class="bg-light rounded">
 
-                    <form id="purchaseForm" action="/SE1820_Group4/CartURL?service=checkOut" method="post">
+                    <form id="purchaseForm" action="CartURL?service=checkOut" method="post">
                         <input type="hidden" name="accountId" value="2">
                         <p class="text-danger" >${mess}</p> 
                         <div class="p-4">
@@ -185,8 +185,7 @@
                             </div>
                             <div class="d-flex justify-content-between mb-2">
                                 <h5 class="mb-0 me-4">Payment Method</h5>
-                                <select name="paymentMethod" class="mb-0" onchange="handlePaymentMethodChange(this)">
-                                    <option value=""></option>
+                                <select name="payment" class="mb-0" onchange="handlePaymentMethodChange(this)">
                                     <option value="direct">Direct</option>
                                     <option value="online">Online</option>
                                 </select>
@@ -204,11 +203,12 @@
                             <h5 class="mb-0 ps-4 me-4">Total</h5>
                             <p class="mb-0 pe-4"><%=df.format(grandTotal).replace(",", ".")%> VND</p>
                         </div>
-                        <div id="qrCodeContainer" class="text-center d-none" >
-                            <img src="https://img.vietqr.io/image/MB-2003666886789-compact2.png?amount=<%=df.format(grandTotal).replace(",", "")%>&addInfo=SHOES&accountName=BUI+VAN+HIEU" height="300px" width=250" alt="QR Code Image">
-                            <button type="submit" name="submit" value="submit" margin-top="2px" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Submit</button>
+                        <div id="qrCodeContainer" class="text-center d-none">
+                            <img src="https://img.vietqr.io/image/MB-2003666886789-compact2.png?amount=<%=df.format(grandTotal).replace(",", ".")%>&addInfo=SHOES&accountName=BUI+VAN+HIEU" height="300px" width="250" alt="QR Code Image">
+                            <p class="text-danger mt-2">Please pay before submit</p>
                         </div>
 
+                        <button type="submit" name="submit" value="submit" class="btn border-secondary rounded-pill px-4 py-3 text-primary text-uppercase mb-4 ms-4">Submit</button>
                     </form>
 
                 </div>
@@ -254,7 +254,8 @@
             toastr.success(`${message}`, 'Success', {timeOut: 1000});
 
             </script>
-        </c:if> <c:if test="${error != null}">
+        </c:if> 
+        <c:if test="${error != null}">
             <script type="text/javascript">
                 toastr.error(`${error}`, 'Error', {timeOut: 1000});
             </script>

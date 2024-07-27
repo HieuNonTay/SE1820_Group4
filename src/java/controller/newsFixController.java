@@ -13,6 +13,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.io.PrintWriter;
 
 public class newsFixController extends HttpServlet {
 
@@ -20,7 +21,7 @@ public class newsFixController extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
         String submitType = req.getParameter("submit");
-
+        String nid = req.getParameter("updateNewsId");
         String author = req.getParameter("author");
         String cateId = req.getParameter("cateId");
         String title = req.getParameter("title");
@@ -41,9 +42,16 @@ public class newsFixController extends HttpServlet {
             session.setAttribute("functionToast", "showToast('info','Some input(s) are blank!')");
             inputInvalid = true;
         }
-
+        if (content.length() > 3000) {
+            session.setAttribute("functionToast", "showToast('error','Failure: Content too long')");
+            inputInvalid = true;
+        }
         if (title.length() > 50) {
             session.setAttribute("functionToast", "showToast('error','Failure: Title too long')");
+            inputInvalid = true;
+        }
+        if (author.length() > 20) {
+            session.setAttribute("functionToast", "showToast('error','Failure: Author too long')");
             inputInvalid = true;
         }
 
@@ -61,7 +69,7 @@ public class newsFixController extends HttpServlet {
         }
 
         if (inputInvalid) {
-            forwardToForm(req, resp, author, title, heading, content, formattedImage, cateId);
+            forwardToForm(req, resp, author, title, heading, content, formattedImage, cateId, nid);
             return;
         }
 
@@ -75,19 +83,29 @@ public class newsFixController extends HttpServlet {
             String updatedAt = dtf.format(now);
             newsDAO.updateNews(Integer.parseInt(cateId), title, formattedImage, heading, author, updatedAt, content, Integer.parseInt(newsId));
             session.setAttribute("functionToast", "showToast('success','Update news successfully!')");
+            resp.sendRedirect("news");
         } else {
             // Handle addition
             String createdAt = dtf.format(now);
             Account account = (Account) session.getAttribute("acc");
             newsDAO.addNews(account.getAccountID(), Integer.parseInt(cateId), title, formattedImage, heading, author, createdAt, content);
             session.setAttribute("functionToast", "showToast('success','Add news successfully!')");
+            resp.sendRedirect("news");
         }
-
-        resp.sendRedirect("news");
     }
 
-    private void forwardToForm(HttpServletRequest req, HttpServletResponse resp, String author, String title, String heading, String content, String image, String cateId) throws ServletException, IOException {
+    private void forwardToForm(HttpServletRequest req, HttpServletResponse resp, String author, String title, String heading, String content, String image, String cateId, String nid) throws ServletException, IOException {
+        NewsDAO n = new NewsDAO();
         NewsGroupDAO newsGroupDAO = new NewsGroupDAO();
+        News news = null;
+        if (nid != null) {
+            news = n.getNewsById(Integer.parseInt(nid));
+            if (news != null) {
+                String imageFormat = "<p><img src=\"" + news.getImage() + "\" width=\"572\" height=\"322\" /></p>";
+                req.setAttribute("imageFormat", imageFormat);
+            }
+            req.setAttribute("selectNews", news);
+        }
         req.setAttribute("author", author);
         req.setAttribute("title", title);
         req.setAttribute("heading", heading);

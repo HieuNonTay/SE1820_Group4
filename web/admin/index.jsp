@@ -1,9 +1,5 @@
-<%-- 
-    Document   : index
-    Created on : Oct 19, 2021, 11:22:48 PM
-    Author     : Khuong Hung
---%>
 
+<%@page import="entity.*, java.util.*, java.text.DecimalFormat,dao.DisCountDAO,entity.Discount" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
@@ -60,7 +56,7 @@
                         <div class="col-md-6">
                             <div class="widget-small info coloured-icon"><i class='icon bx bxs-data fa-3x'></i>
                                 <div class="info">
-                                    <h4>Tổng sản phẩm</h4>
+                                    <h4>Total Product</h4>
                                     <p><b>${requestScope.countTotalProducts} Product</b></p>
                                     <p class="info-tong">${requestScope.countTotalProducts} Total Product.</p>
                                 </div>
@@ -70,8 +66,8 @@
                         <div class="col-md-6">
                             <div class="widget-small warning coloured-icon"><i class='icon bx bxs-shopping-bags fa-3x'></i>
                                 <div class="info">
-                                    <h4>Tổng đơn hàng</h4>
-                                    <p><b>${requestScope.countTotalOrders} đơn hàng</b></p>
+                                    <h4>Total Orer</h4>
+                                    <p><b>${requestScope.countTotalOrders} Order</b></p>
                                     <p class="info-tong">${requestScope.countTotalOrdersInDay} Total Order in week</p>
                                 </div>
                             </div>
@@ -80,44 +76,48 @@
                         <div class="col-md-6">
                             <div class="widget-small danger coloured-icon"><i class='icon bx bxs-error-alt fa-3x'></i>
                                 <div class="info">
-                                    <h4>Sắp hết hàng</h4>
-                                    <p><b>${requestScope.low} sản phẩm</b></p>
-                                    <p class="info-tong">Số sản phẩm cảnh báo hết cần nhập thêm.</p>
+                                    <h4>Out of stock</h4>
+                                    <p><b>${requestScope.low} Product</b></p>
+                                    <p class="info-tong">Order by OrderDate DESC</p>
                                 </div>
                             </div>
                         </div>
                         <!-- col-12 -->
                         <div class="col-md-12">
                             <div class="tile">
-                                <h3 class="tile-title">Đơn hàng hôm nay</h3>
+                                <h3 class="tile-title">Order for one week</h3>
                                 <div>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
-                                                <th>ID đơn hàng</th>
-                                                <th>Khách hàng</th>
-                                                <th>Số điện thoại</th>
-                                                <th>Địa chỉ</th>
-                                                <th>Ngày mua</th>
-                                                <th>Tổng tiền</th>
-                                                <th>Thanh Toán</th>
-                                                <th>Chức năng</th>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Address</th>
+                                                <th>Order Date</th>
+                                                <th>Total</th>
+                                                <th>Payment</th>
+                                                <th>Status</th>
 
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <c:forEach items="${billbyday}" var="b">
-                                                <tr>
-                                                    <td>${b.bill_id}</td>
-                                                    <td>${b.user.user_name}</td>
-                                                    <td>(+84)${b.phone}</td>
-                                                    <td>${b.address}</td>
-                                                    <td>${b.date}</td>
-                                                    <td>${b.total}</td>
-                                                    <td><span class="badge bg-success">${b.payment}</span></td>                                  
-                                                    <td><a style=" color: rgb(245 157 57);background-color: rgb(251 226 197); padding: 5px;border-radius: 5px;" href="ordermanager?action=showdetail&bill_id=${b.bill_id}"><i class="fa"></i>Chi tiết đơn hàng</a></td>
-                                                </tr>
-                                            </c:forEach>
+                                            <% 
+                                                DecimalFormat df = new DecimalFormat("#,###");
+                                Vector<Order> listOrder1Week = (Vector<Order>) request.getAttribute("listOrder1Week");
+                                for (Order order : listOrder1Week) { 
+                                            %>
+                                            <tr>
+                                                <td><%= order.getAccountId()%></td>
+                                                <td><%= order.getFirstName()%> <%= order.getLastName()%></td>
+                                                <td><%= order.getLine1()%></td>
+                                                <td><%= order.getLine2()%></td>
+                                                <td><%= order.getOrderdate()%></td>
+                                                <td><%=df.format(order.getTotal()).replace(",",".")%></td>
+                                                <td><span class="badge bg-success"><%= order.getPayment()%></span></td>                                  
+                                                <td><span class="badge bg-success"><%= order.getStatus()%></span></td>                                  
+                                            </tr>
+                                            <% } %>
 
                                         </tbody>
                                     </table>
@@ -126,16 +126,59 @@
                             </div>
                         </div>
                         <!-- / col-12 -->
+
+                        <!-- col-12 -->
+                        <div class="col-md-12">
+                            <div class="tile">
+                                <h3 class="tile-title">Top Product Sale</h3>
+                                <div>
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>ID</th>
+                                                <th>Name</th>
+                                                <th>Phone</th>
+                                                <th>Address</th>
+                                                <th>Order Date</th>
+                                                <th>Total</th>
+                                                <th>Payment</th>
+                                                <th>Status</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% 
+                                Vector<Order> listOrder1Week1 = (Vector<Order>) request.getAttribute("listOrder1Week");
+                                for (Order order : listOrder1Week1) { 
+                                            %>
+                                            <tr>
+                                                <td><%= order.getAccountId()%></td>
+                                                <td><%= order.getFirstName()%> <%= order.getLastName()%></td>
+                                                <td><%= order.getLine1()%></td>
+                                                <td><%= order.getLine2()%></td>
+                                                <td><%= order.getOrderdate()%></td>
+                                                <td><%= order.getTotal()%></td>
+                                                <td><span class="badge bg-success"><%= order.getPayment()%></span></td>                                  
+                                                <td><span class="badge bg-success"><%= order.getStatus()%></span></td>                                  
+                                            </tr>
+                                            <% } %>
+
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <!-- / div trống-->
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
 
             <div class="text-center" style="font-size: 13px">
-                <p><b>Copyright
+                <p><b>
                         <script type="text/javascript">
                             document.write(new Date().getFullYear());
-                        </script> Phần mềm quản lý Website
+                        </script> Dasboard
                     </b></p>
             </div>
         </main>
@@ -187,13 +230,13 @@
             function time() {
                 var today = new Date();
                 var weekday = new Array(7);
-                weekday[0] = "Chủ Nhật";
-                weekday[1] = "Thứ Hai";
-                weekday[2] = "Thứ Ba";
-                weekday[3] = "Thứ Tư";
-                weekday[4] = "Thứ Năm";
-                weekday[5] = "Thứ Sáu";
-                weekday[6] = "Thứ Bảy";
+                weekday[0] = "Sunday";
+                weekday[1] = "Monday";
+                weekday[2] = "Tuesday";
+                weekday[3] = "Wensday";
+                weekday[4] = "Thursday";
+                weekday[5] = "Friday";
+                weekday[6] = "Saturday";
                 var day = weekday[today.getDay()];
                 var dd = today.getDate();
                 var mm = today.getMonth() + 1;

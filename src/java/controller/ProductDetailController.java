@@ -1,9 +1,5 @@
 package controller;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 import dao.ProductDAO;
 import entity.Product;
 import java.io.IOException;
@@ -14,13 +10,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 /**
  *
  * @author ASUS
  */
-//detail
+//product
 public class ProductDetailController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -41,15 +38,16 @@ public class ProductDetailController extends HttpServlet {
             if (action.equalsIgnoreCase("productdetail")) {
                 int product_id = Integer.parseInt(request.getParameter("product_id"));
                 ProductDAO c = new ProductDAO();
-                Product products = c.getById(product_id);
+                List<Map<String, Object>> products = c.getProductById(product_id);
                 int category_id = c.findCategoryIdByProductId(product_id);
                 String categoryName = c.findCategoryByProductId(category_id);
                 System.out.println(categoryName);
+                products.stream().forEach(y -> System.err.println(y));
                 request.setAttribute("ProductData", products);
                 request.setAttribute("ProductByCategory", categoryName);
                 request.getRequestDispatcher("product_detail.jsp").forward(request, response);
             } else {
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("404.jsp");
             }
         } catch (Exception e) {
             System.out.println(e);

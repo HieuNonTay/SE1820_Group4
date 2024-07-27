@@ -1,11 +1,14 @@
-<%-- 
-    Document   : product
-    Created on : Oct 19, 2021, 11:23:29 PM
-    Author     : Khuong Hung
---%>
+
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="java.sql.*" %>
+<%@ page import="java.util.*" %>
+<%@page import="model.DBContext"%>
+<%@page import="java.sql.Connection"%>
+<%@page import="dao.ProductDAO"%>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -31,9 +34,7 @@
 
     <body onload="time()" class="app sidebar-mini rtl">
         <!-- Navbar-->
-
         <jsp:include page="Sidebar.jsp"/>
-
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb side">
@@ -50,10 +51,7 @@
                                     <a class="btn btn-add btn-sm" href="productmanager?action=insert" title="Thêm"><i class="fas fa-plus"></i>
                                         Insert a new Product</a>
                                 </div>
-                                <div class="col-sm-2">
-                                    <a class="btn btn-delete btn-sm print-file" type="button" title="In" onclick="myApp.printTable()"><i
-                                            class="fas fa-print"></i> Print</a>
-                                </div>
+
                             </div>
 
                             <table class="table table-hover table-bordered" id="sampleTable">
@@ -71,24 +69,31 @@
                                         <th>Action</th>
                                     </tr>
                                 </thead>
+
                                 <tbody>
                                     <c:forEach items="${ProductData}" var="p">
                                         <tr>
-                                            <td>${p.productId}</td>
-                                            <td>${p.model}</td>
-                                            <td>${p.name}</td>
-                                            <td>${p.description}</td>
-                                            <td>${p.catergoryId}</td>
-                                            <td>${p.price}</td>
-                                            <td>${p.sold}</td>
-                                            <td>${p.quantity}</td>
-                                            <td>null</td>
+                                            <td>${p.ProductID}</td>
+                                            <td>${p.Model}</td>
+                                            <td>${p.Name}</td>
+                                            <td>${p.Description}</td>
+                                            <td>${productDao.findCategoryByProductId(p.CategoryID)}</td>
+                                            <td>${p.Price}</td>
+                                            <td>${p.Sold}</td>
+                                            <td>${p.Quantity}</td>
                                             <td>
-                                                <button class="btn btn-primary btn-sm trash" type="button" title="Delete" value="${p.productId}"><i
+                                                <c:forEach var="image" items="${p.Images}">
+                                                    <div>
+                                                        <img src="${image.source}" alt="${image.alt}" width="90px;"/>
+                                                    </div>
+                                                </c:forEach>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm trash" type="button" title="Delete" value="${p.ProductID}"><i
                                                         class="fas fa-trash-alt"></i>
                                                 </button>
                                                 <button class="btn btn-primary btn-sm edit" type="button" title="Edit" id="show-emp"
-                                                        data-toggle="modal" data-target="#ModalUP${p.productId}"><i class="fas fa-edit"></i>
+                                                        data-toggle="modal" data-target="#ModalUP${p.ProductID}"><i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -97,10 +102,10 @@
                                         MODAL
                                         -->
 
-                                    <div class="modal fade" id="ModalUP${p.productId}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+                                    <div class="modal fade" id="ModalUP${p.ProductID}" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
                                          data-keyboard="false">
                                         <div class="modal-dialog modal-dialog-centered" role="document">
-                                            <form action="update?action=updateproduct">
+                                            <form action="update"  enctype="multipart/form-data">
                                                 <div class="modal-content">
                                                     <div class="modal-body">
                                                         <div class="row">
@@ -118,7 +123,7 @@
                                                                         <option value="${b.brandID}">${b.brandName}</option>
                                                                     </c:forEach>
                                                                 </select>
-                                                                <input class="form-control" type="hidden" readonly name="product_id" value="${p.productId}">
+                                                                <input class="form-control" type="hidden" readonly name="product_id" value="${p.ProductID}">
                                                             </div>
                                                             <!--                                                            <div class="form-group col-md-6">
                                                                                                                             <label for="exampleSelect1" class="control-label">Category</label>
@@ -138,36 +143,36 @@
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Product Name</label>
-                                                                <input class="form-control" type="text" name="product_name" value="${p.name}" required>
+                                                                <input class="form-control" type="text" name="product_name" value="${p.Name}" required>
                                                             </div>
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Price</label>
-                                                                <input class="form-control" type="number" name="product_price" value="${p.price}" required>
+                                                                <input class="form-control" type="number" name="product_price" value="${p.Price}" required>
                                                             </div>
                                                             <div class="form-group col-md-6">
-                                                                <label class="control-label">Color</label>
-                                                                <input class="form-control" name="product_color" type="text" value="${p.colorId}">
+                                                                <label class="control-label">Model</label>
+                                                                <input class="form-control" name="product_model" type="text" value="${p.Model}">
                                                             </div>
 
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Size</label>
-                                                                <input class="form-control" name="product_size" type="text" value="${p.sizeId}">
+                                                                <input class="form-control" name="product_size" type="text" value="${p.SizeId}">
                                                             </div>
 
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Description</label>
-                                                                <input class="form-control" type="text" name="product_describe" value="${p.description}">
+                                                                <input class="form-control" type="text" name="product_describe" value="${p.Description}">
                                                             </div>
 
                                                             <div class="form-group col-md-6">
                                                                 <label class="control-label">Quantity</label>
-                                                                <input class="form-control" type="text" name="product_quantity" value="${p.quantity}">
+                                                                <input class="form-control" type="text" name="product_quantity" value="${p.Quantity}">
                                                             </div>
                                                             <!--anh san pham-->
                                                             <div class="form-group col-md-12">
                                                                 <label class="control-label">Product Image</label>
-                                                                <div id="myfileupload">
-                                                                    <input type="file" id="uploadfile" name="product_img" onchange="readURL(this);" />
+                                                                <div >
+                                                                    <input type="file"  name="product_img"  />
                                                                 </div>
                                                                 <div id="thumbbox">
                                                                     <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -217,47 +222,47 @@
         <script type="text/javascript" src="admin/js/plugins/jquery.dataTables.min.js"></script>
         <script type="text/javascript" src="admin/js/plugins/dataTables.bootstrap.min.js"></script>
         <script type="text/javascript">
-                                                                        $('#sampleTable').DataTable();
-                                                                        //Thời Gian
-                                                                        function time() {
-                                                                            var today = new Date();
-                                                                            var weekday = new Array(7);
-                                                                            weekday[0] = "Sunday";
-                                                                            weekday[1] = "Monday";
-                                                                            weekday[2] = "Tuesday";
-                                                                            weekday[3] = "Wednesday ";
-                                                                            weekday[4] = "Thursday";
-                                                                            weekday[5] = "Friday";
-                                                                            weekday[6] = "Saturday";
-                                                                            var day = weekday[today.getDay()];
-                                                                            var dd = today.getDate();
-                                                                            var mm = today.getMonth() + 1;
-                                                                            var yyyy = today.getFullYear();
-                                                                            var h = today.getHours();
-                                                                            var m = today.getMinutes();
-                                                                            var s = today.getSeconds();
-                                                                            m = checkTime(m);
-                                                                            s = checkTime(s);
-                                                                            nowTime = h + " : " + m + " : " + s;
-                                                                            if (dd < 10) {
-                                                                                dd = '0' + dd
-                                                                            }
-                                                                            if (mm < 10) {
-                                                                                mm = '0' + mm
-                                                                            }
-                                                                            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
-                                                                            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
-                                                                                    '</span>';
-                                                                            document.getElementById("clock").innerHTML = tmp;
-                                                                            clocktime = setTimeout("time()", "1000", "Javascript");
+        $('#sampleTable').DataTable();
+        //Thời Gian
+        function time() {
+            var today = new Date();
+            var weekday = new Array(7);
+            weekday[0] = "Sunday";
+            weekday[1] = "Monday";
+            weekday[2] = "Tuesday";
+            weekday[3] = "Wednesday ";
+            weekday[4] = "Thursday";
+            weekday[5] = "Friday";
+            weekday[6] = "Saturday";
+            var day = weekday[today.getDay()];
+            var dd = today.getDate();
+            var mm = today.getMonth() + 1;
+            var yyyy = today.getFullYear();
+            var h = today.getHours();
+            var m = today.getMinutes();
+            var s = today.getSeconds();
+            m = checkTime(m);
+            s = checkTime(s);
+            nowTime = h + " : " + m + " : " + s;
+            if (dd < 10) {
+                dd = '0' + dd
+            }
+            if (mm < 10) {
+                mm = '0' + mm
+            }
+            today = day + ', ' + dd + '/' + mm + '/' + yyyy;
+            tmp = '<span class="date"> ' + today + ' - ' + nowTime +
+                    '</span>';
+            document.getElementById("clock").innerHTML = tmp;
+            clocktime = setTimeout("time()", "1000", "Javascript");
 
-                                                                            function checkTime(i) {
-                                                                                if (i < 10) {
-                                                                                    i = "0" + i;
-                                                                                }
-                                                                                return i;
-                                                                            }
-                                                                        }
+            function checkTime(i) {
+                if (i < 10) {
+                    i = "0" + i;
+                }
+                return i;
+            }
+        }
         </script>
         <script>
 

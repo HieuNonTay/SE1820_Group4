@@ -139,11 +139,10 @@
         </style>
         <!-- Navbar-->
         <jsp:include page="Sidebar.jsp"/>
-
         <main class="app-content">
             <div class="app-title">
                 <ul class="app-breadcrumb breadcrumb">
-                    <li class="breadcrumb-item"><a href="productmanager">Products</a></li>
+                    <li class="breadcrumb-item">Product List</li>
                     <li class="breadcrumb-item"><a href="#">Add products</a></li>
                 </ul>
             </div>
@@ -159,7 +158,7 @@
                                 </div>
                             </div>
 
-                            <form class="row" action="addproduct?action=insertproduct" >
+                            <form class="row" action="addproduct" method="POST" enctype="multipart/form-data">
                                 <div class="form-group col-md-3">
                                     <label class="control-label">Product Name</label>
                                     <input class="form-control" name="product_name" type="text">
@@ -206,8 +205,8 @@
                                 </div>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Product Image</label>
-                                    <div id="myfileupload">
-                                        <input type="file" id="uploadfile" name="product_img" onchange="readURL(this);" />
+                                    <div >
+                                        <input type="file"  name="product_img"  />
                                     </div>
                                     <div id="thumbbox">
                                         <img height="450" width="400" alt="Thumb image" id="thumbimage" style="display: none" />
@@ -278,25 +277,25 @@
         <script src="admin/js/main.js"></script>
         <script src="admin/js/plugins/pace.min.js"></script>
         <script>
-                                            const inpFile = document.getElementById("inpFile");
-                                            const loadFile = document.getElementById("loadFile");
-                                            const previewContainer = document.getElementById("imagePreview");
-                                            const previewContainer = document.getElementById("imagePreview");
-                                            const previewImage = previewContainer.querySelector(".image-preview__image");
-                                            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
-                                            const object = new ActiveXObject("Scripting.FileSystemObject");
-                                            inpFile.addEventListener("change", function () {
-                                                const file = this.files[0];
-                                                if (file) {
-                                                    const reader = new FileReader();
-                                                    previewDefaultText.style.display = "none";
-                                                    previewImage.style.display = "block";
-                                                    reader.addEventListener("load", function () {
-                                                        previewImage.setAttribute("src", this.result);
-                                                    });
-                                                    reader.readAsDataURL(file);
-                                                }
-                                            });
+            const inpFile = document.getElementById("inpFile");
+            const loadFile = document.getElementById("loadFile");
+            const previewContainer = document.getElementById("imagePreview");
+            const previewContainer = document.getElementById("imagePreview");
+            const previewImage = previewContainer.querySelector(".image-preview__image");
+            const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+            const object = new ActiveXObject("Scripting.FileSystemObject");
+            inpFile.addEventListener("change", function () {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    previewDefaultText.style.display = "none";
+                    previewImage.style.display = "block";
+                    reader.addEventListener("load", function () {
+                        previewImage.setAttribute("src", this.result);
+                    });
+                    reader.readAsDataURL(file);
+                }
+            });
 
 
         </script>

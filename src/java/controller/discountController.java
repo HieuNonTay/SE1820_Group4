@@ -46,7 +46,7 @@ public class discountController extends HttpServlet {
         req.setAttribute("discounts", d.getListDiscountByTypeAndSearchAndPage(Integer.parseInt(page), null, search));
 //        req.setAttribute("types", n.getListContentsByName("discountFilter"));
 
-        req.getRequestDispatcher("discount.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/discount.jsp").forward(req, resp);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class discountController extends HttpServlet {
         //req.setAttribute("discounts", d.getListDiscount());
         req.setAttribute("discounts", d.getListDiscountByTypeAndSearchAndPage(1, null, null));
 
-        req.getRequestDispatcher("discount.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/discount.jsp").forward(req, resp);
     }
 
     public int calThePage(int sizePage, String search) {

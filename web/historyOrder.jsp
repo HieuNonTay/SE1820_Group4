@@ -1,6 +1,6 @@
 
 
-<%@page import="java.sql.ResultSet, entity.*, dao.*, java.util.*"%>
+<%@page import="java.sql.ResultSet, entity.*, dao.*, java.util.*,  java.text.DecimalFormat"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="pageSize" value="9" />
@@ -92,6 +92,7 @@
                         <tbody>
                             <% 
                                 Vector<Order> listOrder = (Vector<Order>) request.getAttribute("listOrder");
+                                DecimalFormat df = new DecimalFormat("#,###");
                                 for (Order order : listOrder) { 
                             %>
                             <tr>
@@ -102,11 +103,11 @@
                                 <td><%= order.getLine1()%></td>
                                 <td><%= order.getLine2()%></td>
                                 <td><%= order.getCity()%></td>
-                                <td><%= order.getTotal()%></td>
+                                <td><%=df.format(order.getTotal()).replace(",",".")%></td>
                                 <td><%= order.getStatus()%></td>
 
                                 <td>
-                                    <a href="order?service=View&id=<%=order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
+                                    <a href="historyOrder?service=detail&id=<%=order.getOrderId()%>" class="btn btn-sm btn-primary">View</a>
                                 </td>
                                 <% if(order.getStatus() != null && order.getStatus().equals("Pending")) { %>
                                 <td>

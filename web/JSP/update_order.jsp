@@ -4,7 +4,7 @@
     Author     : DELL
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@page import="java.sql.ResultSet, java.util.*, entity.*, dao.*" %>
+<%@page import="java.sql.ResultSet, java.util.*, entity.*, dao.*, java.text.DecimalFormat" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <c:set var="pageSize" value="9" />
 <!DOCTYPE html>
@@ -62,7 +62,8 @@
             </ol>
         </div>
         <%
-          Order order = (Order)request.getAttribute("order");
+                  DecimalFormat df = new DecimalFormat("#,###");
+                  Order order = (Order)request.getAttribute("order");
         %>
 
         <div class="container" style="margin-top: 10px">
@@ -95,7 +96,7 @@
                         </div>
                         <div class="form-group">
                             <label for="total">Total:</label>
-                            <input type="text" class="form-control" id="total" name="total" value="<%= order.getTotal() %>" readonly>
+                            <input type="text" class="form-control" id="total" name="total" value="<%=df.format(order.getTotal()).replace(",", ".")%> VND" readonly>
                         </div>
                         <div class="form-group">
                             <label for="address">Address:</label>
@@ -110,7 +111,6 @@
                 </div>
             </div>
         </div>
-
     <head>
         <style>
             table {
@@ -130,37 +130,45 @@
             }
         </style>
     </head>
-    <body>
 
-        <h2>Order Detail List</h2>
+    <div class="container" style="margin-top: 10px">
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Order Detail List</h2>
 
-        <table>
-            <tr>
+                <table>
+                    <tr>
 
-                <th>OrderID</th>
-                <th>Product Name</th>
-                <th>Quantity</th>
-                <th>Price</th>
-            </tr>
-            <% Vector<OrderDetail> listOrderDetail = (Vector<OrderDetail>)request.getAttribute("listOrderDetail"); 
-                for (OrderDetail orderDetail : listOrderDetail) { 
-                ProductDAO productDAO = new ProductDAO();
-                Product product = productDAO.getById(orderDetail.getProductID());
+                        <th>OrderID</th>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                        <th>Price</th>
+                    </tr>
+                    <% 
+               
+                        Vector<OrderDetail> listOrderDetail = (Vector<OrderDetail>)request.getAttribute("listOrderDetail"); 
+                        for (OrderDetail orderDetail : listOrderDetail) { 
+                        ProductDAO productDAO = new ProductDAO();
+                        Product product = productDAO.getById(orderDetail.getProductID());
                 
-            %>
-            <tr>
-                <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
-                <td><%= orderDetail.getOrderID()%></td>
-                <td><%= product.getName()%></td>
-                <td><%= orderDetail.getQuantity()%></td>
-                <td><%= orderDetail.getPrice()%></td>
-            </tr>
-            <%}%>
+                    %>
+                    <tr>
+                        <!-- Giả sử các giá trị được hiển thị là các giá trị cụ thể từ cơ sở dữ liệu -->
+                        <td><%= orderDetail.getOrderID()%></td>
+                        <td><%= product.getName()%></td>
+                        <td><%= orderDetail.getQuantity()%></td>
+                        <td><%=df.format((orderDetail.getPrice()*orderDetail.getQuantity())).replace(",",".")%> VND</td>
+
+                    </tr>
+                    <%}%>
 
 
-        </table>
+                </table>
+            </div>
+        </div>
+    </div>
 
-    </body>
+
     <jsp:include page="footer.jsp"/>
 
 

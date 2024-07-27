@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
 import dao.CategoryDAO;
@@ -23,11 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.util.Vector;
 import java.sql.Timestamp;
+import java.util.Map;
 
-/**
- *
- * @author Khuong Hung
- */
 public class ProductManagerController extends HttpServlet {
 
     /**
@@ -54,14 +46,16 @@ public class ProductManagerController extends HttpServlet {
             if (action == null || action.equalsIgnoreCase("back")) {
                 ProductDAO productDao = new ProductDAO();
                 CategoryDAO categoryDAO = new CategoryDAO();
-                List<Product> listProduct;
+                List<Map<String, Object>> listProduct;
                 List<Brand> brands;
                 brands = productDao.getBrands("select * from brand");
-                listProduct = productDao.getAllProduct();
+                listProduct = productDao.getAllProductImage();
                 List<Category> category = categoryDAO.getAll("select * from Category");
                 request.setAttribute("CategoryData", category);
                 request.setAttribute("ProductData", listProduct);
                 request.setAttribute("BrandData", brands);
+                request.setAttribute("productDao", productDao);
+
                 request.getRequestDispatcher("/admin/product.jsp").forward(request, response);
             } else if (action.equalsIgnoreCase("insert")) {
                 List<Brand> brands;

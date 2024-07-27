@@ -20,13 +20,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Vector;
 import java.sql.Timestamp;
 
-/**
- *
- * @author Khuong Hung
- */
+@MultipartConfig
 public class AddProductController extends HttpServlet {
 
     /**
@@ -53,19 +54,42 @@ public class AddProductController extends HttpServlet {
             String product_size = request.getParameter("size");
             String product_color = request.getParameter("color");
             String product_quantity = request.getParameter("quantity");
-            String product_img = "null";
             String product_describe = request.getParameter("describe");
             int quantity = Integer.parseInt(product_quantity);
             int brandId = Integer.parseInt(brand_id);
             double price = Double.parseDouble(product_price);
             int cid = Integer.parseInt(category_id);
             ProductDAO productDao = new ProductDAO();
-
             Timestamp publicationDate = new Timestamp(System.currentTimeMillis());
             Timestamp createdAt = new Timestamp(System.currentTimeMillis());
             Timestamp updatedAt = new Timestamp(System.currentTimeMillis());
+
+//            Part filePart = request.getPart("product_img");
+//            String imageFileName = filePart.getSubmittedFileName();
+//            String uploadPath = "E:/Ki5/SWP391/NeatBean/SE1820_Group4/web/assets/custom/images" + imageFileName;
+//            System.out.println(uploadPath);
+//            // Handle file upload
+//            File uploadDir = new File(getServletContext().getRealPath("") + "images");
+//            if (!uploadDir.exists()) {
+//                uploadDir.mkdir();
+//            }
+            Part file = request.getPart("product_img");
+            String imageFileName = file.getSubmittedFileName();
+            String uploadPath = "E:/Ki5/SWP391/NeatBean/SE1820_Group4/web/assets/custom/images/" + imageFileName;
+            FileOutputStream fos = new FileOutputStream(uploadPath);
+            InputStream is = file.getInputStream();
+            byte[] data = new byte[is.available()];
+            is.read(data);
+            fos.write(data);
+            fos.close();
+            byte[] buffer = new byte[1024];
+            int bytesRead;
+            while ((bytesRead = is.read(buffer)) != -1) {
+                fos.write(buffer, 0, bytesRead);
+            }
+
             Product product = new Product(product_name, product_model, brandId, cid, 1, 1, product_describe, price, quantity, 0, 0, publicationDate, createdAt, updatedAt);
-            productDao.insertProduct(product);
+            productDao.insertProduct(product, "assets/custom/images/" + imageFileName);
             response.sendRedirect("productmanager?action=back");
 
         } catch (Exception e) {

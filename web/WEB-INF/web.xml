@@ -8,6 +8,10 @@
         <filter-name>HomeFilter</filter-name>
         <url-pattern>/*</url-pattern>
     </filter-mapping>-->
+    <filter-mapping>
+        <filter-name>StaffAccountFilter</filter-name>
+        <url-pattern>/accountmanager</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>CartController</servlet-name>
         <servlet-class>controller.CartController</servlet-class>
@@ -102,7 +106,7 @@
     </servlet>
     <servlet>
         <servlet-name>DashBoardController</servlet-name>
-        <servlet-class>controller.admin.DashBoardController</servlet-class>
+        <servlet-class>controller.dashboard.DashBoardController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgotPasswordController</servlet-name>
@@ -111,6 +115,14 @@
     <servlet>
         <servlet-name>SendEmailController</servlet-name>
         <servlet-class>controller.SendEmailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ManageAccountController</servlet-name>
+        <servlet-class>controller.ManageAccountController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>StaffAccountFilter</servlet-name>
+        <servlet-class>filter.StaffAccountFilter</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>CartController</servlet-name>
@@ -271,6 +283,14 @@
     <servlet-mapping>
         <servlet-name>SendEmailController</servlet-name>
         <url-pattern>/sendEmail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ManageAccountController</servlet-name>
+        <url-pattern>/accountmanager</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>StaffAccountFilter</servlet-name>
+        <url-pattern>/StaffAccountFilter</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>404</error-code>

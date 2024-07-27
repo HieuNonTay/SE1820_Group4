@@ -5,8 +5,6 @@
 --%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@page import="java.sql.ResultSet, entity.*, dao.*, java.util.*"%>
-<%@ page import="java.text.DecimalFormat" %>
 <c:set var="pageSize" value="9" />
 <!DOCTYPE html>
 <html lang="en">
@@ -48,6 +46,14 @@
 
 
     </head>
+    <style>
+        .product-image {
+            width: 100%;
+            height: 150px;
+            object-fit: cover; /* Ensures the image covers the box, maintaining aspect ratio */
+            border-radius: 0; /* Remove rounded corners if any */
+        }
+    </style>
 
     <body>
 
@@ -77,25 +83,12 @@
                 <div class="col-12 col-md-4 col-lg-3">
                     <div class="fables-store-search mb-4">
                         <form action="product" method="get"> 
-                            <div class="input-group">
-                                <input name="search" type="text" class="form-control rounded-0 font-14 fables-store-input pl-5 py-2" placeholder="Search Product">
-                                <div class="input-group-append">
-                                    <button type="submit" name="submit" value="submit" id="search-icon-1" class="btn btn-secondary"><i class="fa fa-search"></i></button>
-                                </div>
-                            </div>
+                            <div class="input-icon">
+                                <span class="fables-iconsearch-icon fables-input-icon"></span>
+                                <input name="search" type="text" class="form-control rounded-0 form-control rounded-0 font-14 fables-store-input pl-5 py-2"  placeholder="Search Product">
+                                <button type="submit" name="submit" value="submit" id="search-icon-1" class="input-group-text p-3"><i class="fa fa-search"></i></button>
 
-                            <style>
-                                .input-group {
-                                    display: flex;
-                                }
-                                .form-control {
-                                    border-radius: 0;
-                                }
-                                .input-group-append .btn {
-                                    border-radius: 0;
-                                    height: auto;
-                                }
-                            </style>
+                            </div>
 
                         </form>
                     </div>
@@ -128,63 +121,46 @@
                 </div>
                 <div class="col-12 col-md-8 col-lg-9"> 
                     <div class="row mb-4">
-                        <!--                        <div class="col-12 col-lg-4">
-                                                    <form> 
-                                                        <div class="form-group mb-0"> 
-                                                            <select class="form-control rounded-0">
-                                                                <option value="" selected>default sorting</option>
-                                                                <option>2</option>
-                                                                <option>3</option>
-                                                                <option>4</option>
-                                                                <option>5</option>
-                                                            </select>
-                                                        </div> 
-                                                    </form>
-                                                </div>-->
                         <div class="col-4 col-md-6 col-lg-2 offset-lg-6 text-center pl-0 d-none d-lg-block">
                             <span class="fables-iconlist fa-fw fables-view-btn fables-list-btn fables-third-border-color fables-third-text-color"></span>
                             <span class="fables-icongrid active fa-fw fables-view-btn fables-grid-btn fables-third-border-color fables-third-text-color"></span>
                         </div>
                     </div>
                     <div class="row">
-                        <%
-                        Vector<Product> listProduct = (Vector<Product>) request.getAttribute("listProduct");
-                            for (Product product : listProduct) {
-                                BrandDAO brandDao = new BrandDAO();
-                                Brand brand = brandDao.getById(product.getBrandId());
-                                ProductDAO productDao = new ProductDAO();
-                                String image = productDao.getImage(product.getProductId());
-                                DecimalFormat formatter = new DecimalFormat("#,###");
-                                String formattedPrice = formatter.format(product.getPrice());
-                        %>
-                        <div class="col-12 col-sm-6 col-lg-4 fables-product-block">
-                            <div class="card rounded-0 mb-4">
-                                <div class="row">
-                                    <div class="fables-product-img col-12">
-                                        <img class="card-img-top rounded-0" src="<%=image%>" height="250" width="300" alt="Product Image">
-                                        <div class="fables-img-overlay">                                          
-                                            <ul class="nav fables-product-btns">
-                                                <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>
-                                                <li><a href="" class="fables-product-btn"><span class="fables-iconcompare"></span></a></li>
-                                                <li><button class="fables-product-btn"><span class="fables-iconheart"></span></button></li>
-                                            </ul>
+                        <c:forEach items="${listProduct}"
+                                   var="product" >
+
+                            <div class="col-12 col-sm-6 col-lg-4 fables-product-block">
+                                <div class="card rounded-0 mb-4">
+                                    <div class="row">
+                                        <c:forEach var="image" items="${product.Images}">
+                                            <div class="fables-product-img col-12">
+                                                <img class="card-img-top product-image" src="${image.source}" alt="${image.alt}">
+                                                <div class="fables-img-overlay">
+                                                    <ul class="nav fables-product-btns">
+                                                        <li><a href="" class="fables-product-btn"><span class="fables-iconeye"></span></a></li>
+                                                        <li><a href="" class="fables-product-btn"><span class="fables-iconcompare"></span></a></li>
+                                                        <li><button class="fables-product-btn"><span class="fables-iconheart"></span></button></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+
+                                        </c:forEach>
+                                        <div class="card-body col-12">
+                                            <h5 class="card-title mx-xl-3">
+                                                <a href="detail?action=productdetail&product_id=${product.ProductID}" class="fables-main-text-color fables-store-product-title fables-second-hover-color">${product.Name}</a>
+                                            </h5>
+                                            <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3">${productDao.findCategoryByProductId(product.CategoryID)}</p>
+                                            <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3">${product.Price} $</p>
+                                            <p class="fables-product-info">
+                                                <a href="CartURL?service=addToCart&id=${product.ProductID}" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
+                                                    <span class="fables-iconcart"></span> 
+                                                    <span class="fables-btn-value">ADD TO CART</span></a></p>
                                         </div>
                                     </div>
-                                    <div class="card-body col-12">
-                                        <h5 class="card-title mx-xl-3">
-                                            <a href="detail?action=productdetail&product_id=<%=product.getProductId()%>" class="fables-main-text-color fables-store-product-title fables-second-hover-color"><%=product.getName()%></a>
-                                        </h5>
-                                        <p class="store-card-text fables-fifth-text-color font-15 mx-xl-3"><%=brand.getBrandName()%></p>
-                                        <p class="font-15 font-weight-bold fables-second-text-color my-2 mx-xl-3"><%=formattedPrice%> VND</p>
-                                        <p class="fables-product-info">
-                                            <a href="CartURL?service=addToCart&id=<%=product.getProductId()%>" class="btn fables-second-border-color fables-second-text-color fables-btn-rouned fables-hover-btn-color font-14 p-2 px-2 px-xl-4">
-                                                <span class="fables-iconcart"></span> 
-                                                <span class="fables-btn-value">ADD TO CART</span></a></p>
-                                    </div>
                                 </div>
-                            </div>
-                        </div>  
-                        <%}%>
+                            </div>  
+                        </c:forEach>
                     </div> 
                     <nav aria-label="Page navigation">
                         <ul class="pagination justify-content-center">                                 

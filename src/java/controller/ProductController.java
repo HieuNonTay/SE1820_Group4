@@ -1,9 +1,5 @@
 package controller;
 
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
- */
 import dao.CategoryDAO;
 import dao.ProductDAO;
 import entity.Category;
@@ -15,9 +11,13 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 /**
@@ -28,15 +28,16 @@ import java.util.stream.Collectors;
 public class ProductController extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException, SQLException {
         try {
             HttpSession session = request.getSession(true);
             String service = request.getParameter("service");
             String submit = request.getParameter("submit");
             ProductDAO productDao = new ProductDAO();
             CategoryDAO categoryDAO = new CategoryDAO();
-            Vector<Product> listProduct;
-            listProduct = productDao.getAll();
+//            List<Map<String, Object>> listProduct = null;
+            List<Map<String, Object>> product = null;
+//            listProduct = productDao.getAll();
             List<Category> categorys = categoryDAO.getAll("select * from Category");
 
             if (service == null) {
@@ -44,37 +45,36 @@ public class ProductController extends HttpServlet {
             }
             String sql = "select * from product";
             if (submit == null) {
-                listProduct = productDao.getAll();
+                product = productDao.getAllProductImage();
             } else {
 
                 String productName = request.getParameter("search");
-                listProduct = productDao.searchProduct(productName);
-                System.out.println("duoc");
+                product = productDao.searchProduct(productName);
+//                listProduct.stream().forEach(y -> System.err.println(y));
             }
             request.setAttribute("categorys", categorys);
-            request.setAttribute("listProduct", listProduct);
+            request.setAttribute("listProduct", product);
+            request.setAttribute("productDao", productDao);
             if (service.equals("product")) {
                 request.getRequestDispatcher("/product_list.jsp").forward(request, response);
             } else if (service.equals("category")) {
                 int product_id = Integer.parseInt(request.getParameter("product_id"));
                 int catedoryID = productDao.findCategoryIdByProductId(product_id);
-                List<Product> list = productDao.findProductsByCategoryId(catedoryID);
+                List<Map<String, Object>> list = productDao.findProductsByCategoryId(catedoryID);
                 request.setAttribute("listProduct", list);
                 request.getRequestDispatcher("/product_list.jsp").forward(request, response);
             } else if (service.equals("categoryFilter")) {
                 String name = request.getParameter("name");
                 List<Category> categorys1 = categoryDAO.searchCategory(name);
                 int ca_id = categoryDAO.getCategoryIdByName(name);
-                List<Product> list = productDao.findProductsByCategoryId(ca_id);
+                List<Map<String, Object>> list = productDao.findProductsByCategoryId(ca_id);
                 request.setAttribute("listProduct", list);
                 request.getRequestDispatcher("/product_list.jsp").forward(request, response);
             } else if (service.equals("filterPrice")) {
                 String sortOrder = request.getParameter("sortOrder");
                 double passPrice = Double.parseDouble(request.getParameter("passPrice"));
-                System.out.println(passPrice);
-                System.out.println("hello");
-                System.out.println(sortOrder);
-                List<Product> list = productDao.filterProductsByPrice(passPrice, sortOrder);
+                List<Map<String, Object>> list = productDao.filterProductsByPrice(passPrice, sortOrder);
+                list.stream().forEach(y -> System.err.println(y));
                 request.setAttribute("listProduct", list);
                 request.getRequestDispatcher("/product_list.jsp").forward(request, response);
             }
@@ -86,14 +86,22 @@ public class ProductController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

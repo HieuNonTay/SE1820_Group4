@@ -48,7 +48,7 @@ public class OrderController extends HttpServlet {
             listOrder = orderDao.searchOrder(searchQuery);
             request.setAttribute("searchQuery", searchQuery);
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("orderManage.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/order.jsp").forward(request, response);
 
         } else if (service.equals("View")) {
             int orderId = Integer.parseInt(request.getParameter("id"));
@@ -60,7 +60,7 @@ public class OrderController extends HttpServlet {
         } else {
             listOrder = orderDao.getAll();
             request.setAttribute("listOrder", listOrder);
-            request.getRequestDispatcher("admin/order.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/order.jsp").forward(request, response);
         }
     }
 
@@ -107,9 +107,11 @@ public class OrderController extends HttpServlet {
             if (update > 0) {
                 System.out.println("duoc");
                 response.sendRedirect("order");
+                return;
             } else {
                 System.out.println("chua duoc");
                 response.sendRedirect("order");
+                return;
             }
 
         }

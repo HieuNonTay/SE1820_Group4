@@ -139,9 +139,7 @@
                                     </div>
                                 </div>
                                 <!-- Save changes button-->
-                                <button type="submit" class="btn btn-primary" onclick="setFormAction('updateInfo');">Save changes</button>
-                                <!-- Log Out button-->
-                                <button type="submit" class="btn btn-danger"  onclick="setFormAction('logout');">Log Out</button>
+                                <button type="submit" class="btn btn-primary" onclick="setFormAction('updateInfo');">Save changes</button>                                
 
                             </form>
                         </div>

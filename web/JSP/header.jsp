@@ -62,7 +62,7 @@
                         int cartItemCount = 0;
                         while (emm1.hasMoreElements()) {
                             String key = emm1.nextElement();
-                            if (!key.equals("acc") && !key.equals("vecKey")) {
+                            if (!key.equals("acc") && !key.equals("vecKey")||key.equals("products")||key.equals("functionToast")||key.equals("roleID")||key.equals("roleName")) {
                                 cartItemCount++;
                             }
                         }
@@ -83,13 +83,13 @@
                                     //    return df.format(price);
                                     //}
                                     Enumeration<String> em = session1.getAttributeNames();
-                                    DecimalFormat df = new DecimalFormat("#.##");
+                                    DecimalFormat df = new DecimalFormat("#,###");
                                     double grandTotal = 0;
                                     int itemCount = 0;
                                     Vector<String> vecKey = new Vector<>();
                                     while(em.hasMoreElements()){
                                         String key = em.nextElement().toString();
-                                        if(key.equals("vecKey") ||key.equals("acc")||key.equals("products")||key.equals("functionToast") ){
+                                        if(key.equals("vecKey") ||key.equals("acc")||key.equals("products")||key.equals("functionToast") ||key.equals("roleID")||key.equals("roleName")){
                                             continue;
                                         }else{
                                             vecKey.add(key);
@@ -146,6 +146,9 @@
                                     <li><a href="updateInfo"  class="dropdown-item"> Profile </a></li>
                                     <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
                                     <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
+                                        <c:if test="${sessionScope.acc.roleID != 2}">
+                                        <li><a href="dashboard"  class="dropdown-item"> Dash Board </a></li>
+                                        </c:if>
                                 </ul>
                             </div>  
                         </div>

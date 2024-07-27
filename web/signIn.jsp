@@ -71,7 +71,7 @@
             <div class="row my-4 my-lg-5">
                 <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 text-center">
                     <p class="font-20 semi-font fables-main-text-color mt-4 mb-4 mb-lg-5">Sign In</p>
-                    <form action="login" method="get">
+                    <form action="login" method="post">
 
                         <p class="text-danger">${mess}</p>                      
 

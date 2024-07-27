@@ -20,13 +20,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
 import java.util.Vector;
 import java.sql.Timestamp;
 
-/**
- *
- * @author Khuong Hung
- */
+@MultipartConfig
 public class UpdateProductController extends HttpServlet {
 
     /**
@@ -54,7 +55,7 @@ public class UpdateProductController extends HttpServlet {
             String product_quantity = request.getParameter("product_quantity");
             String product_model = request.getParameter("product_model");
             String brand_id = request.getParameter("brand_id");
-            String product_img = "null";
+            String product_img = request.getParameter("product_img");
             String product_describe = request.getParameter("product_describe");
             int quantity = Integer.parseInt(product_quantity);
             int brandId = Integer.parseInt(brand_id);
@@ -63,7 +64,8 @@ public class UpdateProductController extends HttpServlet {
             int pid = Integer.parseInt(product_id);
             ProductDAO productDao = new ProductDAO();
             Timestamp updatedAt = new Timestamp(System.currentTimeMillis());
-            productDao.updateProduct(pid, product_name, product_model, brandId, cid, cid, cid, product_describe, price, quantity, updatedAt);
+
+            productDao.updateProduct(pid, product_name, product_model, brandId, cid, cid, cid, product_describe, price, quantity, updatedAt, "assets/custom/images/" + product_img);
             response.sendRedirect("productmanager?action=back");
 
         } catch (Exception e) {

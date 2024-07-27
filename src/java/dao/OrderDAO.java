@@ -24,7 +24,8 @@ import model.DBContext;
 public class OrderDAO extends DBContext {
 
     public Vector<Order> getAll() {
-        String sql = "select * from [Order] Order by OrderDate DESC";
+        String sql = "select orderID, accountId, firstName, lastName, Orderdate, Discountcode,\n"
+                + "Total, line1, line2, city, province, createdAt, updatedAt, payment,[status] from [Order] Order by OrderDate DESC";
         Vector<Order> vector = new Vector<>();
         ResultSet rs = getData(sql);
 
@@ -93,7 +94,8 @@ public class OrderDAO extends DBContext {
     }
 
     public Order getById(int id) {
-        String sql = "Select * From [Order] o Where o.OrderID = ?;";
+        String sql = "Select orderID, accountId, firstName, lastName, Orderdate, Discountcode,\n"
+                + "Total, line1, line2, city, province, createdAt, updatedAt, payment,[status] From [Order] o Where o.OrderID = ?;";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
             pre.setInt(1, id);
@@ -125,7 +127,8 @@ public class OrderDAO extends DBContext {
     }
 
     public Vector<Order> getByAccountId(int accountID) {
-        String sql = "Select * From [Order] o Where o.AccountID = " + accountID + ";";
+        String sql = "Select orderID, accountId, firstName, lastName, Orderdate, Discountcode,\n"
+                + "Total, line1, line2, city, province, createdAt, updatedAt, payment,[status] From [Order] o Where o.AccountID = " + accountID + " ORDER BY Orderdate DESC;";
         Vector<Order> vector = new Vector<>();
         ResultSet rs = getData(sql);
         try {
@@ -159,10 +162,12 @@ public class OrderDAO extends DBContext {
     }
 
     public Vector<Order> searchOrder(String search) {
-        String sql = "SELECT * FROM [Order]\n"
+        String sql = "SELECT orderID, accountId, firstName, lastName, Orderdate, Discountcode,\n"
+                + "Total, line1, line2, city, province, createdAt, updatedAt, payment,[status] FROM [Order]\n"
                 + "WHERE firstName like '%" + search + "%' or lastName like '%" + search + "%' \n"
                 + "or line1 like '%" + search + "%' or line2 like '%" + search + "%' \n"
-                + "or city like '%" + search + "%' or [Status] like '%" + search + "%';";
+                + "or city like '%" + search + "%' or [Status] like '%" + search + "%'"
+                + "Order by OrderDate DESC;";
         Vector<Order> vector = new Vector<>();
         ResultSet rs = getData(sql);
         try {
@@ -278,15 +283,17 @@ public class OrderDAO extends DBContext {
     }
 
     public int cancelOrder(int orderId) {
-        String status = "Cancelled";
+
         int n = 0;
-        String sql = "UPDATE [dbo].[Order]\n"
-                + "   SET [Status] = ?"
-                + " WHERE [OrderId] = ?";
+        String sql = "UPDATE [Order]\n"
+                + "SET \n"
+                + "    [Status] = 'Cancelled',\n"
+                + "    UpdatedAt = GETDATE()  \n"
+                + "WHERE \n"
+                + "    orderID = ?";
         try {
             PreparedStatement pre = conn.prepareStatement(sql);
-            pre.setString(1, status);
-            pre.setInt(2, orderId);
+            pre.setInt(1, orderId);
             n = pre.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

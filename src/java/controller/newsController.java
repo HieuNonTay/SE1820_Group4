@@ -47,7 +47,7 @@ public class newsController extends HttpServlet {
         req.setAttribute("page", page);
         req.setAttribute("groups", ng.getListNewsGroup());
         req.setAttribute("news", n.getListByPagesAndGroupAndSortAndSearch(Integer.parseInt(page), grouped, "-1", search));
-        req.getRequestDispatcher("news.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/news.jsp").forward(req, resp);
     }
 
     @Override
@@ -69,7 +69,7 @@ public class newsController extends HttpServlet {
         req.setAttribute("news", newsDao.getListByPagesAndGroupAndSortAndSearch(1, "-1", "-1", null));
         req.setAttribute("groupBy", "0");
         req.setAttribute("search", "");
-        req.getRequestDispatcher("news.jsp").forward(req, resp);
+        req.getRequestDispatcher("/admin/news.jsp").forward(req, resp);
     }
 
     public int calThePage(int sizePage, int gid, String search) {

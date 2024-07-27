@@ -6,7 +6,7 @@
 <html lang="en">
 
     <head>
-        
+
         <!-- Title Page-->
         <title>Discount Detail Management</title>
 
@@ -69,7 +69,7 @@
         <link href="assets/custom/css/custom.css" rel="stylesheet">
         <!-- FABLES CUSTOM CSS RESPONSIVE FILE -->
         <link href="assets/custom/css/custom-responsive.css" rel="stylesheet">
-        
+
 
     </head>
 
@@ -77,260 +77,247 @@
         <%
             request.getSession().removeAttribute("functionToast");
         %>
-        
 
-            </header>
-            <!-- END HEADER MOBILE-->
-            <jsp:include page="header.jsp"/>
-            <!-- MENU SIDEBAR-->
-            
-            <!-- END MENU SIDEBAR-->
 
-            <!-- PAGE CONTAINER-->
-            <div class="page-container">
-                <!-- HEADER DESKTOP-->
-                
-                <!-- END HEADER DESKTOP-->
+    </header>
+    <!-- END HEADER MOBILE-->
+    <!-- MENU SIDEBAR-->
 
-                <!-- MAIN CONTENT-->
-                <div class="main-content">
-                    <div class="section__content section__content--p30">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <!-- DATA TABLE -->
-                                    <div class="table-responsive table-responsive-data2">
-                                        <h3 class="title-5 m-b-35">Add discount detail</h3>
-                                        <c:if test="${requestScope.updateDiscount == null}">
+    <!-- END MENU SIDEBAR-->
 
-                                            <form action="discountDetail" method="post">
-                                               
+    <!-- PAGE CONTAINER-->
+    <div class="page-container">
+        <!-- HEADER DESKTOP-->
 
-<!--                                                <div class="form-group">
-                                                    <label class="mr-2">Code</label>
-                                                    <input type="text" name="code" class="form-control" required="" value="${requestScope.code}" maxlength="14">
-                                                </div>-->
-                                                <h2 class="text-center" style="color: red">${sessionScope.errorCode}</h2>
-                                                <div class="form-group">
-                                                    <label class="mr-2">Name</label>
-                                                    <input type="text" name="name" class="form-control" value="${requestScope.name}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="mr-2">Amount (%)</label>                                                   
-                                                    <input type="number" step="any" name="amount" class="form-control" required="" value="${requestScope.amount}">
-                                                </div> 
-                                                <h2 class="text-center" style="color: red">${sessionScope.errorAmount}</h2>
-                                                <div class="form-group">
-                                                    <label class="mr-2">Description:</label>
-                                                    <textarea name="description" class="form-control">${requestScope.description}</textarea>
-                                                </div>         
-                                                <div class="form-group">
-                                                    <label class="mr-2">Type:</label>
-                                                    <input type="radio" name="type" value="User" onchange="show()" id="user" required> For the user &nbsp;
-                                                    <input type="radio" name="type" value="Product" onchange="show()" id="product" required> For the product<br> 
-                                                </div>
-                                                                                                     
-                                               
-                                                <div id="product-div" hidden>
-                                                    <div class="form-group" >
-                                                        <label class="mr-2">Product model code(s):</label>
-                                                        <select class="js-example-basic-multiple" name="models[]" multiple="multiple">
-                                                            <c:forEach var="pro" items="${sessionScope.products}">
-                                                                <option value="${pro.productId}">${pro.name}</option>
-                                                            </c:forEach>
-                                                        </select>                                                        
-                                                    </div>
-                                                    <div class="form-group">
-                                                        <label class="mr-2">From: </label>
-                                                        <input type="date" name="fromDate" class="form-control" required id="fromDate" value="${requestScope.fromDate}">
-                                                    </div> 
-                                                    <div class="form-group">
-                                                        <label class="mr-2">To: </label>
-                                                        <input type="date" name="toDate" class="form-control" required id="toDate" value="${requestScope.toDate}">
-                                                    </div> 
-                                                </div>
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <button class="au-btn au-btn-icon au-btn--blue au-btn--small" type="submit" name="submit" value="add">
-                                                        Submit</button>        
-                                                </div> 
-                                            </form>
-                                        </c:if>   
+        <!-- END HEADER DESKTOP-->
 
-                                        <c:if test="${requestScope.updateDiscount != null}">
-                                            <c:set var="ud" value="${requestScope.updateDiscount}" />
+        <!-- MAIN CONTENT-->
+        <div class="main-content">
+            <div class="section__content section__content--p30">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- DATA TABLE -->
+                            <div class="table-responsive table-responsive-data2">
 
-                                            <form action="discountDetail" method="post">
-                                                <h3 class="title-5 m-b-35">Update discount detail</h3>
+                                <c:if test="${requestScope.updateDiscount == null}">
+                                    <h3 class="title-5 m-b-35">Add discount detail</h3>
+                                    <form action="discountDetail" method="post">
 
-                                                <div class="form-group">
-                                                    <label class="mr-2">Code</label>
-                                                    <input type="text" name="code" class="form-control" required="" value="${ud.code}" readonly>
-                                                </div>
 
-                                                <div class="form-group">
-                                                    <label class="mr-2">Name</label>
-                                                    <input type="text" name="name" class="form-control" value="${ud.name}">
-                                                </div>
-                                                <div class="form-group">
-                                                    <label class="mr-2">Amount (%)</label>                                                   
-                                                    <input type="number" step="any" name="amount" class="form-control" required="" value="${ud.amount}"}>
-                                                </div> 
-                                                <h2 class="text-center" style="color: red">${sessionScope.errorAmount}</h2>
-                                                <div class="form-group">
-                                                    <label class="mr-2">Description:</label>
-                                                    <textarea name="description" class="form-control">${ud.description}</textarea>
-                                                </div>         
-                                                <div class="form-group">
-                                                    <label class="mr-2">Type: ${ud.type}</label>                                                                                     
-                                                </div>         
-                                                <c:if test="${requestScope.updateProductDiscount != null}">
-                                                    <c:set var="upd" value="${requestScope.updateProductDiscount}"/>
+                                        <!--                                                <div class="form-group">
+                                                                                            <label class="mr-2">Code</label>
+                                                                                            <input type="text" name="code" class="form-control" required="" value="${requestScope.code}" maxlength="14">
+                                                                                        </div>-->
+                                        <h2 class="text-center" style="color: red">${sessionScope.errorCode}</h2>
+                                        <div class="form-group">
+                                            <label class="mr-2">Name</label>
+                                            <input type="text" name="name" class="form-control" value="${requestScope.name}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mr-2">Amount (%)</label>                                                   
+                                            <input type="number" step="any" name="amount" class="form-control" required="" value="${requestScope.amount}">
+                                        </div> 
+                                        <h2 class="text-center" style="color: red">${sessionScope.errorAmount}</h2>
+                                        <div class="form-group">
+                                            <label class="mr-2">Description:</label>
+                                            <textarea name="description" class="form-control">${requestScope.description}</textarea>
+                                        </div>         
+                                        <div class="form-group">
+                                            <label class="mr-2">Type:</label>
 
-                                                    <%--<c:if test="${(requestScope.checkUpdate == false)}">--%>
-                                                        <div class="form-group">
-                                                            <label class="mr-2">Product model(s) of this discount: ${requestScope.updateModels}</label>   
-                                                            <input type="hidden" value="0" name="canUpdate"/>                                                            
-                                                        </div>                                                         
-                                                    <%--</c:if>--%>
-                                                    <%--<c:if test="${(requestScope.checkUpdate == true)}">--%>
-<!--                                                        <div class="form-group">
-                                                            <label class="mr-2">Product model(s) of this discount before update: ${requestScope.updateModels}</label>                                                    
-                                                        </div> 
-                                                        <div class="form-group" >
-                                                            <label class="mr-2">Product model code(s):</label>
-                                                            <select class="js-example-basic-multiple" name="models[]" multiple="multiple">
-                                                                <c:forEach var="pro" items="${sessionScope.products}">
-                                                                    <option value="${pro.productId}">${pro.name}</option>
-                                                                </c:forEach>
-                                                            </select>
-                                                            <input type="hidden" value="1" name="canUpdate"/>
-                                                        </div> -->
-                                                    <%--</c:if>--%>
+                                            <input type="radio" name="type" value="Product" onchange="show()" id="product" required> For the product<br> 
+                                        </div>
 
-                                                    <div class="form-group">
-                                                        <label class="mr-2">From: </label>
-                                                        <input type="date" name="fromDate" class="form-control" required value="${requestScope.updateFromDate}" readonly>
-                                                    </div> 
-                                                    <div class="form-group">
-                                                        <label class="mr-2">To: </label>
-                                                        <input type="date" name="toDate" class="form-control" required value="${requestScope.updateToDate}" readonly>
-                                                    </div> 
-                                                </c:if>
-                                                <input type="hidden" name="checkUpdate" value="${requestScope.checkUpdate}"> 
-                                                <div class="d-flex justify-content-center align-items-center">
-                                                    <button class="au-btn au-btn-icon au-btn--blue au-btn--small" type="submit" name="submit" value="update">
-                                                        Submit</button>        
-                                                </div>
-                                            </form>
-                                        </c:if>  
-                                    </div>
-                                </div>
+
+                                        <div id="product-div" hidden>
+                                            <div class="form-group" >
+                                                <label class="mr-2">Product model code(s):</label>
+                                                <select class="js-example-basic-multiple" name="models[]" multiple="multiple">
+                                                    <c:forEach var="pro" items="${sessionScope.products}">
+                                                        <option value="${pro.productId}">${pro.name}</option>
+                                                    </c:forEach>
+                                                </select>                                                        
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="mr-2">From: </label>
+                                                <input type="date" name="fromDate" class="form-control" required id="fromDate" value="${requestScope.fromDate}">
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="mr-2">To: </label>
+                                                <input type="date" name="toDate" class="form-control" required id="toDate" value="${requestScope.toDate}">
+                                            </div> 
+                                        </div>
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <button class="au-btn au-btn-icon au-btn--blue au-btn--small" type="submit" name="submit" value="add">
+                                                Submit</button>        
+                                        </div> 
+                                    </form>
+                                </c:if>   
+
+                                <c:if test="${requestScope.updateDiscount != null}">
+                                    <c:set var="ud" value="${requestScope.updateDiscount}" />
+
+                                    <form action="discountDetail" method="post">
+                                        <h3 class="title-5 m-b-35">Update discount detail</h3>
+
+                                        <div class="form-group">
+                                            <label class="mr-2">Code</label>
+                                            <input type="text" name="code" class="form-control" required="" value="${ud.code}" readonly>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="mr-2">Name</label>
+                                            <input type="text" name="name" class="form-control" value="${ud.name}">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="mr-2">Amount (%)</label>                                                   
+                                            <input type="number" step="any" name="amount" class="form-control" required="" value="${ud.amount}"}>
+                                        </div> 
+                                        <h2 class="text-center" style="color: red">${sessionScope.errorAmount}</h2>
+                                        <div class="form-group">
+                                            <label class="mr-2">Description:</label>
+                                            <textarea name="description" class="form-control">${ud.description}</textarea>
+                                        </div>         
+                                        <div class="form-group">
+                                            <label class="mr-2">Type: ${ud.type}</label>                                                                                     
+                                        </div>         
+                                        <c:if test="${requestScope.updateProductDiscount != null}">
+                                            <c:set var="upd" value="${requestScope.updateProductDiscount}"/>
+
+                                            <%--<c:if test="${(requestScope.checkUpdate == false)}">--%>
+                                            <div class="form-group">
+                                                <label class="mr-2">Product model(s) of this discount: ${requestScope.updateModels}</label>   
+                                                <input type="hidden" value="0" name="canUpdate"/>                                                            
+                                            </div>                                                         
+                                            <%--</c:if>--%>
+                                            <%--<c:if test="${(requestScope.checkUpdate == true)}">--%>
+                                            <!--                                                        <div class="form-group">
+                                                                                                        <label class="mr-2">Product model(s) of this discount before update: ${requestScope.updateModels}</label>                                                    
+                                                                                                    </div> 
+                                                                                                    <div class="form-group" >
+                                                                                                        <label class="mr-2">Product model code(s):</label>
+                                                                                                        <select class="js-example-basic-multiple" name="models[]" multiple="multiple">
+                                            <c:forEach var="pro" items="${sessionScope.products}">
+                                                <option value="${pro.productId}">${pro.name}</option>
+                                            </c:forEach>
+                                        </select>
+                                        <input type="hidden" value="1" name="canUpdate"/>
+                                    </div> -->
+                                            <%--</c:if>--%>
+
+                                            <div class="form-group">
+                                                <label class="mr-2">From: </label>
+                                                <input type="date" name="fromDate" class="form-control" required value="${requestScope.updateFromDate}" readonly>
+                                            </div> 
+                                            <div class="form-group">
+                                                <label class="mr-2">To: </label>
+                                                <input type="date" name="toDate" class="form-control" required value="${requestScope.updateToDate}" readonly>
+                                            </div> 
+                                        </c:if>
+                                        <input type="hidden" name="checkUpdate" value="${requestScope.checkUpdate}"> 
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <button class="au-btn au-btn-icon au-btn--blue au-btn--small" type="submit" name="submit" value="update">
+                                                Submit</button>        
+                                        </div>
+                                    </form>
+                                </c:if>  
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- CKEDITOR JS-->
-        <script>
-            function show() {
-                document.getElementById('user').required = false;
-                document.getElementById('product').required = false;
-                if (document.getElementById('user').checked) {
-//                        document.getElementById('user-div').hidden = false;
-                    document.getElementById('product-div').hidden = true;
-
-//                        document.getElementById('userId').required = true;
-//                        document.getElementById('number').required = true;
-                    document.getElementById('proId').required = false;
-                    document.getElementById('fromDate').required = false;
-                    document.getElementById('toDate').required = false;
-
-                } else if (document.getElementById('product').checked) {
-                    document.getElementById('product-div').hidden = false;
+    </div>
+</div>
+<!-- CKEDITOR JS-->
+<script>
+    function show() {
+        document.getElementById('product').required = false;
+        if (document.getElementById('product').checked) {
+            document.getElementById('product-div').hidden = false;
 //                        document.getElementById('user-div').hidden = true;
 
 //                        document.getElementById('userId').required = false;
 //                        document.getElementById('number').required = false;
-                    document.getElementById('proId').required = true;
-                    document.getElementById('fromDate').required = true;
-                    document.getElementById('toDate').required = true;
-                }
-            }
-        </script>
+            document.getElementById('proId').required = true;
+            document.getElementById('fromDate').required = true;
+            document.getElementById('toDate').required = true;
+        }
+    }
+</script>
 
 
-        <script>
-            function showToast(type, title) {
-                switch (type) {
-                    case 'success':
-                        toastr.success(title, 'Notification');
-                        break;
-                    case 'info':
-                        toastr.info(title, 'Notification');
-                        break;
-                    case 'warning':
-                        toastr.warning(title, 'Notification');
-                        break;
-                    case 'error':
-                        toastr.error(title, 'Notification');
-                        break;
-                    default:
-                        break;
-                }
-            }
-        </script>
+<script>
+    function showToast(type, title) {
+        switch (type) {
+            case 'success':
+                toastr.success(title, 'Notification');
+                break;
+            case 'info':
+                toastr.info(title, 'Notification');
+                break;
+            case 'warning':
+                toastr.warning(title, 'Notification');
+                break;
+            case 'error':
+                toastr.error(title, 'Notification');
+                break;
+            default:
+                break;
+        }
+    }
+</script>
 
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/toastr.min.js"></script>
-        <!-- Jquery JS-->
-        <script src="vendor/jquery-3.2.1.min.js"></script>
-        <!-- Bootstrap JS-->
-        <script src="vendor/bootstrap-4.1/popper.min.js"></script>
-        <script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
-        <!-- Vendor JS       -->
-        <script src="vendor/slick/slick.min.js">
-        </script>
-        <script src="vendor/wow/wow.min.js"></script>
-        <script src="vendor/animsition/animsition.min.js"></script>
-        <script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
-        </script>
-        <script src="vendor/counter-up/jquery.waypoints.min.js"></script>
-        <script src="vendor/counter-up/jquery.counterup.min.js">
-        </script>
-        <script src="vendor/circle-progress/circle-progress.min.js"></script>
-        <script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
-        <script src="vendor/chartjs/Chart.bundle.min.js"></script>
+<script src="js/jquery.min.js"></script>
+<script src="js/toastr.min.js"></script>
+<!-- Jquery JS-->
+<script src="vendor/jquery-3.2.1.min.js"></script>
+<!-- Bootstrap JS-->
+<script src="vendor/bootstrap-4.1/popper.min.js"></script>
+<script src="vendor/bootstrap-4.1/bootstrap.min.js"></script>
+<!-- Vendor JS       -->
+<script src="vendor/slick/slick.min.js">
+</script>
+<script src="vendor/wow/wow.min.js"></script>
+<script src="vendor/animsition/animsition.min.js"></script>
+<script src="vendor/bootstrap-progressbar/bootstrap-progressbar.min.js">
+</script>
+<script src="vendor/counter-up/jquery.waypoints.min.js"></script>
+<script src="vendor/counter-up/jquery.counterup.min.js">
+</script>
+<script src="vendor/circle-progress/circle-progress.min.js"></script>
+<script src="vendor/perfect-scrollbar/perfect-scrollbar.js"></script>
+<script src="vendor/chartjs/Chart.bundle.min.js"></script>
 
-        <script src="vendor/select2/select2.min.js">
-        </script>
+<script src="vendor/select2/select2.min.js">
+</script>
 
-        <script>
-            $(document).ready(function () {
-                $('.js-example-basic-multiple').select2();
-            });
-        </script>
+<script>
+    $(document).ready(function () {
+        $('.js-example-basic-multiple').select2();
+    });
+</script>
 
-        <!-- Main JS-->
-        <script src="js/main.js"></script>
-        <jsp:include page="footer.jsp"/>
+<!-- Main JS-->
+<script src="js/main.js"></script>
 
-        <script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
-        <script src="assets/vendor/timeline/jquery.timelify.js"></script>
-        <script src="assets/vendor/loadscreen/js/ju-loading-screen.js"></script>
-        <script src="assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
-        <script src="assets/vendor/popper/popper.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-        <script src="assets/vendor/bootstrap/js/bootstrap-4-navbar.js"></script>
-        <script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
-        <script src="assets/vendor/fancybox-master/jquery.fancybox.min.js"></script>
-        <script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
-        <script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
-        <script src="assets/custom/js/custom.js"></script>  
-        <script>
-        </script>
-    </body>
+<script src="assets/vendor/jquery/jquery-3.3.1.min.js"></script>
+<script src="assets/vendor/timeline/jquery.timelify.js"></script>
+<script src="assets/vendor/loadscreen/js/ju-loading-screen.js"></script>
+<script src="assets/vendor/jquery-circle-progress/circle-progress.min.js"></script>
+<script src="assets/vendor/popper/popper.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
+<script src="assets/vendor/bootstrap/js/bootstrap-4-navbar.js"></script>
+<script src="assets/vendor/owlcarousel/owl.carousel.min.js"></script> 
+<script src="assets/vendor/fancybox-master/jquery.fancybox.min.js"></script>
+<script src="assets/vendor/video-background/jquery.mb.YTPlayer.js"></script>
+<script src="assets/vendor/WOW-master/dist/wow.min.js"></script>
+<script src="assets/custom/js/custom.js"></script>  
+<script>
+</script>
+</body>
 
 </html>
 <!-- end document-->

@@ -7,6 +7,7 @@ package dao;
 import entity.Brand;
 import entity.Category;
 import entity.Color;
+import entity.Order;
 import entity.Product;
 import entity.Size;
 import java.sql.*;
@@ -108,6 +109,46 @@ public class DashBoardDAO extends DBContext {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return insert;
+    }
+
+    public Vector<Order> listOrder1week() {
+        Vector<Order> vector = new Vector<>();
+        String sql = "SELECT orderID, accountId, firstName, lastName, Orderdate, Discountcode,\n"
+                + "Total, line1, line2, city, province, createdAt, updatedAt, payment,[status]\n"
+                + "FROM [Order] \n"
+                + "WHERE \n"
+                + "    Orderdate >= DATEADD(DAY, -7, GETDATE()) \n"
+                + "ORDER BY \n"
+                + "    Orderdate DESC;";
+        ResultSet rs = getData(sql);
+        try {
+            while (rs.next()) {
+
+                int orderId = rs.getInt(1);
+                int accountId = rs.getInt(2);
+                String firstName = rs.getString(3);
+                String lastName = rs.getString(4);
+                Timestamp Orderdate = rs.getTimestamp(5);
+                String discountCode = rs.getString(6);
+                double total = rs.getDouble(7);
+                String line1 = rs.getString(8);
+                String line2 = rs.getString(9);
+                String city = rs.getString(10);
+                String province = rs.getString(11);
+                Timestamp createdAt = rs.getTimestamp(12);
+                Timestamp updateAt = rs.getTimestamp(13);
+                String payment = rs.getString(14);
+                String status = rs.getString(15);
+
+                vector.add(new Order(orderId, accountId, firstName, lastName,
+                        Orderdate, discountCode, total, line1, line2, city, province,
+                        createdAt, updateAt, payment, status));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(OrderDAO.class
+                    .getName()).log(Level.SEVERE, null, ex);
+        }
+        return vector;
     }
 
     public static void main(String[] args) {
