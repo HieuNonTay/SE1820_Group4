@@ -25,23 +25,21 @@ public class resetPasswordController extends HttpServlet {
         String Re_newPass = req.getParameter("re_newPass");
         req.setAttribute("user", username);
         AccountDAO accountDAO = new AccountDAO();
-       Account acc = new Account();
-            if ((newPass.length() < 6) || !isIncludedDigits(newPass) || !isIncludedLetters(newPass) || !isIncludedSpecialChars(newPass)) {
-                req.setAttribute("mess", "Password must contain at least 6 included digit, characters and special characters");
-                req.getRequestDispatcher("resetPassword.jsp").forward(req, resp);
+        Account acc = new Account();
+        if ((newPass.length() < 6) || !isIncludedDigits(newPass) || !isIncludedLetters(newPass) || !isIncludedSpecialChars(newPass)) {
+            req.setAttribute("mess", "Password must contain at least 6 included digit, characters and special characters");
+            req.getRequestDispatcher("resetPassword.jsp").forward(req, resp);
+        } else {
+            if (newPass.equals(Re_newPass)) {
+                accountDAO.changePassword(username, newPass);
+                req.setAttribute("mess", "Change password successfully!");
+                req.getRequestDispatcher("signIn.jsp").forward(req, resp);
             } else {
-                if (newPass.equals(Re_newPass)) {
-                    accountDAO.changePassword(username, newPass);
-                    req.setAttribute("mess", "Change password successfully!");
-                    req.getRequestDispatcher("signIn.jsp").forward(req, resp);
-                } else {
-                    req.setAttribute("mess", "Check your new password again!");
-                    req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
-                }
+                req.setAttribute("mess", "Check your new password again!");
+                req.getRequestDispatcher("changePassword.jsp").forward(req, resp);
             }
+        }
     }
-              
-    
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {

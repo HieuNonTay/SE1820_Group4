@@ -50,8 +50,8 @@
             <div class="app-sidebar__user"><img class="app-sidebar__user-avatar" src="admin/images/user.png" width="50px"
                                                 alt="User Image">
                 <div>
-                    <p class="app-sidebar__user-name"><b>${sessionScope. acc.lname}</b></p>
-                    <p class="app-sidebar__user-designation">Chào mừng bạn trở lại</p>
+                    <p class="app-sidebar__user-name"><b>${sessionScope. acc.fname}</b></p>
+                    <p class="app-sidebar__user-designation">${sessionScope.roleName}</p>
                 </div>
             </div>
             <hr>

@@ -1,9 +1,11 @@
 package dao;
 
 import entity.Account;
+import entity.Role;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -20,8 +22,6 @@ public class AccountDAO {
     Statement stm;   //thuc hien cau lenh sql
     PreparedStatement pstm;
     ResultSet rs;    //luu tru va xu ly du lieu
-    
-    
 
     public void changePassword(String email, String newPass) {
         try {
@@ -42,7 +42,21 @@ public class AccountDAO {
     }
 
     public Account getUser(String user) {
-        String query = "  SELECT * FROM Account\n"
+        String query = "SELECT [AccountID]\n"
+                + "      ,[firstName]\n"
+                + "      ,[lastName]\n"
+                + "      ,[Dob]\n"
+                + "      ,[Phone]\n"
+                + "      ,[Email]\n"
+                + "      ,[password]\n"
+                + "      ,[RoleID]\n"
+                + "      ,[Address]\n"
+                + "      ,[Status]\n"
+                + "      ,[registerAt]\n"
+                + "      ,[lastLogin]\n"
+                + "      ,[lastLogout]\n"
+                + "      ,[image]\n"
+                + "  FROM [dbo].[Account]"
                 + "  where Email =?";
         try {
             conn = new DBContext().conn;
@@ -63,7 +77,8 @@ public class AccountDAO {
                         rs.getString(10),
                         rs.getString(11),
                         rs.getString(12),
-                        rs.getString(13));
+                        rs.getString(13),
+                        rs.getString(14));
             }
         } catch (Exception e) {
             System.out.println("Login: " + e.getMessage());
@@ -72,8 +87,22 @@ public class AccountDAO {
     }
 
     public Account loginUser(String user, String password) {
-        String query = "  SELECT * FROM Account\n"
-                + "  where Email =? and [passwordHash] = ?";
+        String query = "SELECT [AccountID]\n"
+                + "      ,[firstName]\n"
+                + "      ,[lastName]\n"
+                + "      ,[Dob]\n"
+                + "      ,[Phone]\n"
+                + "      ,[Email]\n"
+                + "      ,[password]\n"
+                + "      ,[RoleID]\n"
+                + "      ,[Address]\n"
+                + "      ,[Status]\n"
+                + "      ,[registerAt]\n"
+                + "      ,[lastLogin]\n"
+                + "      ,[lastLogout]\n"
+                + "      ,[image]\n"
+                + "  FROM [dbo].[Account]"
+                + "  where Email =? and [password] = ?";
         try {
             conn = new DBContext().conn;
             pstm = conn.prepareStatement(query);
@@ -95,7 +124,8 @@ public class AccountDAO {
                             rs.getString(10),
                             rs.getString(11),
                             rs.getString(12),
-                            rs.getString(13));
+                            rs.getString(13),
+                            rs.getString(14));
                 } else {
                     return null;
                 }
@@ -106,7 +136,7 @@ public class AccountDAO {
         return null;
     }
 
-    private boolean checkBan(String account) {
+    public boolean checkBan(String account) {
         if (account.equals("Active")) {
             return true;
         } else {
@@ -116,7 +146,7 @@ public class AccountDAO {
 
     public void signUp(String fname, String lname, String dob, String phone, String address,
             String email, String pass) {
-        String query = "INSERT INTO [dbo].[Account] ([firstName], [lastName], [Dob], [Phone], [Email], [passwordHash], [Address]) "
+        String query = "INSERT INTO [dbo].[Account] ([firstName], [lastName], [Dob], [Phone], [Email], [password], [Address]) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = new DBContext().conn; PreparedStatement pstm = conn.prepareStatement(query)) {
@@ -135,7 +165,21 @@ public class AccountDAO {
     }
 
     public Account checkAccountExist(String user, String phone) {
-        String query = "  SELECT * FROM Account\n"
+        String query = "SELECT [AccountID]\n"
+                + "      ,[firstName]\n"
+                + "      ,[lastName]\n"
+                + "      ,[Dob]\n"
+                + "      ,[Phone]\n"
+                + "      ,[Email]\n"
+                + "      ,[password]\n"
+                + "      ,[RoleID]\n"
+                + "      ,[Address]\n"
+                + "      ,[Status]\n"
+                + "      ,[registerAt]\n"
+                + "      ,[lastLogin]\n"
+                + "      ,[lastLogout]\n"
+                + "      ,[image]\n"
+                + "  FROM [dbo].[Account]"
                 + "  where Email =? or Phone = ? ";
         try {
             conn = new DBContext().conn;
@@ -157,7 +201,8 @@ public class AccountDAO {
                         rs.getString(10),
                         rs.getString(11),
                         rs.getString(12),
-                        rs.getString(13));
+                        rs.getString(13),
+                        rs.getString(14));
             }
         } catch (Exception e) {
         }
@@ -189,7 +234,7 @@ public class AccountDAO {
         }
     }
 
-        public void UpdateAll(String fname, String lname, String dob, String phone, String address, String email, String status, int role) {
+    public void UpdateAll(String fname, String lname, String dob, String phone, String address, String email, String status, int role) {
         String strUpdate = "UPDATE [dbo].[Account]\n"
                 + "SET \n"
                 + "   [firstName] = ?,\n"
@@ -217,9 +262,23 @@ public class AccountDAO {
             System.out.println("Error updating account: " + e.getMessage());
         }
     }
-    
+
     public Account checkPhoneExist(String email, String phone) {
-        String query = "  SELECT * FROM Account\n"
+        String query = "SELECT [AccountID]\n"
+                + "      ,[firstName]\n"
+                + "      ,[lastName]\n"
+                + "      ,[Dob]\n"
+                + "      ,[Phone]\n"
+                + "      ,[Email]\n"
+                + "      ,[password]\n"
+                + "      ,[RoleID]\n"
+                + "      ,[Address]\n"
+                + "      ,[Status]\n"
+                + "      ,[registerAt]\n"
+                + "      ,[lastLogin]\n"
+                + "      ,[lastLogout]\n"
+                + "      ,[image]\n"
+                + "  FROM [dbo].[Account]"
                 + "  where [Email] = ? and Phone = ? ";
         try {
             conn = new DBContext().conn;
@@ -242,7 +301,8 @@ public class AccountDAO {
                             rs.getString(10),
                             rs.getString(11),
                             rs.getString(12),
-                            rs.getString(13));
+                            rs.getString(13),
+                            rs.getString(14));
                 }
             } else {
                 return null;
@@ -253,57 +313,90 @@ public class AccountDAO {
         return null;
     }
 
-    public List<Account> getAllAccount() {
-        List<Account> list = new ArrayList<>();
-        String query = "SELECT * from [Account]";
-        try {
-            conn = new DBContext().conn;
-            pstm = conn.prepareStatement(query);
-            rs = pstm.executeQuery();
-            while (rs.next()) {                
-                list.add(new Account(rs.getInt(1)
-                        , rs.getString(2)
-                        , rs.getString(3)
-                        , rs.getDate(2)
-                        , rs.getString(5)
-                        , rs.getString(6)
-                        , rs.getString(7)
-                        , rs.getInt(8)
-                        , rs.getString(9)
-                        , rs.getString(10),
-                        rs.getString(11), 
-                        rs.getString(12),
-                        rs.getString(13)));
-            }
-        } catch (Exception e) {
-        }               
-        return list;
-    }
+    public List<Role> getRoleAccount() {
+        String query = "SELECT [RoleID]\n"
+                + "      ,[RoleName]\n"
+                + "  FROM [dbo].[Role]";
 
-     public Vector<Account> getAllAccounts() {
-        Vector<Account> listAccount = new Vector<>();
-        String query = "SELECT * FROM [Account]"; // Thay 'accounts' bằng tên bảng thực tế của bạn
+        List<Role> listRole = new ArrayList<>();
+
         try {
             conn = new DBContext().conn;
             pstm = conn.prepareStatement(query);
             rs = pstm.executeQuery();
             while (rs.next()) {
-                Account account = new Account();
-                account.setAccountID(rs.getInt("accountID"));
-                account.setFname(rs.getString("fname"));
-                account.setLname(rs.getString("lname"));
-                account.setEmail(rs.getString("email"));
-                account.setStatus(rs.getString("status"));
-                listAccount.add(account);
+                listRole.add(new Role(rs.getInt(1), rs.getString(2)));
             }
-        } catch (Exception e) {
-            e.printStackTrace();
+            return listRole;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
         }
-        return listAccount;
+        return null;
     }
-     public static void main(String[] args) {
-         AccountDAO ad = new AccountDAO();
-        Vector<Account> listAccount = ad.getAllAccounts();
-         System.out.println(listAccount.get(0).getFname());
+
+    public String getRoleName(int id) {
+        String query = "SELECT [RoleName]\n"
+                + "  FROM [dbo].[Role]\n"
+                + "  WHERE RoleID = ?";
+        try {
+            conn = new DBContext().conn;
+            pstm = conn.prepareStatement(query);
+            pstm.setInt(1, id);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                return rs.getString(1);
+            }
+
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+        return null;
+    }
+
+    public List<Account> getAllAccount() {
+        String query = "SELECT [AccountID]\n"
+                + "      ,[firstName]\n"
+                + "      ,[lastName]\n"
+                + "      ,[Dob]\n"
+                + "      ,[Phone]\n"
+                + "      ,[Email]\n"
+                + "      ,[password]\n"
+                + "      ,[RoleID]\n"
+                + "      ,[Address]\n"
+                + "      ,[Status]\n"
+                + "      ,[registerAt]\n"
+                + "      ,[lastLogin]\n"
+                + "      ,[lastLogout]\n"
+                + "      ,[image]\n"
+                + "  FROM [dbo].[Account]";
+
+        List<Account> listAccounts = new ArrayList<>();
+
+        try {
+            conn = new DBContext().conn;
+            pstm = conn.prepareStatement(query);
+            rs = pstm.executeQuery();
+            while (rs.next()) {
+                listAccounts.add(new Account(rs.getInt(1), 
+                        rs.getString(2), 
+                        rs.getString(3), 
+                        rs.getDate(4), 
+                        rs.getString(5), 
+                        rs.getString(6), 
+                        rs.getString(7), 
+                        rs.getInt(8), 
+                        rs.getString(9), 
+                        rs.getString(10), 
+                        rs.getString(11), 
+                        rs.getString(12),
+                        rs.getString(13), 
+                        rs.getString(14)));
+            }
+            return listAccounts;
+        } catch (SQLException sqle) {
+            System.out.println(sqle);
+        }
+
+        return null;
     }
 }

@@ -33,10 +33,6 @@ public class registerController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String fname = req.getParameter("fname");
         String lname = req.getParameter("lname");
         String phone = req.getParameter("phone");
@@ -83,7 +79,11 @@ public class registerController extends HttpServlet {
             req.setAttribute("mess", "Please enter google email fomat");
             req.getRequestDispatcher("register.jsp").forward(req, resp);
         }
+    }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+            req.getRequestDispatcher("register.jsp").forward(req, resp);
     }
 
     public static boolean isIncludedDigits(String s) {

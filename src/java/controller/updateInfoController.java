@@ -31,11 +31,6 @@ public class updateInfoController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
-    }
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String logout = req.getParameter("logout");
         if (logout != null) {
             resp.sendRedirect("logout");
@@ -65,6 +60,11 @@ public class updateInfoController extends HttpServlet {
                 req.getRequestDispatcher("userDetail.jsp").forward(req, resp);
             }
         }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("updateInfo").forward(req, resp);
     }
 
     public static boolean checkDob(String dobString) {

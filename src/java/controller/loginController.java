@@ -14,14 +14,9 @@ import java.io.IOException;
  * @author quyen
  */
 public class loginController extends HttpServlet {
-    
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
-    }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("user");
         String password = req.getParameter("password");
         req.setAttribute("user", username);
@@ -33,8 +28,13 @@ public class loginController extends HttpServlet {
         } else {
             HttpSession session = req.getSession();
             session.setAttribute("acc", acc);
+            session.setAttribute("roleID", acc.getRoleID());
             resp.sendRedirect("home");
         }
     }
 
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.getRequestDispatcher("signIn.jsp").forward(req, resp);
+    }
 }

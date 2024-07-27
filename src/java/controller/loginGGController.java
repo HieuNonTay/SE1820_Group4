@@ -48,18 +48,20 @@ public class loginGGController extends HttpServlet {
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 //        Date date = new Date();
         acc = accDAO.getUser(user.getEmail());
-        if ( acc == null) {
-            accDAO.signUp(user.getFamily_name(), user.getGiven_name(), "", "", "", user.getEmail(), user.getId());
+        if (acc == null) {
+            accDAO.signUp(user.getFamily_name(), user.getGiven_name(), null, null, null, user.getEmail(), user.getId());
             acc = accDAO.getUser(user.getEmail());
 //            u.updateLastLogin(dateFormat.format(date), n.getId());
 //            u.updateLastLogOut(null, n.getId());
             session.setAttribute("acc", acc);
+            session.setAttribute("roleID", acc.getRoleID());
             resp.sendRedirect("home");
-            
-        } else {         
+
+        } else {
             acc = accDAO.getUser(user.getEmail());
             session.setAttribute("acc", acc);
-            resp.sendRedirect("home");         
+            session.setAttribute("roleID", acc.getRoleID());
+            resp.sendRedirect("home");
         }
     }
 

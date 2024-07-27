@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Vector;
 
 public class accountController extends HttpServlet {
@@ -32,7 +33,7 @@ public class accountController extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Vector<Account> listAccount = accountDAO.getAllAccounts();
+        List<Account> listAccount = accountDAO.getAllAccount();
         request.setAttribute("listAccount", listAccount);
         RequestDispatcher dispatcher = request.getRequestDispatcher("AccountManage.jsp");
         dispatcher.forward(request, response);

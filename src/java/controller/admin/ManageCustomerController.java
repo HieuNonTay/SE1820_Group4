@@ -6,7 +6,6 @@ package controller.admin;
 
 import static controller.updateInfoController.checkDob;
 import dao.AccountDAO;
-import dao.RoleDAO;
 import entity.Account;
 import entity.Role;
 import java.io.IOException;
@@ -75,10 +74,9 @@ public class ManageCustomerController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        AccountDAO ad = new AccountDAO();
-        RoleDAO rd = new RoleDAO();
-        List<Account> listA = rd.getAllAccount();
-        List<Role> listRole = rd.getRoleAccount();
+        AccountDAO accDao = new AccountDAO();
+        List<Account> listA = accDao.getAllAccount();
+        List<Role> listRole = accDao.getRoleAccount();
 
         request.setAttribute("listAcc", listA);
         request.setAttribute("listR", listRole);
@@ -96,7 +94,7 @@ public class ManageCustomerController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        RoleDAO ad = new RoleDAO();
+        AccountDAO accDao = new AccountDAO();
         String action = request.getParameter("action");
         switch (action) {
             case "update":
@@ -110,14 +108,13 @@ public class ManageCustomerController extends HttpServlet {
                 String status = request.getParameter("status");
                 String role = request.getParameter("role");
                 int roleID = Integer.parseInt(role);
-                AccountDAO accountDAO = new AccountDAO();
-                Account a = accountDAO.checkPhoneExist(email, phone);
+                Account a = accDao.checkPhoneExist(email, phone);
                 if (a == null) {
                     if (!checkDob(dob)) {
                         request.setAttribute("mess", "Please enter your birth day before today");
                         request.getRequestDispatcher("admin/customer.jsp").forward(request, response);
                     } else {
-                        accountDAO.UpdateAll(fname, lname, dob, phone, address, email, status, roleID);
+                        accDao.UpdateAll(fname, lname, dob, phone, address, email, status, roleID);
                         request.setAttribute("mess", "Update Successfully");
                         response.sendRedirect("customermanager");
                     }

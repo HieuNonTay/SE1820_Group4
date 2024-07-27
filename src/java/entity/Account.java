@@ -18,31 +18,33 @@ public class Account {
     private Date dob;
     private String phone;
     private String email;
-    private String passwordHash;
+    private String password;
     private int roleID;
     private String address;
     private String status;
     private String registerAt;
     private String lastLogin;
     private String lastLogout;
+    private String image;
 
     public Account() {
     }
 
-    public Account(int accountID, String fname, String lname, Date dob, String phone, String email, String passwordHash, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout) {
+    public Account(int accountID, String fname, String lname, Date dob, String phone, String email, String password, int roleID, String address, String status, String registerAt, String lastLogin, String lastLogout, String image) {
         this.accountID = accountID;
         this.fname = fname;
         this.lname = lname;
         this.dob = dob;
         this.phone = phone;
         this.email = email;
-        this.passwordHash = passwordHash;
+        this.password = password;
         this.roleID = roleID;
         this.address = address;
         this.status = status;
         this.registerAt = registerAt;
         this.lastLogin = lastLogin;
         this.lastLogout = lastLogout;
+        this.image = image;
     }
 
     public int getAccountID() {
@@ -93,12 +95,12 @@ public class Account {
         this.email = email;
     }
 
-    public String getPasswordHash() {
-        return passwordHash;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPasswordHash(String passwordHash) {
-        this.passwordHash = passwordHash;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getRoleID() {
@@ -149,7 +151,18 @@ public class Account {
         this.lastLogout = lastLogout;
     }
 
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Override
+    public String toString() {
+        return "Account{" + "accountID=" + accountID + ", fname=" + fname + ", lname=" + lname + ", dob=" + dob + ", phone=" + phone + ", email=" + email + ", password=" + password + ", roleID=" + roleID + ", address=" + address + ", status=" + status + ", registerAt=" + registerAt + ", lastLogin=" + lastLogin + ", lastLogout=" + lastLogout + ", image=" + image + '}';
+    }
 
     
-
 }

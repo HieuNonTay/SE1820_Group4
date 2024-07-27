@@ -116,9 +116,12 @@
                             </a>
                             <div class="nav-item dropdown">
                                 <ul style="list-style-type: none" class="dropdown-menu" aria-labelledby="sub-nav1">
-                                    <li><a href="userDetail.jsp"  class="dropdown-item"> Profile </a></li>
+                                    <li><a href="updateInfo"  class="dropdown-item"> Profile </a></li>
                                     <li><a href="changePassword.jsp"  class="dropdown-item"> Change Password </a></li>
                                     <li><a href="logout"  class="dropdown-item"> Sign Out </a></li>
+                                    <c:if test="${sessionScope.acc.roleID != 2}">
+                                    <li><a href="dashboard"  class="dropdown-item"> Dash Board </a></li>
+                                    </c:if>
                                 </ul>
                             </div>  
                         </div>
